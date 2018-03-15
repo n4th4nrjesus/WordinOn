@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8" style="border: 2px solid black; padding: 20px; height: 850px">
+                <div class="row" style="text-align: center">
+                    <div class="col-md-12">
+                        <label class="control-label" style="font-size: x-large; font-weight: bold">Bem vindo ao WORDIN'ON</label>
+                    </div>
+                </div>
+                <br />
+                <div class="row" style="text-align: justify">
+                    <div class="col-md-12">
+                        <p style="font-size: large; font-weight: normal; margin-top: 235px">
+                            Este é o site Wordin'On. Ele foi desenvolvido com o intuito de ajudar os estudantes a treinarem para o desenvolvimento de redações do estilo ENEM, já que muitos concordam
+                            que essa parte do Exame é a mais temida. O Wordin'On permitirá, aos estudantes, criarem redações dissertativas argumentativas (O estilo exigido pelo ENEM) sobre temas que seão
+                            selecionados aleatoriamente. As redações terão um determinado tempo para serem realizadas e, logo após sua conclusão, serão dispinibilizadas para correção e avaliação por professores.
+                        </p>
+                        <br />
+                        <p style="font-size: large; font-weight: normal">
+                            No site, também há o sistema de salas de redações. Essas serão criadas por professores, sendo que os mesmo poderão inserir usuários (professores ou estudantes) dentro dela. Os estudantes
+                            quando forem publicar uma redação, poderão fazê-lo em salas que pertencem ou simplesmente para todos.
+                        </p>
+                        <br />
+                        <p style="font-size: large; font-weight: normal">
+                            Para utilizar do sistema Wordin'On, realize o cadastro ou login (caso já seja cadastrado no site) como professor ou estudante. Para entrar como professor, deverá ser utilizada uma chave
+                            de acesso.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="padding: 50px">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Nome: </label>
+                        <input type="text" class="form-control" name="txtNome" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Sobrenome: </label>
+                        <input type="text" class="form-control" name="txtSobrenome" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email: </label>
+                        <input type="text" class="form-control" name="txtEmail" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Senha: </label>
+                        <input type="password" class="form-control" name="txtSenha" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Chave: </label>
+                        <input type="text" class="form-control" name="txtChave" />
+                        <br />
+                    </div>
+                    <div class="form-group"><div class="col-md-12 text-right"><input type="checkbox" name="cbProfessor" class="text-right" />  É Professor?</div></div>
+                    <div class="form-group text-right">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary" name="btnCadastrar">Cadastrar</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-default" name="btnVoltar">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="col-=md-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

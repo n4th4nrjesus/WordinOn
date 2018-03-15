@@ -1,0 +1,5 @@
+E:\WEB\BOOTSTRAP\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.DataAccess.dll
+E:\WEB\BOOTSTRAP\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.DataAccess.pdb
+E:\WEB\BOOTSTRAP\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.csprojResolveAssemblyReference.cache
+E:\WEB\BOOTSTRAP\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.dll
+E:\WEB\BOOTSTRAP\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.pdb
