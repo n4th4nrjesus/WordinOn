@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\EstudanteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,8 +197,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Cadastro\Index.cshtml" />
+    <Content Include="Views\Estudante\TelaInicial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">
+      <Project>{af799b17-b9cf-4dc3-8c0d-73c217abac82}</Project>
+      <Name>WordinOn.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordinOn.Models\WordinOn.Models.csproj">
+      <Project>{8964ad83-8600-49a7-ab05-e51a65c49aa3}</Project>
+      <Name>WordinOn.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

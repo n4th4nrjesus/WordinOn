@@ -1,12 +1,14 @@
 ﻿@{
     Layout = null;
 }
+@using WordinOn.Models
+@model Tuple <Usuario, Professor>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,7 +18,7 @@
             <div class="col-md-8" style="border: 2px solid black; padding: 20px; height: 850px">
                 <div class="row" style="text-align: center">
                     <div class="col-md-12">
-                        <label class="control-label" style="font-size: x-large; font-weight: bold">Bem vindo ao WORDIN'ON</label>
+                        @Html.Label("Bem vindo ao WORDIN'ON", new { @class = "control-label", @style = "font-size: x-large; font-weight: bold" })
                     </div>
                 </div>
                 <br />
@@ -43,32 +45,37 @@
             <div class="col-md-4" style="padding: 50px">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="control-label">Nome: </label>
-                        <input type="text" class="form-control" name="txtNome" />
+                        @Html.LabelFor(Tuple => Tuple.Item1.Nome, "Nome:", new { @class = "control-label" })
+                        @Html.TextBoxFor(Tuple => Tuple.Item1.Nome, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Sobrenome: </label>
-                        <input type="text" class="form-control" name="txtSobrenome" />
+                        @Html.LabelFor(Tuple => Tuple.Item1.Sobrenome, "Sobrenome:", new { @class = "control-label" })
+                        @Html.TextBoxFor(Tuple => Tuple.Item1.Sobrenome, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Email: </label>
-                        <input type="text" class="form-control" name="txtEmail" />
+                        @Html.LabelFor(Tuple => Tuple.Item1.Email, "Email:", new { @class = "control-label" })
+                        @Html.TextBoxFor(Tuple => Tuple.Item1.Email, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Senha: </label>
-                        <input type="password" class="form-control" name="txtSenha" />
+                        @Html.LabelFor(Tuple => Tuple.Item1.Senha, "Senha:", new { @class = "control-label" })
+                        @Html.TextBoxFor(Tuple => Tuple.Item1.Senha, new { @class = "form-control", @type = "password" })
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Chave: </label>
-                        <input type="text" class="form-control" name="txtChave" />
+                        @Html.LabelFor(Tuple => Tuple.Item2.Chave, "Chave:", new { @class = "control-label" })
+                        @Html.TextBoxFor(Tuple => Tuple.Item2.Chave, new { @class = "form-control" })
                         <br />
                     </div>
-                    <div class="form-group"><div class="col-md-12 text-right"><input type="checkbox" name="cbProfessor" class="text-right" />  É Professor?</div></div>
-                    <div class="form-group text-right">
-                        <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            @Html.CheckBoxFor(Tuple => Tuple.Item2.EProfessor)
+                            @Html.LabelFor(Tuple => Tuple.Item2.EProfessor, "É Professor?", new { @class = "control-label", @style= "font-weight: normal" })
+                        </div>
+                    </div>
+                    <div class="form-group text-right" style="margin-top: 325px">
+                        <div class="col-md-6 text-left">
                             <button type="submit" class="btn btn-primary" name="btnCadastrar">Cadastrar</button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-right">
                             <button type="submit" class="btn btn-default" name="btnVoltar">Voltar</button>
                         </div>
                     </div>

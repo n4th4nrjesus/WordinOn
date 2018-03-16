@@ -1,0 +1,39 @@
+﻿@using WordinOn.Models
+@model Tuple<Sala, Redacao>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Inicial</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4" style="border-right: 2px solid black">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(Tuple => Tuple.Item1.Cod, new SelectList(ViewBag.Sala, "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
