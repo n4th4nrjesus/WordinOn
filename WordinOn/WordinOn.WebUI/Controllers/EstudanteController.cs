@@ -9,7 +9,7 @@ namespace WordinOn.WebUI.Controllers
     public class EstudanteController : Controller
     {
         // GET: Estudante
-        public ActionResult Index()
+        public ActionResult TelaInicial()
         {
             return View();
         }

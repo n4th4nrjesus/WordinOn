@@ -5,6 +5,5 @@ E:\WEB\BOOTSTRAP\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.dll
 E:\WEB\BOOTSTRAP\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.pdb
 C:\Users\Aluno\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\bin\Debug\WordinOn.Models.dll
 C:\Users\Aluno\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\bin\Debug\WordinOn.Models.pdb
-C:\Users\Aluno\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.csprojResolveAssemblyReference.cache
 C:\Users\Aluno\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.dll
 C:\Users\Aluno\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.pdb
