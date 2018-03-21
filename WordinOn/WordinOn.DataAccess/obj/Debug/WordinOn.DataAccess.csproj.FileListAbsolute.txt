@@ -1,7 +1,0 @@
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.DataAccess.dll
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.DataAccess.pdb
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.Models.dll
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\bin\Debug\WordinOn.Models.pdb
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.csprojResolveAssemblyReference.cache
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.dll
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.DataAccess\obj\Debug\WordinOn.DataAccess.pdb

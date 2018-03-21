@@ -1,5 +1,4 @@
 C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\bin\Debug\WordinOn.Models.dll
 C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\bin\Debug\WordinOn.Models.pdb
-C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.csprojResolveAssemblyReference.cache
 C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.dll
 C:\Users\andradeti\Documents\GitHub\WordinOn\WordinOn\WordinOn.Models\obj\Debug\WordinOn.Models.pdb
