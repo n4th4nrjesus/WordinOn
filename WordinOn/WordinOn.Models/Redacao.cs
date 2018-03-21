@@ -15,6 +15,7 @@ namespace WordinOn.Models
         public Avaliacao Avaliacao { get; set; }
         public Nota Nota { get; set; }
         public Estudante Estudante { get; set; }
+        public DateTime Data { get; set; }
         public bool RAvaliada { get; set; }
     }
 }

@@ -42,6 +42,30 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="border: 2px solid black">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (Redacao item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Estudante.Nome</td>
+                                    <td>@item.Tema.Nome</td>
+                                    <td>@item.Data</td>
+                                </tr>
+                            }*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
