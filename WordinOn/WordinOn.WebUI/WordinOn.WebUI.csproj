@@ -196,8 +196,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Cadastro\Index.cshtml" />
+    <Content Include="Views\Cadastro\IndexEstudante.cshtml" />
     <Content Include="Views\Estudante\TelaInicial.cshtml" />
+    <Content Include="Views\Cadastro\IndexProfessor.cshtml" />
+    <Content Include="Views\Estudante\CriarRedacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">

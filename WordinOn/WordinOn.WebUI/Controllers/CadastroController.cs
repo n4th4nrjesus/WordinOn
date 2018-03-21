@@ -9,7 +9,12 @@ namespace WordinOn.WebUI.Controllers
     public class CadastroController : Controller
     {
         // GET: Cadastro
-        public ActionResult Index()
+        public ActionResult IndexProfessor()
+        {
+            return View();
+        }
+
+        public ActionResult IndexEstudante()
         {
             return View();
         }

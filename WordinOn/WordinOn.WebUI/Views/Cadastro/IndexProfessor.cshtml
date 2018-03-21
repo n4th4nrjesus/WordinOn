@@ -2,13 +2,13 @@
     Layout = null;
 }
 @using WordinOn.Models
-@model Tuple <Usuario, Professor>
+@model Professor
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Cadastro de Professor</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -45,31 +45,25 @@
             <div class="col-md-4" style="padding: 50px">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        @Html.LabelFor(Tuple => Tuple.Item1.Nome, "Nome:", new { @class = "control-label" })
-                        @Html.TextBoxFor(Tuple => Tuple.Item1.Nome, new { @class = "form-control" })
+                        @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(Tuple => Tuple.Item1.Sobrenome, "Sobrenome:", new { @class = "control-label" })
-                        @Html.TextBoxFor(Tuple => Tuple.Item1.Sobrenome, new { @class = "form-control" })
+                        @Html.Label("lblSobrenome", "Sobrenome:", new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Sobrenome, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(Tuple => Tuple.Item1.Email, "Email:", new { @class = "control-label" })
-                        @Html.TextBoxFor(Tuple => Tuple.Item1.Email, new { @class = "form-control" })
+                        @Html.Label("lblEmail", "Email:", new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(Tuple => Tuple.Item1.Senha, "Senha:", new { @class = "control-label" })
-                        @Html.TextBoxFor(Tuple => Tuple.Item1.Senha, new { @class = "form-control", @type = "password" })
+                        @Html.Label("lblSenha", "Senha:", new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @type = "password" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(Tuple => Tuple.Item2.Chave, "Chave:", new { @class = "control-label" })
-                        @Html.TextBoxFor(Tuple => Tuple.Item2.Chave, new { @class = "form-control" })
+                        @Html.Label("lblChave", "Chave:", new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Chave, new { @class = "form-control" })
                         <br />
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12 text-right">
-                            @Html.CheckBoxFor(Tuple => Tuple.Item2.EProfessor)
-                            @Html.LabelFor(Tuple => Tuple.Item2.EProfessor, "É Professor?", new { @class = "control-label", @style= "font-weight: normal" })
-                        </div>
                     </div>
                     <div class="form-group text-right" style="margin-top: 325px">
                         <div class="col-md-6 text-left">
