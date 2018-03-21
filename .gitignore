@@ -1,6 +1,10 @@
+*.suo
+*.user
+_ReSharper.*
 bin
-bin/*
 obj
+packages
+bin/*
 obj/*
 /WordinOn/.vs
 /WordinOn/.vs/*
@@ -90,3 +94,8 @@ WordinOn.DataAccess.csproj.user
 *.user
 .vs
 WordinOn.Models.csproj.user
+WordinOn/WordinOn.Models/bin/Debug/WordinOn.Models.dll
+WordinOn/WordinOn.Models/bin/Debug/WordinOn.Models.dll
+*.dll
+*.pdb
+*.cache
