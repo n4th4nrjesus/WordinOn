@@ -8,16 +8,17 @@
         <div class="row">
 
             <div class="col-md-1">
-                <label class="control-label" style="margin-top: 15px; font-size: medium">Tema:</label>
+                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
             </div>
 
             <div class="col-md-9" style="border-right: solid 2px black">
-                <label class="control-label" style="margin-top: 15px; font-size: medium; font-weight: normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar nisi et suscipit vulputate. Morbi sit amet rhoncus purus. Pellentesque ultricies sed sapien nec ultrices. Integer dui ligula, tincidunt non massa et, finibus feugiat orci. Etiam vel dignissim nisl. Nulla fermentum, lectus at semper porttitor, sapien magna bibendum ex, eget maximus leo ligula eget nisi.</label>
+                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+
             </div>
 
             <div class="col-md-2">
-                <label class="control-label" style="margin-top: 15px; font-size: medium">Tempo:</label>
-                <label class="control-label" style="margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal">00.00.00</label>
+                @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                @Html.Label("lblTime", "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
             </div>
 
         </div>
@@ -33,23 +34,19 @@
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <select class="form-control" style="width: 100px; border-color: black">
-                        <option class="form-control">Público</option>
-                        <option class="form-control">Sala 1</option>
-                        <option class="form-control">Sala 2</option>
-                    </select>
+                    @Html.DropDownList("ddlSala", new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style= "border-color: black" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary" style="border-color: black">Enviar</button>
+                    <button type="button" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
                 </div>
             </div>
 
             <div class="form-group" style="margin-top: 305px">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default" style="border-color: black">Cancelar</button>
+                    <button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
                 </div>
             </div>
 
@@ -60,12 +57,10 @@
         <form class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-12">
-                    <textarea class="form-control" style="resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray"></textarea>
+                    @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
                 </div>
             </div>
         </form>
     </div>
 
 </div>
-
-        </div>

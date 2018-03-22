@@ -13,5 +13,10 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult CriarRedacao()
+        {
+            return View();
+        }
     }
 }
