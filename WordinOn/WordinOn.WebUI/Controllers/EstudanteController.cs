@@ -18,5 +18,21 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult PropriasRedacoes()
+        {
+            return View();
+        }
+
+        public ActionResult AcessoRedacao()
+        {
+            return View();
+        }
+
+        public ActionResult AcessoRedacaoAvaliacao()
+        {
+            return View();
+        }
+
     }
 }

@@ -200,6 +200,9 @@
     <Content Include="Views\Estudante\TelaInicial.cshtml" />
     <Content Include="Views\Cadastro\IndexProfessor.cshtml" />
     <Content Include="Views\Estudante\CriarRedacao.cshtml" />
+    <Content Include="Views\Estudante\PropriasRedacoes.cshtml" />
+    <Content Include="Views\Estudante\AcessoRedacao.cshtml" />
+    <Content Include="Views\Estudante\AcessoRedacaoAvaliacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">

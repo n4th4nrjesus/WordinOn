@@ -1,0 +1,36 @@
+﻿@using WordinOn.Models
+@model Redacao
+
+<div class="container">
+    <div class="row" style="padding: 50px">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="border: 2px solid black; padding: 20px">
+    <div class="col-md-2">
+        <div class="col-md-6">
+            <img alt="Brand" class="img-responsive" style="width: 30px; height: 30px" src="https://upload.wikimedia.org/wikipedia/commons/7/73/Bibeksheel-logo-final.png" />
+        </div>
+        <div class="col-md-6">
+            @Html.Label("lblProfessor", "Professor", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+        </div>
+    </div>
+    <div class="col-md-10" style="border-left: 2px solid black">
+        <div class="row text-center">
+            @Html.Label("lblAvaliacao", "Avaliacao", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+        </div>
+        <div class="row text-right">
+            @Html.Label("lblNota", "Nota:", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+            @Html.TextBox("txtNota", "Nota", new { @class = "form-control", @style = "border-color: black; width: 100px" })
+        </div>
+    </div>
+</div>
