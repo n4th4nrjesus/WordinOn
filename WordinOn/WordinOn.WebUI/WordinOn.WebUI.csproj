@@ -152,6 +152,7 @@
     <Compile Include="Controllers\EstudanteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,10 @@
     <Content Include="Views\Estudante\PropriasRedacoes.cshtml" />
     <Content Include="Views\Estudante\AcessoRedacao.cshtml" />
     <Content Include="Views\Estudante\AcessoRedacaoAvaliacao.cshtml" />
+    <Content Include="Views\Estudante\ListaSalas.cshtml" />
+    <Content Include="Views\Estudante\ListaRedacoesSala.cshtml" />
+    <Content Include="Views\Professor\TelaInicial.cshtml" />
+    <Content Include="Views\Professor\TelaAvaliacaoRedacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">
@@ -221,6 +226,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
