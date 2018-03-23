@@ -7,7 +7,7 @@
             <div class="col-md-6 text-center">
                 <div class="form-group">
                     <div class="col-md-6 text-center">
-                        <button type="submit" class="btn btn-default" name="btnAcessar" style="border-color: black">Acessar</button>
+                        <button type="submit" class="btn btn-default" name="btnCriar" style="border-color: black">Criar</button>
                     </div>
                     
                 </div>
@@ -34,15 +34,15 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Quantidade de Pessoa</th>
+                        <th>Descrição</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Sala item in Model ?? new List<Sala>())
+                    @foreach (Tema item in Model ?? new List<Tema>())
                     {
                         <tr>
                             <td>@item.Nome</td>
-                            <td>@item.Quantidade</td>
+                            <td>@item.Descricao</td>
                         </tr>
                     }
                 </tbody>
