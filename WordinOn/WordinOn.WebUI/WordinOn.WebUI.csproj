@@ -210,6 +210,8 @@
     <Content Include="Views\Professor\TelaAvaliacaoRedacao.cshtml" />
     <Content Include="Views\Professor\ListaSala.cshtml" />
     <Content Include="Views\Professor\RedacaoSala.cshtml" />
+    <Content Include="Views\Professor\ListaTema.cshtml" />
+    <Content Include="Views\Professor\RedacoesSala.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">
