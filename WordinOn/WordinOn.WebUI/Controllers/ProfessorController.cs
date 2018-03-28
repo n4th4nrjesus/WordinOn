@@ -24,7 +24,12 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult RedacaoSala()
+        public ActionResult RedacoesSala()
+        {
+            return View();
+        }
+
+        public ActionResult CriarSala()
         {
             return View();
         }

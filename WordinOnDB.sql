@@ -21,7 +21,7 @@ select * from Redacao;
 
 -----------------------------------------------------------------------------------------------
 
-create table Estudante
+create table Usuario
 (
 	cod int primary key identity (1,1),
 	nome varchar (200) not null,
@@ -30,13 +30,16 @@ create table Estudante
 	email varchar (250) not null
 );
 
+create table Estudante
+(
+	cod int primary key identity (1,1),
+	codUsusario int foreign key references Usuario (cod)
+);
+
 create table Professor
 (
 	cod int primary key identity (1,1),
-	nome varchar (200) not null,
-	sobrenome varchar (200) not null,
-	senha varchar (200) not null,
-	email varchar (250) not null,
+	codUsusario int foreign key references Usuario (cod),
 	chave int not null
 );
 
@@ -88,5 +91,5 @@ create table salaXestudante
 (
 	codEst int references Estudante (cod) not null,
 	codSala int references sala (cod) not null,
-	constraint pkSxE primary key (codEst, codSala)
+	constraint pkSxE primary key (codEst, codSala)z
 );
