@@ -213,6 +213,7 @@
     <Content Include="Views\Professor\ListaTema.cshtml" />
     <Content Include="Views\Professor\RedacoesSala.cshtml" />
     <Content Include="Views\Professor\CriarSala.cshtml" />
+    <Content Include="Views\Professor\CriacaoTema.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">

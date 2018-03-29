@@ -33,5 +33,15 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult ListaTema()
+        {
+            return View();
+        }
+
+        public ActionResult CriacaoTema()
+        {
+            return View();
+        }
     }
 }
