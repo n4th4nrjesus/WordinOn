@@ -214,6 +214,8 @@
     <Content Include="Views\Professor\RedacoesSala.cshtml" />
     <Content Include="Views\Professor\CriarSala.cshtml" />
     <Content Include="Views\Professor\CriacaoTema.cshtml" />
+    <Content Include="Views\Estudante\Perfil.cshtml" />
+    <Content Include="Views\Professor\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.DataAccess\WordinOn.DataAccess.csproj">

@@ -43,5 +43,10 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult Perfil()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,49 @@
+﻿@using WordinOn.Models
+@model Estudante
+
+<div class="container">
+    <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+        <div class="col-md-6">
+            @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 20px">
+        <div class="col-md-6">
+            @Html.Label("lblSobrenome", "Sobrenome:", new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 20px">
+        <div class="col-md-6">
+            @Html.Label("lblSenha", "Senha:", new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Nome, new { @type = "password", @class = "form-control", @style = "border-color: black" })
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 20px">
+        <div class="col-md-6">
+            @Html.Label("lblConfirmarSenha", "ConfirmarSenha:", new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Nome, new { type = "password", @class = "form-control", @style = "border-color: black" })
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row text-right" style="padding: 20px">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default" name="btnSalvar" style="border-color: black">Salvar</button>
+            <button type="submit" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
+        </div>
+    </div>
+</div>
