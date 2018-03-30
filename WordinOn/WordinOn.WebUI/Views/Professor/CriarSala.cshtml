@@ -12,8 +12,8 @@
     </div>
     <div class="col-md-9 text-right">
         <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-default" name="btnCriar" style="width: 100px">Criar</button>
-            <button type="submit" class="btn btn-default" name="btnCancelar" style="width: 100px">Cancelar</button>
+            <button type="submit" class="btn btn-default" name="btnCriar" style="width: 100px; border-color: black">Criar</button>
+            <button type="submit" class="btn btn-default" name="btnCancelar" style="width: 100px; border-color: black">Cancelar</button>
         </div>
     </div>
 </div>
@@ -24,28 +24,28 @@
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-10">
                     @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
-                    @Html.DropDownList("ddlProfessores", new SelectList(ViewBag.Professores ?? new List<Professor>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control" })
+                    @Html.DropDownList("ddlProfessores", new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
                 </div>
                 <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default" name="btnAddProfessor">Adicionar</button>
+                        <button type="submit" class="btn btn-default" name="btnAddProfessor" style = "border-color: black">Adicionar</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default" name="btnExcluirProfessor">Excluir</button>
+                        <button type="submit" class="btn btn-default" name="btnExcluirProfessor" style = "border-color: black">Excluir</button>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10">
                     @Html.Label("lblEstudantes", "Estudantes:", new { @class = "control-label" })
-                    @Html.DropDownList("ddlEstudantes", new SelectList(ViewBag.Estudantes ?? new List<Estudante>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control" })
+                    @Html.DropDownList("ddlEstudantes", new SelectList(ViewBag.Estudantes ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
                 </div>
                 <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default" name="btnAddEstudante">Adicionar</button>
+                        <button type="submit" class="btn btn-default" name="btnAddEstudante" style = "border-color: black">Adicionar</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default" name="btnExcluirEstudante">Excluir</button>
+                        <button type="submit" class="btn btn-default" name="btnExcluirEstudante" style = "border-color: black">Excluir</button>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,6 @@ namespace WordinOn.Models
         public int Cod { get; set; }
         public string Nome { get; set; }
         public Usuario Professor { get; set; }
-        public int Quantidade { get; set; }
+        public int Quantidade { get; }
     }
 }
