@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redacao.cs" />
     <Compile Include="Sala.cs" />
+    <Compile Include="SalaXEstudante.cs" />
+    <Compile Include="SalaXProfessor.cs" />
     <Compile Include="Tema.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace WordinOn.Models
 {
-    public class Sala
+    public class SalaXProfessor
     {
-        public int Cod { get; set; }
-        public string Nome { get; set; }
         public Professor Professor { get; set; }
-        public int Quantidade { get; set; }
+        public Sala Sala { get; set; }
     }
 }

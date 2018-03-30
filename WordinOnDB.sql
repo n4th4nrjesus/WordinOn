@@ -1,7 +1,7 @@
 create database WordinOnDB
 use WordinOnDB
 
------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 drop table Estudante;
 drop table Professor;
@@ -19,7 +19,7 @@ select * from Avaliacao;
 select * from Nota;
 select * from Redacao;
 
------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 create table Usuario
 (
@@ -27,20 +27,9 @@ create table Usuario
 	nome varchar (200) not null,
 	sobrenome varchar (200) not null,
 	senha varchar (200) not null,
-	email varchar (250) not null
-);
-
-create table Estudante
-(
-	cod int primary key identity (1,1),
-	codUsusario int foreign key references Usuario (cod)
-);
-
-create table Professor
-(
-	cod int primary key identity (1,1),
-	codUsusario int foreign key references Usuario (cod),
-	chave int not null
+	email varchar (250) not null,
+	chave int,
+	perfil_usuario int not null
 );
 
 create table Tema
@@ -50,18 +39,11 @@ create table Tema
 	descricao varchar (max) not null
 );
 
-create table Avaliacao
+create table Sala
 (
 	cod int primary key identity (1,1),
-	texto varchar (max) not null,
-	codProfessor int foreign key references Professor(cod) not null 
-);
-
-create table Nota
-(
-	cod int primary key identity (1,1),
-	valor int not null,
-	codProfessor int foreign key references Professor (cod) not null
+	nome varchar (200) not null,
+	codProfessor int foreign key references Usuario(cod)
 );
 
 create table Redacao
@@ -70,26 +52,39 @@ create table Redacao
 	texto varchar (max) not null,
 	tempo int not null,
 	codTema int foreign key references Tema (cod) not null,
-	codAvaliacao int foreign key references Avaliacao (cod) null,
-	codNota int foreign key references Nota (cod) null,
-	codEstudante int foreign key references Estudante (cod) not null,
-	data date
+	codEstudante int foreign key references Usuario (cod) not null,
+	codSala int foreign key references Sala(cod),
+	data datetime not null default getdate() 
 );
 
-create table Sala
+create table Avaliacao
 (
 	cod int primary key identity (1,1),
-	nome varchar (200) not null,
-	codProf int foreign key references Professor (cod) not null,
-	codEstudante int foreign key references Estudante (cod) null,
-	codRedacao int foreign key references Redacao (cod) null
+	texto varchar (max) not null,
+	valor int not null,
+	codProfessor int foreign key references Usuario(cod) not null,
+	codRedacao int foreign key references Redacao(cod) not null
 );
 
------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
 
 create table salaXestudante
 (
-	codEst int references Estudante (cod) not null,
+	codEstudante int references Usuario(cod) not null,
 	codSala int references sala (cod) not null,
-	constraint pkSxE primary key (codEst, codSala)z
+	constraint pkSxE primary key (codEstudante, codSala)
 );
+
+create table salaXprofessor
+(
+	codProfessor int references Usuario(cod) not null,
+	codSala int references sala (cod) not null,
+	constraint pkSxE primary key (codProfessor, codSala)
+);
+
+------------------------------------------------------------------------------------------------
+
+select u.nome, t.nome, r.data from Redacao r 
+	inner join Usuario u on u.cod = r.codEstudante
+	inner join Tema t on t.cod = r.codTema;
