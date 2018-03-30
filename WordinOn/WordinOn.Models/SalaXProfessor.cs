@@ -8,7 +8,7 @@ namespace WordinOn.Models
 {
     public class SalaXProfessor
     {
-        public Professor Professor { get; set; }
+        public Usuario Professor { get; set; }
         public Sala Sala { get; set; }
     }
 }

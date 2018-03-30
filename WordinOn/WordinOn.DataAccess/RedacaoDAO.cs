@@ -16,11 +16,11 @@ namespace WordinOn.DataAccess
         public void Inserir(Redacao obj)
         {
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                Data Source=localhost;
-                                                Integrated Security=SSPI;"))
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
             {
                 string strSQL = @"insert into Redacao (texto, tempo, codTema, codAvaliacao, codNota, codEstudante, data)
-                                  values (@texto, @tempo, @codTema, @codAvaliacao, @codNota, @codEstudante, @data);";
+                                              values (@texto, @tempo, @codTema, @codAvaliacao, @codNota, @codEstudante, @data);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -45,16 +45,16 @@ namespace WordinOn.DataAccess
             var lst = new List<Redacao>();
 
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                Data Source=localhost;
-                                                Integrated Security=SSPI;"))
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
-                                    u.nome as Nome da Pessoa, 
-                                    t.nome as Tema Proposto, 
-                                    r.data as Data
-                                    from Redacao r 
-                                    inner join Usuario u on u.cod = r.codEstudante
-	                                inner join Tema t on t.cod = r.codTema;";
+                                                u.nome as Nome da Pessoa, 
+                                                t.nome as Tema Proposto, 
+                                                r.data as Data
+                                                from Redacao r 
+                                                inner join Usuario u on u.cod = r.codEstudante
+	                                            inner join Tema t on t.cod = r.codTema;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -73,7 +73,7 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Estudante = new Estudante()
+                            Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["Nome da Pessoa"].ToString()
