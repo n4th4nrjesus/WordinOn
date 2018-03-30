@@ -49,12 +49,12 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
-                                                u.nome as Nome da Pessoa, 
-                                                t.nome as Tema Proposto, 
-                                                r.data as Data
-                                                from Redacao r 
-                                                inner join Usuario u on u.cod = r.codEstudante
-	                                            inner join Tema t on t.cod = r.codTema;";
+                                    u.nome as Nome da Pessoa, 
+                                    t.nome as Tema Proposto, 
+                                    r.data as Data
+                                    from Redacao r 
+                                    inner join Usuario u on u.cod = r.codEstudante
+	                                inner join Tema t on t.cod = r.codTema;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
