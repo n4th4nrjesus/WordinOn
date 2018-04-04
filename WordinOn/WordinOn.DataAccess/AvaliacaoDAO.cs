@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WordinOn.DataAccess
 {
-    class AvaliacaoDAO
+    public class AvaliacaoDAO
     {
+
     }
 }
