@@ -45,6 +45,7 @@
     <Compile Include="RedacaoDAO.cs" />
     <Compile Include="SalaDAO.cs" />
     <Compile Include="TemaDAO.cs" />
+    <Compile Include="UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordinOn.Models\WordinOn.Models.csproj">
