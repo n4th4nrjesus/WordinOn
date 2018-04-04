@@ -88,3 +88,5 @@ create table salaXprofessor
 select u.nome, t.nome, r.data from Redacao r 
 	inner join Usuario u on u.cod = r.codEstudante
 	inner join Tema t on t.cod = r.codTema;
+	
+select top 1 * from Usuario order by newid()

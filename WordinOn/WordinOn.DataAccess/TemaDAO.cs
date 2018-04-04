@@ -83,7 +83,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select nome, descricao from Tema";
+                string strSQL = @"select top 1 * from Tema order by newid()";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
