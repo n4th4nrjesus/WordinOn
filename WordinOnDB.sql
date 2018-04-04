@@ -86,5 +86,3 @@ select u.nome, t.nome, r.data from Redacao r
 	inner join Tema t on t.cod = r.codTema;
 	
 select top 1 * from Usuario order by newid()
-
-select nome from Sala
