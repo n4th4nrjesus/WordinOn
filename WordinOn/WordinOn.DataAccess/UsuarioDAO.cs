@@ -68,5 +68,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        // TEMOS QUE FAZER UM MÉTODO PARA VALIDAR O PERFIL_USUARIO
+
     }
 }

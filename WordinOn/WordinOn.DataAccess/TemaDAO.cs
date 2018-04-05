@@ -75,7 +75,6 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Buscar Aleatoriamente
-
         public List<Tema> BuscarAleatoriamente(Tema obj)
         {
             var lst = new List<Tema>();
@@ -111,7 +110,6 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
-
         #endregion
 
     }

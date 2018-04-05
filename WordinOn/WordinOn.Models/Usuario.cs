@@ -14,6 +14,12 @@ namespace WordinOn.Models
         public string Senha { get; set; }
         public string Email { get; set; }
         public string Chave { get; set; }
-        public int PerfilUsuario { get; set; }
+        public Perfil PerfilUsuario { get; set; }
+    }
+
+    public enum Perfil
+    {
+        Estudante,
+        Professor
     }
 }
