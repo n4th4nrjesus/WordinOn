@@ -19,7 +19,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"insert into Usuario (codEstudante, codSala) 
+                string strSQL = @"insert into SalaXEstudante (codEstudante, codSala) 
                                     values (@codEstudante, @codSala);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
