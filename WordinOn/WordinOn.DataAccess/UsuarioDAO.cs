@@ -40,7 +40,6 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-
         #region Alterar
         public void Alterar(Usuario obj)
         {
