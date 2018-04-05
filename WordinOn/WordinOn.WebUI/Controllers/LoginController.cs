@@ -13,5 +13,15 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult CadastroProfessor()
+        {
+            return RedirectToAction("IndexProfessor", "Cadastro");
+        }
+
+        public ActionResult CadastroEstudante()
+        {
+            return RedirectToAction("IndexEstudante", "Cadastro");
+        }
     }
 }
