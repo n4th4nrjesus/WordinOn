@@ -45,7 +45,7 @@
     <Compile Include="RedacaoDAO.cs" />
     <Compile Include="SalaDAO.cs" />
     <Compile Include="SalaXEstudanteDAO.cs" />
-    <Compile Include="SalaXProfessor.cs" />
+    <Compile Include="SalaXProfessorDAO.cs" />
     <Compile Include="TemaDAO.cs" />
     <Compile Include="UsuarioDAO.cs" />
   </ItemGroup>
