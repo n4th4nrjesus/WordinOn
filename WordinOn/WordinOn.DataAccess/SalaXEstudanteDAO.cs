@@ -88,22 +88,21 @@ namespace WordinOn.DataAccess
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        var redacao = new Redacao()
+                        var salaXestudante = new SalaXEstudante()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["Nome da Pessoa"].ToString()
+                                Nome = row["nome"].ToString(),
+                                Email = row["email"].ToString()
                             },
-                            Tema = new Tema()
+                            Sala = new Sala()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["Tema Proposto"].ToString()
-                            },
-                            Data = Convert.ToDateTime(row["data"])
+                                Nome = row["nome"].ToString()
+                            }
                         };
-                        lst.Add(redacao);
+                        lst.Add(salaXestudante);
                     }
                 }
             }
