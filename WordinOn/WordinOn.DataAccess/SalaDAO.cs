@@ -74,28 +74,5 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        #region Inserir
-        public void Inserir(Sala obj)
-        {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
-            {
-                string strSQL = @"insert into Sala (nome)
-                                              values (@nome);";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    cmd.Connection = conn;
-                    cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-        }
-        #endregion Inserir
-
     }
 }
