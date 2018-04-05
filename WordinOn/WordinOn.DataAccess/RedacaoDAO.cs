@@ -210,5 +210,61 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Procurar
+        public List<Redacao> Procurar(string obj)
+        {
+            var lst = new List<Redacao>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select 
+                                    u.nome,
+                                    t.nome,
+                                    data 
+                                    from Redacao r
+                                    inner join Usuario u on u.cod = r.codEstudante
+                                    inner join Tema t on t.cod = r.codTema
+                                    where t.nome like '%' + @texto + '%';";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Estudante = new Usuario()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Nome da Pessoa"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Tema Proposto"].ToString()
+                            },
+                            Data = Convert.ToDateTime(row["data"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
     }
 }
