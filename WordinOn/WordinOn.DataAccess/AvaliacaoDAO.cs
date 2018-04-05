@@ -52,13 +52,14 @@ namespace WordinOn.DataAccess
                                     r.data as Data
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
-	                                inner join Tema t on t.cod = r.codTema where r.cod = @;";
+	                                inner join Tema t on t.cod = r.codTema 
+                                    where r.cod = @rCod and u.Cod = @uCod;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@r.cod", SqlDbType.VarChar).Value = obj.Cod;
-                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj2.Cod;
+                    cmd.Parameters.Add("@uCod", SqlDbType.VarChar).Value = obj.Cod;
+                    cmd.Parameters.Add("@rCod", SqlDbType.VarChar).Value = obj2.Cod;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
