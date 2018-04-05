@@ -19,13 +19,14 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"insert into Tema (nome, descricao) values (@nome, @descricao);";
+                string strSQL = @"insert into Tema (nome, descricao, data) values (@nome, @descricao, @data);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = obj.Descricao;
+                    cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = obj.Data;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -44,7 +45,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select nome, descricao from Tema";
+                string strSQL = @"select nome, descricao, data from Tema";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -64,7 +65,9 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
-                            Descricao = row["descricao"].ToString()
+                            Descricao = row["descricao"].ToString(),
+                            Data = Convert.ToDateTime(row["data"])
+                            
                         };
                         lst.Add(tema);
                     }
@@ -103,6 +106,46 @@ namespace WordinOn.DataAccess
                             Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
                             Descricao = row["descricao"].ToString()
+                        };
+                        lst.Add(tema);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
+        #region Procurar
+        public List<Tema> Procurar(string obj)
+        {
+            var lst = new List<Tema>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select nome, descricao, data from Tema where nome like '%' + @texto + '%';";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var tema = new Tema()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString(),
+                            Data = Convert.ToDateTime(row["data"])
                         };
                         lst.Add(tema);
                     }

@@ -74,5 +74,44 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Procurar
+        public List<Sala> Procurar(string obj)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select * from Sala where nome like '%' + @texto + '%';";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
     }
 }
