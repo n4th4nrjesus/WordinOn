@@ -79,7 +79,7 @@ namespace WordinOn.DataAccess
                             Redacao = new Redacao()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                //Texto = row["texto"].ToString(),
+                                Texto = row["texto"].ToString()
                             }
                         };
                         lst.Add(avaliacao);

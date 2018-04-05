@@ -93,104 +93,116 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        //#region Acesso Redação
-        //public List<Redacao> AcessoRedacao()
-        //{
-        //    var lst = new List<Redacao>();
+        #region Acesso Redação
+        public List<Redacao> AcessoRedacao()
+        {
+            var lst = new List<Redacao>();
 
-        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-        //                                                    Data Source=localhost;
-        //                                                    Integrated Security=SSPI;"))
-        //    {
-        //        string strSQL = @"select texto, tempo from Redacao as r
-        //                                inner join Tema as t on
-        //                                r.codTema = t.cod";
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select 
+	                                r.texto,
+	                                r.tempo, 
+	                                t.nome, 
+	                                t.descricao	
+	                                from Redacao r
+	                                inner join Tema t on t.cod = r.codTema
+                                    where r.codTema = @tema and r.codEstudante = @estudante and r.cod = @cod";
 
-        //        using (SqlCommand cmd = new SqlCommand(strSQL))
-        //        {
-        //            conn.Open();
-        //            cmd.Connection = conn;
-        //            cmd.CommandText = strSQL;
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
 
-        //            var dataReader = cmd.ExecuteReader();
-        //            var dt = new DataTable();
-        //            dt.Load(dataReader);
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
 
-        //            conn.Close();
+                    conn.Close();
 
-        //            foreach (DataRow row in dt.Rows)
-        //            {
-        //                var redacao = new Redacao()
-        //                {
-        //                    Cod = Convert.ToInt32(row["cod"]),
-        //                    Texto = row["texto"].ToString(),
-        //                    Tema = new Tema()
-        //                    {
-        //                        Cod = Convert.ToInt32(row["cod"]),
-        //                        Nome = row["Tema Proposto"].ToString()
-        //                    },
-        //                    Tempo = Convert.ToInt32(row["Tempo"])
-        //                };
-        //                lst.Add(redacao);
-        //            }
-        //        }
-        //    }
-        //    return lst;
-        //}
-        //#endregion
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Texto = row["texto"].ToString(),
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome"].ToString(),
+                                Descricao = row["descricao"].ToString()
+                            },
+                            Tempo = Convert.ToInt32(row["Tempo"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
 
-        //#region Acesso Redação Professor
-        //public List<Redacao> AcessoRedacaoProfessor()
-        //{
-        //    var lst = new List<Redacao>();
+        #region Acesso Redação Professor
+        public List<Redacao> AcessoRedacaoProfessor()
+        {
+            var lst = new List<Redacao>();
 
-        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-        //                                                    Data Source=localhost;
-        //                                                    Integrated Security=SSPI;"))
-        //    {
-        //        string strSQL = @"select texto, tempo, u.nome from Redacao as r
-	       //                         inner join Tema as t on
-	       //                         r.codTema = t.cod
-	       //                         inner join Usuario as u on
-	       //                         u.cod = r.codEstudante";
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select 
+	                                r.texto,
+	                                r.tempo, 
+	                                t.nome,
+	                                t.descricao,
+                                    u.nome as [nome do estudante]
+	                                from Redacao r
+	                                inner join Tema t on t.cod = r.codTema
+                                    inner join Usuario u on u.cod = r.codEstudante
+                                    where r.codTema = @tema and r.codEstudante = @estudante and r.cod = @cod";
 
-        //        using (SqlCommand cmd = new SqlCommand(strSQL))
-        //        {
-        //            conn.Open();
-        //            cmd.Connection = conn;
-        //            cmd.CommandText = strSQL;
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
 
-        //            var dataReader = cmd.ExecuteReader();
-        //            var dt = new DataTable();
-        //            dt.Load(dataReader);
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
 
-        //            conn.Close();
+                    conn.Close();
 
-        //            foreach (DataRow row in dt.Rows)
-        //            {
-        //                var redacao = new Redacao()
-        //                {
-        //                    Cod = Convert.ToInt32(row["cod"]),
-        //                    Texto = row["texto"].ToString(),
-        //                    Estudante = new Usuario()
-        //                    {
-        //                        Cod = Convert.ToInt32(row["cod"]),
-        //                        Nome = row["nome"].ToString()
-        //                    },
-        //                    Tema = new Tema()
-        //                    {
-        //                        Cod = Convert.ToInt32(row["cod"]),
-        //                        Nome = row["Tema Proposto"].ToString()
-        //                    },
-        //                    Tempo = Convert.ToInt32(row["Tempo"])
-        //                };
-        //                lst.Add(redacao);
-        //            }
-        //        }
-        //    }
-        //    return lst;
-        //}
-        //#endregion
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Texto = row["texto"].ToString(),
+                            Estudante = new Usuario()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Tema Proposto"].ToString(),
+                                Descricao = row["descricao"].ToString()
+                            },
+                            Tempo = Convert.ToInt32(row["Tempo"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
 
     }
 }
