@@ -75,7 +75,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar
-        public List<Sala> Procurar(string obj)
+        public List<Sala> Procurar(string texto)
         {
             var lst = new List<Sala>();
 
@@ -83,12 +83,11 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select * from Sala where nome like '%' + @texto + '%';";
+                string strSQL = string.Format(@"select * from Sala where nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 

@@ -116,7 +116,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar
-        public List<Tema> Procurar(string obj)
+        public List<Tema> Procurar(string texto)
         {
             var lst = new List<Tema>();
 
@@ -124,12 +124,11 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select nome, descricao, data from Tema where nome like '%' + @texto + '%';";
+                string strSQL = string.Format(@"select nome, descricao, data from Tema where nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
