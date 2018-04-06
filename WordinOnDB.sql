@@ -4,18 +4,20 @@ use WordinOnDB
 ------------------------------------------------------------------------------------------------
 
 drop table Usuario;
-drop table Sala;
 drop table Tema;
-drop table Avaliacao;
-drop table Nota;
+drop table Sala;
 drop table Redacao;
+drop table Avaliacao;
+drop table salaXestudante;
+drop table salaXprofessor;
 
 select * from Usuario;
-select * from Sala;
 select * from Tema;
-select * from Avaliacao;
-select * from Nota;
+select * from Sala;
 select * from Redacao;
+select * from Avaliacao;
+select * from salaXestudante;
+select * from salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
@@ -87,3 +89,18 @@ select u.nome, t.nome, r.data from Redacao r
 	
 select top 1 * from Usuario order by newid()
 
+
+select * from tema;
+select * from Redacao;
+
+select * from usuario;
+
+insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Nathan', 'Jesus', '123', 'nathan.jesus@gmail.com', 456, 1);
+
+select * from sala;
+insert into sala (nome) values ('lab 02');
+
+
+insert into redacao (texto, tempo, codTema, codEstudante, codSala, data) values ('minha primeira redacao', 10, 1, 1, 1, getdate());
+
+select * from redacao;

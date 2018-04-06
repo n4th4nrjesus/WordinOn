@@ -211,7 +211,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar
-        public List<Redacao> Procurar(string obj)
+        public List<Redacao> Procurar(string texto)
         {
             var lst = new List<Redacao>();
 
@@ -219,19 +219,18 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select 
-                                    u.nome,
-                                    t.nome,
-                                    data 
-                                    from Redacao r
-                                    inner join Usuario u on u.cod = r.codEstudante
-                                    inner join Tema t on t.cod = r.codTema
-                                    where t.nome like '%' + @texto + '%';";
+                string strSQL = string.Format(@"select 
+                                                    u.nome,
+                                                    t.nome,
+                                                    data 
+                                                    from Redacao r
+                                                    inner join Usuario u on u.cod = r.codEstudante
+                                                    inner join Tema t on t.cod = r.codTema
+                                                    where t.nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 

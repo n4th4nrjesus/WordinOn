@@ -29,6 +29,11 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
+        public ActionResult ProcurarRedacao(string texto)
+        {
+            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
+            return View();
+        }
         #endregion
 
         public ActionResult CriarRedacao()

@@ -19,7 +19,7 @@ namespace WordinOn.Models
 
     public enum Perfil
     {
-        Estudante,
-        Professor
+        Estudante = 1,
+        Professor = 2
     }
 }
