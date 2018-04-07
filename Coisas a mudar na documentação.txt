@@ -4,31 +4,59 @@
 
 * Elementos Pré-textuais (Capa, Folha de Rosto, Listas [Figuras, Tabelas e
 Siglas], Sumário, Agradecimentos, Resumo)
+ATUALIZAR
 * Introdução
+FAZER
 * Problematização
+FAZER
 * Justificativa;
+FEITO
 * Referencial Teórico (Embasamento Teórico do Objeto de Pesquisa)
+FAZER
 * Objetivo Geral
+FEITO
 * Objetivos Específicos
+FEITO
 * Viabilidade Técnica e Econômica
-* Cronograma
+
+	* Cronograma
+	FAZER
 	* Business Model Canvas
+	ATUALIZAR
 	* Sumário Executivo (Categoria, Estudo de Mercado e Demanda,investimentos Previstos e Resultados Esperados)
+	FAZER
 * Ferramentas;
+ATUALIZAR
 * Protótipos (todos);
+ATUALIZAR
 * Desenvolvimento
+EM ANDAMENTO
 * Requisitos (funcionais e não funcionais)
+ATUALIZAR
 * Regras de Negócio
+ATUALIZAR
 * Caso de Uso Descritivo
+FAZER
 * Diagramas (Casos de uso, classe, sequência, atividade e DER Lógico e
 físico de banco de dados, etc.);
+FAZER
 * Implementação
+FAZER
 * Arquitetura e Metodologia – (por que usar esta Arquitetura?)
+FAZER
 * Telas (todas)
+EM ANDAMENTO
 * Plano de teste;
+FAZER
 * Casos de teste (três principais funcionalidades);
+FAZER
 * Instruções de uso (quando aplicável);
+NÃO PRECISA
 * Instruções de instalação (quando aplicável);
+NÃO PRECISA
 * Conclusão
+FAZER
 * Referências
+ATUALIZAR
 * Anexos e apêndices
+FAZER E ATUALIZAR
