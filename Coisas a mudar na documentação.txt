@@ -1,0 +1,34 @@
+-- COISAS PARA MUDAR NA DOCUMENTAÇÃO --
+
+
+
+* Elementos Pré-textuais (Capa, Folha de Rosto, Listas [Figuras, Tabelas e
+Siglas], Sumário, Agradecimentos, Resumo)
+* Introdução
+* Problematização
+* Justificativa;
+* Referencial Teórico (Embasamento Teórico do Objeto de Pesquisa)
+* Objetivo Geral
+* Objetivos Específicos
+* Viabilidade Técnica e Econômica
+* Cronograma
+	* Business Model Canvas
+	* Sumário Executivo (Categoria, Estudo de Mercado e Demanda,investimentos Previstos e Resultados Esperados)
+* Ferramentas;
+* Protótipos (todos);
+* Desenvolvimento
+* Requisitos (funcionais e não funcionais)
+* Regras de Negócio
+* Caso de Uso Descritivo
+* Diagramas (Casos de uso, classe, sequência, atividade e DER Lógico e
+físico de banco de dados, etc.);
+* Implementação
+* Arquitetura e Metodologia – (por que usar esta Arquitetura?)
+* Telas (todas)
+* Plano de teste;
+* Casos de teste (três principais funcionalidades);
+* Instruções de uso (quando aplicável);
+* Instruções de instalação (quando aplicável);
+* Conclusão
+* Referências
+* Anexos e apêndices
