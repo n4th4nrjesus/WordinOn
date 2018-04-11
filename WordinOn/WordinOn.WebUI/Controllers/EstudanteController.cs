@@ -86,14 +86,11 @@ namespace WordinOn.WebUI.Controllers
             new RedacaoDAO().Inserir(obj);
             return RedirectToAction("TelaInicial", "Estudante");
         }
-
-        public void ContagemRegressiva()
+        
+        public ActionResult Professores()
         {
-            TimeSpan TempoInicial = new TimeSpan(1, 30, 0);
-            TimeSpan NovoTempo = new TimeSpan(0, 0, 0);
-            TimeSpan TempoASubtrair = new TimeSpan(0, 0, 1);
-
-            for(NovoTempo = TempoInicial)
+            ViewBag.Sala = new UsuarioDAO().BuscarTodos();
+            return View();
         }
 
     }
