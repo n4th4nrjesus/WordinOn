@@ -11,42 +11,10 @@ namespace WordinOn.WebUI.Controllers
     public class EstudanteController : Controller
     {
         // GET: Estudante
-        #region Tela Inicial
         public ActionResult TelaInicial()
         {
             return View();
         }
-
-        public ActionResult Salas()
-        {
-            ViewBag.Sala = new SalaDAO().BuscarTodos();
-            return View();
-        }
-
-        public ActionResult Redacao()
-        {
-            ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
-            return View();
-        }
-
-        public ActionResult ProcurarSala(string texto)
-        {
-            ViewBag.Sala = new SalaDAO().Procurar(texto);
-            return View();
-        }
-
-        public ActionResult ProcurarRedacao(string texto)
-        {
-            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
-            return View();
-        }
-
-        public ActionResult ProcurarTema(string texto)
-        {
-            ViewBag.Tema = new RedacaoDAO().Procurar(texto);
-            return View();
-        }
-        #endregion
 
         public ActionResult CriarRedacao()
         {
@@ -81,6 +49,51 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult Perfil()
         {
             return View();
+        }
+
+        public ActionResult Salas()
+        {
+            ViewBag.Sala = new SalaDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult Redacao()
+        {
+            ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult ProcurarRedacao(string texto)
+        {
+            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
+            return View();
+        }
+
+        public ActionResult ProcurarSala(string texto)
+        {
+            ViewBag.Sala = new SalaDAO().Procurar(texto);
+            return View();
+        }
+
+        public ActionResult ProcurarTema(string texto)
+        {
+            ViewBag.Tema = new RedacaoDAO().Procurar(texto);
+            return View();
+        }
+
+        public ActionResult EnviarRedacao(Redacao obj)
+        {
+            new RedacaoDAO().Inserir(obj);
+            return RedirectToAction("TelaInicial", "Estudante");
+        }
+
+        public void ContagemRegressiva()
+        {
+            TimeSpan TempoInicial = new TimeSpan(1, 30, 0);
+            TimeSpan NovoTempo = new TimeSpan(0, 0, 0);
+            TimeSpan TempoASubtrair = new TimeSpan(0, 0, 1);
+
+            for(NovoTempo = TempoInicial)
         }
 
     }
