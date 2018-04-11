@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WordinOn.DataAccess;
+using WordinOn.Models;
 
 namespace WordinOn.WebUI.Controllers
 {
@@ -48,5 +50,44 @@ namespace WordinOn.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult Redacao()
+        {
+            ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao)
+        {
+            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
+
+
+        }
+
+        public ActionResult Salas()
+        {
+            ViewBag.Sala = new SalaDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult ProcurarRedacao(string texto)
+        {
+            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
+            return View();
+        }
+
+        public ActionResult ProcurarSala(string texto)
+        {
+            ViewBag.Sala = new SalaDAO().Procurar(texto);
+            return View();
+        }
+
+        public ActionResult ProcurarTema(string texto)
+        {
+            ViewBag.Tema = new RedacaoDAO().Procurar(texto);
+            return View();
+        }
+
+
     }
 }

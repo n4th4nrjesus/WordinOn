@@ -149,7 +149,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Acesso Redação Professor
-        public List<Redacao> AcessoRedacaoProfessor(Tema obj, Usuario obj2, Redacao obj3)
+        public List<Redacao> AcessoRedacaoProfessor(int obj, int obj2, int obj3)
         {
             var lst = new List<Redacao>();
 
@@ -171,9 +171,9 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@tema", SqlDbType.VarChar).Value = obj.Cod;
-                    cmd.Parameters.Add("@estudante", SqlDbType.VarChar).Value = obj2.Cod;
-                    cmd.Parameters.Add("@cod", SqlDbType.VarChar).Value = obj3.Cod;
+                    cmd.Parameters.Add("@tema", SqlDbType.VarChar).Value = obj;
+                    cmd.Parameters.Add("@estudante", SqlDbType.VarChar).Value = obj2;
+                    cmd.Parameters.Add("@cod", SqlDbType.VarChar).Value = obj3;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
