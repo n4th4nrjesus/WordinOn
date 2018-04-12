@@ -59,9 +59,12 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao)
         {
-            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
+            var redacaoAcess = new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
 
-
+            if(redacaoAcess == null)
+            {
+                return RedirectToAction("TelaInicial", "Professor");
+            }
         }
 
         public ActionResult Salas()
