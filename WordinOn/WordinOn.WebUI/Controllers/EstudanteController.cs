@@ -80,16 +80,28 @@ namespace WordinOn.WebUI.Controllers
             ViewBag.Tema = new RedacaoDAO().Procurar(texto);
             return View();
         }
-
+        
         public ActionResult EnviarRedacao(Redacao obj)
         {
             new RedacaoDAO().Inserir(obj);
             return RedirectToAction("TelaInicial", "Estudante");
         }
-        
+
         public ActionResult Professores()
         {
             ViewBag.Sala = new UsuarioDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult Avaliacao()
+        {
+            ViewBag.Sala = new AvaliacaoDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult SairSala(SalaXEstudante obj)
+        {
+            new SalaXEstudanteDAO().TirarDaSala(obj);
             return View();
         }
 

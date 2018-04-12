@@ -110,6 +110,46 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Buscar Todos
+        public List<Usuario> BuscarTodos()
+        {
+            var lst = new List<Usuario>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select nome from Usuario";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var usuario = new Usuario()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString(),
+                            Sobrenome = row["sobrenome"].ToString(),
+                            Senha = row["senha"].ToString(),
+                            Email = row["email"].ToString()
+                        };
+                        lst.Add(usuario);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
 
         // TEMOS QUE FAZER UM MÉTODO PARA VALIDAR O PERFIL_USUARIO
 

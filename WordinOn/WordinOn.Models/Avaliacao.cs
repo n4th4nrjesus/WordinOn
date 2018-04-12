@@ -12,6 +12,6 @@ namespace WordinOn.Models
         public string Texto { get; set; }
         public int Valor{ get; set; }
         public Usuario Professor { get; set; }
-        public Redacao Redacao{ get; set; }
+        public Redacao Redacao { get; set; }
     }
 }
