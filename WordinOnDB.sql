@@ -104,3 +104,5 @@ insert into sala (nome) values ('lab 02');
 insert into redacao (texto, tempo, codTema, codEstudante, codSala, data) values ('minha primeira redacao', 10, 1, 1, 1, getdate());
 
 select * from redacao;
+
+
