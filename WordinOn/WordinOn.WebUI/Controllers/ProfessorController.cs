@@ -73,6 +73,12 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
+        public ActionResult Temas()
+        {
+            ViewBag.Temas = new TemaDAO().BuscarTodos();
+            return View();
+        }
+
         public ActionResult ProcurarRedacao(string texto)
         {
             ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
