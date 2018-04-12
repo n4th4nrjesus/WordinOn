@@ -96,11 +96,12 @@ create table salaXprofessor
 --select * from tema;
 --select * from Redacao;
 
---select * from usuario;
+-- select * from usuario;
 
 insert into tema (nome, descricao) values ('Política', 'Política do Brasil');
 
 insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Nathan', 'Jesus', '123', 'nathan.jesus@gmail.com', 456, 1);
+insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Tiago', 'Andrade', '123', 'tgnandrade@gmail.com', 999, 2);
 
 select * from sala;
 insert into sala (nome) values ('lab 02');

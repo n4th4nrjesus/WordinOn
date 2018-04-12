@@ -59,9 +59,9 @@ namespace WordinOn.WebUI.Controllers
         }
 
         //VERIFICAR ESTE MÉTODO
-        public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao, Avaliacao avaliacao)
+        public ActionResult AvaliarRedacao(Redacao redacao, Avaliacao avaliacao)
         {
-            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod, redacao.Cod);
+            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Cod);
             new AvaliacaoDAO().Inserir(avaliacao);
             return View();
         }
