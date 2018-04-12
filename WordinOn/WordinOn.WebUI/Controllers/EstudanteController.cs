@@ -8,6 +8,7 @@ using WordinOn.Models;
 
 namespace WordinOn.WebUI.Controllers
 {
+    [Authorize]
     public class EstudanteController : Controller
     {
         // GET: Estudante
@@ -86,7 +87,7 @@ namespace WordinOn.WebUI.Controllers
             ViewBag.Tema = new RedacaoDAO().Procurar(texto);
             return View();
         }
-        
+
         public ActionResult EnviarRedacao(Redacao obj)
         {
             new RedacaoDAO().Inserir(obj);

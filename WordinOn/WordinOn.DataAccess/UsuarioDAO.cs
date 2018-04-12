@@ -69,7 +69,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region login
-        public Usuario Login(string Email, string Senha)
+        public Usuario Login(Usuario obj)
         {
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
                                                             Data Source=localhost;
@@ -81,8 +81,8 @@ namespace WordinOn.DataAccess
                 {
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = Email;
-                    cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = Senha;
+                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
+                    cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WordinOn.DataAccess;
 using WordinOn.Models;
 
@@ -10,7 +11,6 @@ namespace WordinOn.WebUI.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
         public ActionResult Index()
         {
             return View();
@@ -26,16 +26,19 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("IndexEstudante", "Cadastro");
         }
 
-        public ActionResult Login(Usuario obj)
+        public ActionResult Entrar(Usuario obj)
         {
-            var usuario = new UsuarioDAO().Login(obj.Email, obj.Senha);
+            var usuarioLogado = new UsuarioDAO().Login(obj);
 
-            if (usuario == null)
+            if (usuarioLogado == null)
             {
                 return RedirectToAction("Index", "Login");
             }
 
-            if (usuario.PerfilUsuario == Perfil.Estudante)
+            var userData = new JavaScriptSerializer().Serialize(usuarioLogado);
+            FormsAuthenticationUtil.SetCustomAuthCookie(usuarioLogado.Email, userData, false);
+
+            if (usuarioLogado.PerfilUsuario == Perfil.Estudante)
             {
                 return RedirectToAction("TelaInicial", "Estudante");
             }
@@ -44,7 +47,13 @@ namespace WordinOn.WebUI.Controllers
             {
                 return RedirectToAction("TelaInicial", "Professor");
             }
+        }
 
+        public ActionResult LogOff()
+        {
+            FormsAuthenticationUtil.SignOut();
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WordinOn.Models
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -21,7 +22,7 @@
                 <a class="navbar-brand" href="#">
                     <img alt="Brand" class="img-responsive" style="width: 30px; height: 30px" src="https://upload.wikimedia.org/wikipedia/commons/7/73/Bibeksheel-logo-final.png" />
                 </a>
-                <p class="navbar-text">Nome Estudante</p>
+                <p class="navbar-text">@(((Usuario)User).Nome)</p>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +37,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">Perfil</a></li>
                             <li><a href="AvaliacaoDeRedacao.html">Voltar</a></li>
-                            <li><a href="#">Sair</a></li>
+                            <li><a href="@Url.Action("LogOff", "Login")">Sair</a></li>
                         </ul>
                     </li>
                 </ul>

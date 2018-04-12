@@ -1,23 +1,26 @@
 create database WordinOnDB
+go
+
 use WordinOnDB
+go
 
 ------------------------------------------------------------------------------------------------
 
-drop table Usuario;
-drop table Tema;
-drop table Sala;
-drop table Redacao;
-drop table Avaliacao;
-drop table salaXestudante;
-drop table salaXprofessor;
+--drop table Usuario;
+--drop table Tema;
+--drop table Sala;
+--drop table Redacao;
+--drop table Avaliacao;
+--drop table salaXestudante;
+--drop table salaXprofessor;
 
-select * from Usuario;
-select * from Tema;
-select * from Sala;
-select * from Redacao;
-select * from Avaliacao;
-select * from salaXestudante;
-select * from salaXprofessor
+--select * from Usuario;
+--select * from Tema;
+--select * from Sala;
+--select * from Redacao;
+--select * from Avaliacao;
+--select * from salaXestudante;
+--select * from salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
@@ -83,17 +86,19 @@ create table salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
-select u.nome, t.nome, r.data from Redacao r 
-	inner join Usuario u on u.cod = r.codEstudante
-	inner join Tema t on t.cod = r.codTema;
+--select u.nome, t.nome, r.data from Redacao r 
+--	inner join Usuario u on u.cod = r.codEstudante
+--	inner join Tema t on t.cod = r.codTema;
 	
-select top 1 * from Usuario order by newid()
+--select top 1 * from Usuario order by newid()
 
 
-select * from tema;
-select * from Redacao;
+--select * from tema;
+--select * from Redacao;
 
-select * from usuario;
+--select * from usuario;
+
+insert into tema (nome, descricao) values ('Política', 'Política do Brasil');
 
 insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Nathan', 'Jesus', '123', 'nathan.jesus@gmail.com', 456, 1);
 

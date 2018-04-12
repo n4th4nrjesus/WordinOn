@@ -8,6 +8,7 @@ using WordinOn.Models;
 
 namespace WordinOn.WebUI.Controllers
 {
+    [Authorize]
     public class ProfessorController : Controller
     {
         // GET: Professor
@@ -60,7 +61,7 @@ namespace WordinOn.WebUI.Controllers
         //VERIFICAR ESTE MÉTODO
         public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao, Avaliacao avaliacao)
         {
-            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
+            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod, redacao.Cod);
             new AvaliacaoDAO().Inserir(avaliacao);
             return View();
         }
