@@ -36,60 +36,7 @@ namespace WordinOn.DataAccess
             }
         }
         #endregion
-
-        #region Buscar Avaliacao
-        public List<Avaliacao> BuscarAvaliacao(Usuario obj, Redacao obj2)
-        {
-            var lst = new List<Avaliacao>();
-
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
-            {
-                string strSQL = @"select 
-                                    u.nome as [Nome da Pessoa], 
-                                    t.nome as [Tema Proposto], 
-                                    r.data as Data
-                                    from Redacao r 
-                                    inner join Usuario u on u.cod = r.codEstudante
-	                                inner join Tema t on t.cod = r.codTema 
-                                    where r.cod = @rCod and u.Cod = @uCod;";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    conn.Open();
-                    cmd.Parameters.Add("@uCod", SqlDbType.VarChar).Value = obj.Cod;
-                    cmd.Parameters.Add("@rCod", SqlDbType.VarChar).Value = obj2.Cod;
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
-
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
-                    dt.Load(dataReader);
-
-                    conn.Close();
-
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        var avaliacao = new Avaliacao()
-                        {
-                            Cod = Convert.ToInt32(row["cod"]),
-                            Texto = row["texto"].ToString(),
-                            Valor = Convert.ToInt32(row["valor"]),
-                            Redacao = new Redacao()
-                            {
-                                Cod = Convert.ToInt32(row["cod"]),
-                                Texto = row["texto"].ToString()
-                            }
-                        };
-                        lst.Add(avaliacao);
-                    }
-                }
-            }
-            return lst;
-        }
-        #endregion
-
+        
         #region Buscar Todos
         public List<Avaliacao> BuscarTodos()
         {
@@ -142,5 +89,7 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
+
+        //FAZER MÉTODO DE FILTRAR POR REDAÇÃO AVALIADA
     }
 }

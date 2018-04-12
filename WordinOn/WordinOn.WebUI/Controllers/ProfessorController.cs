@@ -57,14 +57,12 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao)
+        //VERIFICAR ESTE MÉTODO
+        public ActionResult AvaliarRedacao(Usuario usuario, Redacao redacao, Avaliacao avaliacao)
         {
-            var redacaoAcess = new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
-
-            if(redacaoAcess == null)
-            {
-                return RedirectToAction("TelaInicial", "Professor");
-            }
+            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Tema.Cod, usuario.Cod,  redacao.Cod);
+            new AvaliacaoDAO().Inserir(avaliacao);
+            return View();
         }
 
         public ActionResult Salas()
@@ -97,6 +95,22 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
+        public ActionResult CriarSala(Sala obj)
+        {
+            new SalaDAO().Inserir(obj);
+            return RedirectToAction("ListaSala", "Professor");
+        }
 
+        public ActionResult CriarTema(Tema obj)
+        {
+            new TemaDAO().Inserir(obj);
+            return RedirectToAction("ListaTema", "Professor");
+        }
+
+        public ActionResult PerfilProfessor(Usuario obj)
+        {
+            new UsuarioDAO().Alterar(obj);
+            return RedirectToAction("TelaInicial", "Professor");
+        }
     }
 }
