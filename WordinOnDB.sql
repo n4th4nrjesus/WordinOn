@@ -6,21 +6,21 @@ go
 
 ------------------------------------------------------------------------------------------------
 
---drop table Usuario;
---drop table Tema;
---drop table Sala;
---drop table Redacao;
---drop table Avaliacao;
---drop table salaXestudante;
---drop table salaXprofessor;
+drop table Usuario;
+drop table Tema;
+drop table Sala;
+drop table Redacao;
+drop table Avaliacao;
+drop table salaXestudante;
+drop table salaXprofessor;
 
---select * from Usuario;
---select * from Tema;
---select * from Sala;
---select * from Redacao;
---select * from Avaliacao;
---select * from salaXestudante;
---select * from salaXprofessor
+select * from Usuario;
+select * from Tema;
+select * from Sala;
+select * from Redacao;
+select * from Avaliacao;
+select * from salaXestudante;
+select * from salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
@@ -86,29 +86,43 @@ create table salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
---select u.nome, t.nome, r.data from Redacao r 
---	inner join Usuario u on u.cod = r.codEstudante
---	inner join Tema t on t.cod = r.codTema;
-	
---select top 1 * from Usuario order by newid()
+insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
+values ('Nathan', 'Jesus', '123', 'nathan.jesus@gmail.com', 456, 1);
+insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
+values ('Eliseu', 'Messias', '321', 'eliseu.messias@gmail.com', 457, 1);
+
+insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
+values ('Tiago', 'Andrade', '123', 'tgnandrade@gmail.com', 999, 2);
+insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
+values ('Wagner', 'Oliveira', '321', 'wsoliveira@live.com', 1000, 2);
 
 
---select * from tema;
---select * from Redacao;
+insert into Tema (nome, descricao) 
+values 
+('Política', 'Política do Brasil'), 
+('Desigualdade', 'Desigualdade racial')
 
--- select * from usuario;
+insert into Sala (nome)
+values
+('Metamorfose'),
+('Raízes Urbanas')
 
-insert into tema (nome, descricao) values ('Política', 'Política do Brasil');
+insert into Redacao (texto, tempo, codTema, codEstudante, codSala)
+values
+('blablablabla1', 70, 1, 1, 1),
+('beruberuberu1', 50, 2, 4, 2)
 
-insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Nathan', 'Jesus', '123', 'nathan.jesus@gmail.com', 456, 1);
-insert into usuario (nome, sobrenome, senha, email, chave, perfil_usuario) values ('Tiago', 'Andrade', '123', 'tgnandrade@gmail.com', 999, 2);
+insert into Avaliacao (texto, valor, codProfessor, codRedacao)
+values
+('Muito bom', 750, 2, 1),
+('Muito ruim', 300, 3, 2)
 
-select * from sala;
-insert into sala (nome) values ('lab 02');
+insert into salaXestudante (codEstudante, codSala)
+values
+(1, 1),
+(4, 2)
 
-
-insert into redacao (texto, tempo, codTema, codEstudante, codSala, data) values ('minha primeira redacao', 10, 1, 1, 1, getdate());
-
-select * from redacao;
-
-
+insert into salaXprofessor (codProfessor, codSala)
+values
+(2, 1),
+(3, 2)
