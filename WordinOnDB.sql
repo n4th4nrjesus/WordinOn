@@ -96,7 +96,6 @@ values ('Tiago', 'Andrade', '123', 'tgnandrade@gmail.com', 999, 2);
 insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
 values ('Wagner', 'Oliveira', '321', 'wsoliveira@live.com', 1000, 2);
 
-
 insert into Tema (nome, descricao) 
 values 
 ('Política', 'Política do Brasil'), 
