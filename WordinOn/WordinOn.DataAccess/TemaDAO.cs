@@ -63,7 +63,6 @@ namespace WordinOn.DataAccess
                     {
                         var tema = new Tema()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
                             Descricao = row["descricao"].ToString(),
                             Data = Convert.ToDateTime(row["data"])
