@@ -96,7 +96,6 @@ values ('Tiago', 'Andrade', '123', 'tgnandrade@gmail.com', 999, 2);
 insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
 values ('Wagner', 'Oliveira', '321', 'wsoliveira@live.com', 1000, 2);
 
-
 insert into Tema (nome, descricao) 
 values 
 ('Política', 'Política do Brasil'), 
@@ -110,19 +109,27 @@ values
 insert into Redacao (texto, tempo, codTema, codEstudante, codSala)
 values
 ('blablablabla1', 70, 1, 1, 1),
-('beruberuberu1', 50, 2, 4, 2)
+('beruberuberu1', 50, 2, 2, 2)
 
 insert into Avaliacao (texto, valor, codProfessor, codRedacao)
 values
-('Muito bom', 750, 2, 1),
-('Muito ruim', 300, 3, 2)
+('Muito bom', 750, 3, 1),
+('Muito ruim', 300, 4, 2)
 
 insert into salaXestudante (codEstudante, codSala)
 values
 (1, 1),
-(4, 2)
+(2, 2)
 
 insert into salaXprofessor (codProfessor, codSala)
 values
-(2, 1),
-(3, 2)
+(3, 1),
+(4, 2)
+
+select u.nome , t.nome, a.texto, a.valor, data from Redacao r
+inner join Tema t on r.codTema = t.cod
+inner join Usuario u on u.cod = r.codEstudante
+inner join Avaliacao a on a.codRedacao = r.cod
+where u.perfil_usuario = 1
+
+
