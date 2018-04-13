@@ -47,9 +47,9 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
-                                    u.nome as [Nome do professor],
-                                    a.texto as [Comentario]
-                                    a.valor as [Valor]
+                                    u.nome as Nome_Professor,
+                                    a.texto as Comentario
+                                    a.valor as Valor
                                     from Avaliacao a
                                     inner join Usuario u on u.cod = a.codProfessor";
 
@@ -69,17 +69,11 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome"].ToString()
-                            },
-                            Redacao = new Redacao()
-                            {
-                                Cod = Convert.ToInt32(row["cod"])
                             }
                         };
                         lst.Add(avaliacao);
