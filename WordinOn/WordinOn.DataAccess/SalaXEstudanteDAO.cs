@@ -92,13 +92,11 @@ namespace WordinOn.DataAccess
                         {
                             Estudante = new Usuario()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome"].ToString(),
                                 Email = row["email"].ToString()
                             },
                             Sala = new Sala()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome"].ToString()
                             }
                         };

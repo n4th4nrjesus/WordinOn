@@ -137,7 +137,6 @@ namespace WordinOn.DataAccess
                     {
                         var usuario = new Usuario()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
                             Sobrenome = row["sobrenome"].ToString(),
                             Senha = row["senha"].ToString(),
