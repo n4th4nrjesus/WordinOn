@@ -19,8 +19,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"insert into Sala (nome)
-                                              values (@nome);";
+                string strSQL = @"insert into Sala (nome) values (@nome);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -62,9 +61,7 @@ namespace WordinOn.DataAccess
                     {
                         var sala = new Sala()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString()
-
                         };
                         lst.Add(sala);
                     }
@@ -101,7 +98,6 @@ namespace WordinOn.DataAccess
                     {
                         var sala = new Sala()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString()
                         };
                         lst.Add(sala);
