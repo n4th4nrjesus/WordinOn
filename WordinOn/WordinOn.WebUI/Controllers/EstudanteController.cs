@@ -14,7 +14,9 @@ namespace WordinOn.WebUI.Controllers
         // GET: Estudante
         public ActionResult TelaInicial()
         {
-            return View();
+            var lst = new RedacaoDAO().BuscarTodos();
+
+            return View(lst);
         }
 
         public ActionResult CriarRedacao()

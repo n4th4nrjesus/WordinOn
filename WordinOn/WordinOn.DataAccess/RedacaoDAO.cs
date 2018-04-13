@@ -49,8 +49,8 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
-                                    u.nome as Nome da Pessoa, 
-                                    t.nome as Tema Proposto, 
+                                    u.nome as Nome_Pessoa, 
+                                    t.nome as Tema_Proposto, 
                                     r.data as Data
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
@@ -72,16 +72,13 @@ namespace WordinOn.DataAccess
                     {
                         var redacao = new Redacao()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Estudante = new Usuario()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["Nome da Pessoa"].ToString()
+                                Nome = row["Nome_Pessoa"].ToString()
                             },
                             Tema = new Tema()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["Tema Proposto"].ToString()
+                                Nome = row["Tema_Proposto"].ToString()
                             },
                             Data = Convert.ToDateTime(row["data"])
                         };
