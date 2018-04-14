@@ -11,6 +11,5 @@ namespace WordinOn.Models
         public int Cod { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public DateTime Data { get; set; }
     }
 }
