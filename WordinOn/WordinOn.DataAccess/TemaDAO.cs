@@ -19,14 +19,13 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"insert into Tema (nome, descricao, data) values (@nome, @descricao, @data);";
+                string strSQL = @"insert into Tema (nome, descricao) values (@nome, @descricao);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = obj.Descricao;
-                    cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = obj.Data;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -64,8 +63,7 @@ namespace WordinOn.DataAccess
                         var tema = new Tema()
                         {
                             Nome = row["nome"].ToString(),
-                            Descricao = row["descricao"].ToString(),
-                            Data = Convert.ToDateTime(row["data"])
+                            Descricao = row["descricao"].ToString()
                             
                         };
                         lst.Add(tema);
@@ -142,8 +140,7 @@ namespace WordinOn.DataAccess
                         var tema = new Tema()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Nome = row["nome"].ToString(),
-                            Data = Convert.ToDateTime(row["data"])
+                            Nome = row["nome"].ToString()
                         };
                         lst.Add(tema);
                     }
