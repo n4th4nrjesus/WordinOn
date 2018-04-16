@@ -207,7 +207,7 @@
     <Content Include="Views\Estudante\ListaSalas.cshtml" />
     <Content Include="Views\Estudante\ListaRedacoesSala.cshtml" />
     <Content Include="Views\Professor\TelaInicial.cshtml" />
-    <Content Include="Views\Professor\TelaAvaliacaoRedacao.cshtml" />
+    <Content Include="Views\Professor\AvaliacaoRedacao.cshtml" />
     <Content Include="Views\Professor\ListaSala.cshtml" />
     <Content Include="Views\Professor\ListaTema.cshtml" />
     <Content Include="Views\Professor\RedacoesSala.cshtml" />
