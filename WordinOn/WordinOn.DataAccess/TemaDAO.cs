@@ -64,7 +64,6 @@ namespace WordinOn.DataAccess
                         {
                             Nome = row["nome"].ToString(),
                             Descricao = row["descricao"].ToString()
-                            
                         };
                         lst.Add(tema);
                     }
