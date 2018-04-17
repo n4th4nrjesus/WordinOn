@@ -98,7 +98,7 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult CriarSala(Sala obj)
+        public ActionResult SalvarSala(Sala obj)
         {
             new SalaDAO().Inserir(obj);
             return RedirectToAction("ListaSala", "Professor");
