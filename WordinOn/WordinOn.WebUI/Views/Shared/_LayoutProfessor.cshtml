@@ -27,16 +27,16 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-                <button href="#" type="button" class="btn btn-default navbar-btn" style="border-color: black">Redações</button>
-                <button href="#" type="button" class="btn btn-default navbar-btn" style="border-color: black">Salas</button>
-                <button href="#" type="button" class="btn btn-default navbar-btn" style="border-color: black">Criar Salas</button>
-                <button href="#" type="button" class="btn btn-default navbar-btn" style="border-color: black">Temas</button>
+                <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("TelaInicial", "Professor")">Redações</a>
+                <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("ListaSalas", "Professor")">Salas</a>
+                <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("CriarSala", "Professor")">Criar Salas</a>
+                <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("ListaTemas", "Professor")">Temas</a>
                 <ul class="nav navbar-nav navbar-right" style="border-left: solid 2px black">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Perfil</a></li>
-                            <li><a href="AvaliacaoDeRedacao.html">Voltar</a></li>
+                            <li><a href="@Url.Action("Perfil", "Professor")">Perfil</a></li>
+                            <li><a href="@Url.Action("TelaInicial", "Professor")">Voltar</a></li>
                             <li><a href="@Url.Action("LogOff", "Login")">Sair</a></li>
                         </ul>
                     </li>

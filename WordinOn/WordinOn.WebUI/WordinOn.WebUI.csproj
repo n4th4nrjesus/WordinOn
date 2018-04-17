@@ -208,8 +208,8 @@
     <Content Include="Views\Estudante\ListaRedacoesSala.cshtml" />
     <Content Include="Views\Professor\TelaInicial.cshtml" />
     <Content Include="Views\Professor\AvaliacaoRedacao.cshtml" />
-    <Content Include="Views\Professor\ListaSala.cshtml" />
-    <Content Include="Views\Professor\ListaTema.cshtml" />
+    <Content Include="Views\Professor\ListaSalas.cshtml" />
+    <Content Include="Views\Professor\ListaTemas.cshtml" />
     <Content Include="Views\Professor\RedacoesSala.cshtml" />
     <Content Include="Views\Professor\CriarSala.cshtml" />
     <Content Include="Views\Professor\CriacaoTema.cshtml" />
