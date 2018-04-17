@@ -90,6 +90,59 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Buscar Próprias Redações
+        public List<Redacao> BuscarPropriasRedacoes(int obj)
+        {
+            var lst = new List<Redacao>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select 
+                                    u.nome as Nome_Pessoa, 
+                                    t.nome as Tema_Proposto, 
+                                    r.data as Data
+                                    from Redacao r
+                                    inner join Usuario u on u.cod = r.codEstudante
+	                                inner join Tema t on t.cod = r.codTema
+                                    where codEstudante = @codEstudante;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj;
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Estudante = new Usuario()
+                            {
+                                Nome = row["Nome_Pessoa"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Nome = row["Tema_Proposto"].ToString()
+                            },
+                            Data = Convert.ToDateTime(row["data"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
         #region Acesso Redação
         public List<Redacao> AcessoRedacao(int obj)
         {
