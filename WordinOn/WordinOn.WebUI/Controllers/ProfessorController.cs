@@ -24,7 +24,7 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult ListaSala()
+        public ActionResult ListaSalas()
         {
             return View();
         }
@@ -39,7 +39,7 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult ListaTema()
+        public ActionResult ListaTemas()
         {
             return View();
         }
