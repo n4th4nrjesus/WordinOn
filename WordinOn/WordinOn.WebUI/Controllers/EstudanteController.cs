@@ -15,7 +15,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();
-
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View(lst);
         }
 
@@ -26,7 +26,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult PropriasRedacoes()
         {
-            var lst = new RedacaoDAO().BuscarPropriasRedacoes(Convert.ToInt32(User.Identity));
+            var lst = new RedacaoDAO().BuscarPropriasRedacoes(((Usuario)User).Cod);
 
             return View(lst);
         }

@@ -43,7 +43,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select nome from Sala";
+                string strSQL = @"select * from Sala";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -61,6 +61,7 @@ namespace WordinOn.DataAccess
                     {
                         var sala = new Sala()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString()
                         };
                         lst.Add(sala);
@@ -107,6 +108,83 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
+
+        public List<Sala> BuscarPorEstudante(int codEstudante)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select * from Sala where cod in  (select codSala from salaXestudante where codEstudante = @codEstudante)";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
+
+
+
+
+        public List<Sala> BuscarPorProfessor(int codEstudante)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select * from Sala where cod in  (select codSala from salaXestudante where codEstudante = @codEstudante)";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
 
     }
 }
