@@ -4,54 +4,58 @@
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
 
-<div class="row" style="border-bottom: solid 2px black; padding: 15px">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1">
-                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-            </div>
-            <div class="col-md-9" style="border-right: solid 2px black">
-                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
-            </div>
-            <div class="col-md-2">
-                @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-                @Html.Label("lblTime", "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
-            </div>
-        </div>
-    </div>
-</div>
+@*CHAMAR O PROFESSOR PARA: CONTAGEM REGRESSIVA E PEGAR O COD DE UMA REDAÇÃO*@
 
-<div class="container">
-    <div class="row" style="padding: 50px">
-        <div class="col-md-12">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
-                    </div>
+<form action="@Url.Action("EnviarAvaliacao", "Professor")" class="form-horizontal">
+    <div class="row" style="border-bottom: solid 2px black; padding: 15px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
                 </div>
-            </form>
+                <div class="col-md-9" style="border-right: solid 2px black">
+                    @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+                </div>
+                <div class="col-md-2">
+                    @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                    @Html.Label("lblTime", "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row" style="margin: 15px">
-    <div class="col-md-10 text-center">
-        @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "border-color: black;", @rows = "5" })
-    </div>
-    <div class="col-md-2">
-        <div class="row text-center" style="padding-bottom: 10px">
-            <div class="col-md-12 text-center"> 
-                @Html.TextBox("txtNota", "Nota", new { @class = "form-control", @style = "border-color: black; width: 60px; text-align: center" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <button type="submit" class="btn btn-default" name="btnEnviar" style="border-color: black">Enviar</button>
-            </div>
-            <div class="col-md-6 text-center">
-                <button type="submit" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
+    <div class="container">
+        <div class="row" style="padding: 50px">
+            <div class="col-md-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row" style="margin: 15px">
+        <div class="col-md-10 text-center">
+            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "border-color: black;", @rows = "5" })
+        </div>
+        <div class="col-md-2">
+            <div class="row text-center" style="padding-bottom: 10px">
+                <div class="col-md-12 text-center">
+                    @Html.TextBox("txtNota", "Nota", new { @class = "form-control", @style = "border-color: black; width: 60px; text-align: center" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <button type="submit" class="btn btn-default" name="btnEnviar" style="border-color: black">Enviar</button>
+                </div>
+                <div class="col-md-6 text-center">
+                    <button type="button" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
