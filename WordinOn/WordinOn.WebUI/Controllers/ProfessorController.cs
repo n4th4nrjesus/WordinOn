@@ -15,7 +15,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();
-
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
             return View(lst);
         }
 
@@ -26,7 +26,8 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ListaSalas()
         {
-            return View();
+            var lst = new SalaDAO().BuscarTodos();
+            return View(lst);
         }
 
         public ActionResult RedacoesSala()
@@ -54,8 +55,11 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult Perfil()
         {
             return View();
+            //new UsuarioDAO().Alterar(obj);
+            //return RedirectToAction("TelaInicial", "Professor");
         }
-
+        //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE
+        #region Métodos não automáticos
         public ActionResult Redacao()
         {
             ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
@@ -67,12 +71,6 @@ namespace WordinOn.WebUI.Controllers
         {
             new RedacaoDAO().AcessoRedacaoProfessor(redacao.Cod);
             new AvaliacaoDAO().Inserir(avaliacao);
-            return View();
-        }
-
-        public ActionResult Salas()
-        {
-            ViewBag.Sala = new SalaDAO().BuscarTodos();
             return View();
         }
 
@@ -111,5 +109,6 @@ namespace WordinOn.WebUI.Controllers
             new UsuarioDAO().Alterar(obj);
             return RedirectToAction("TelaInicial", "Professor");
         }
+        #endregion
     }
 }

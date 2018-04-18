@@ -3,7 +3,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
-
+@*NESSA TELA TENHO QUE CARREGAR O METODO DENTRO DO BOTÃO, NÃO NA TELA, DESCOMENTE NA CONTROLLER*@
 <div class="container">
     <div class="row" style="margin-bottom: 20px; margin-top: 20px">
         <div class="col-md-6">
@@ -46,7 +46,7 @@
     <div class="row text-right" style="padding: 20px">
         <div class="col-md-12">
             <button type="submit" class="btn btn-default" name="btnSalvar" style="border-color: black">Salvar</button>
-            <button type="submit" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
+            <button type="button" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
         </div>
     </div>
 </div>
