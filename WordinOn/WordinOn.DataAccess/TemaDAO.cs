@@ -44,7 +44,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select nome, descricao, data from Tema";
+                string strSQL = @"select nome, descricao from Tema";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {

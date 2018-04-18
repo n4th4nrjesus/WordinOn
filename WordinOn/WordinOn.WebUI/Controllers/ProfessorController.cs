@@ -41,7 +41,9 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ListaTemas()
         {
-            return View();
+            var lst = new TemaDAO().BuscarTodos();
+
+            return View(lst);
         }
 
         public ActionResult CriacaoTema()
@@ -71,12 +73,6 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult Salas()
         {
             ViewBag.Sala = new SalaDAO().BuscarTodos();
-            return View();
-        }
-
-        public ActionResult Temas()
-        {
-            ViewBag.Temas = new TemaDAO().BuscarTodos();
             return View();
         }
 
