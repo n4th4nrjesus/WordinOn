@@ -26,7 +26,9 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult PropriasRedacoes()
         {
-            return View();
+            var lst = new RedacaoDAO().BuscarPropriasRedacoes(Convert.ToInt32(User.Identity));
+
+            return View(lst);
         }
 
         public ActionResult AcessoRedacao()
