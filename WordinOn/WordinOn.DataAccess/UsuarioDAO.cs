@@ -41,24 +41,22 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Alterar
-        public void Alterar(Usuario obj)
+        public void Alterar(int cod, Usuario obj)
         {
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"update Usuario set nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email, chave = @chave, perfil_usuario = @perfil_usuario where cod = @cod;";
+                string strSQL = @"update Usuario set nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email where cod = @cod;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@cod", SqlDbType.VarChar).Value = obj.Cod;
+                    cmd.Parameters.Add("@cod", SqlDbType.VarChar).Value = cod;
                     cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@sobrenome", SqlDbType.VarChar).Value = obj.Sobrenome;
                     cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
                     cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
-                    cmd.Parameters.Add("@chave", SqlDbType.VarChar).Value = obj.Chave;
-                    cmd.Parameters.Add("@perfil_usuario", SqlDbType.VarChar).Value = obj.PerfilUsuario;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

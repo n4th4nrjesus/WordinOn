@@ -55,9 +55,14 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult Perfil()
         {
             return View();
-            //new UsuarioDAO().Alterar(obj);
-            //return RedirectToAction("TelaInicial", "Professor");
         }
+
+        public ActionResult AlterarPerfil(Usuario obj)
+        {
+            new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
+            return RedirectToAction("Perfil", "Professor");
+        }
+
         //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE
         #region Métodos não automáticos
         public ActionResult Redacao()
@@ -104,11 +109,11 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("ListaTema", "Professor");
         }
 
-        public ActionResult PerfilProfessor(Usuario obj)
-        {
-            new UsuarioDAO().Alterar(obj);
-            return RedirectToAction("TelaInicial", "Professor");
-        }
+        //public ActionResult PerfilProfessor(Usuario obj)
+        //{
+        //    //new UsuarioDAO().Alterar(obj);
+        //    //return RedirectToAction("TelaInicial", "Professor");
+        //}
         #endregion
     }
 }
