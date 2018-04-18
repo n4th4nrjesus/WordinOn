@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-md-4" style="padding: 50px">
-                <div class="form-horizontal">
+                <form action="@Url.Action("SalvarProfessor", "Cadastro")" class="form-horizontal">
                     <div class="form-group">
                         @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
@@ -60,21 +60,16 @@
                         @Html.Label("lblSenha", "Senha:", new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @type = "password", @style = "border-color: black" })
                     </div>
-                    <div class="form-group">
-                        @Html.Label("lblChave", "Chave:", new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Chave, new { @class = "form-control", @style = "border-color: black" })
-                        <br />
-                    </div>
-                    <div class="form-group text-right" style="margin-top: 325px">
+                    <div class="form-group text-right" style="margin-top: 435px">
                         <div class="col-md-6 text-left">
-                            <button class="btn btn-default navbar-btn" style="border-color: black">Cadastrar</button>
+                            <button class="btn btn-primary" style="border-color: black">Cadastrar</button>
                         </div>
                         <div class="col-md-6 text-right">
-                            <button class="btn btn-default navbar-btn" style="border-color: black">Voltar</button>
+                            <a class="btn btn-default" style="border-color: black" href="@Url.Action("Index", "Login")">Voltar</a>
                         </div>
                     </div>
                     <div class="col-=md-6"></div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

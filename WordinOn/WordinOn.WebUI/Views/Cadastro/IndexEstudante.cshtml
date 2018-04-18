@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-md-4" style="padding: 50px">
-                <div class="form-horizontal">
+                <form action="@Url.Action("SalvarEstudante", "Cadastro")" class="form-horizontal">
                     <div class="form-group">
                         @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
@@ -62,14 +62,14 @@
                     </div>
                     <div class="form-group text-right" style="margin-top: 435px">
                         <div class="col-md-6 text-left">
-                            <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("SalvarEstudante", "Cadastro")">Cadastrar</a>
+                            <button class="btn btn-primary" style="border-color: black" href="">Cadastrar</button>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a class="btn btn-default navbar-btn" style="border-color: black" href="@Url.Action("Index", "Login")">Voltar</a>
+                            <a class="btn btn-default" style="border-color: black" href="@Url.Action("Index", "Login")">Voltar</a>
                         </div>
                     </div>
                     <div class="col-=md-6"></div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

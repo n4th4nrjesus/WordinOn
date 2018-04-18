@@ -19,7 +19,10 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult SalvarProfessor(Usuario obj)
         {
-            new UsuarioDAO().Inserir(obj);
+            obj.PerfilUsuario = Perfil.Professor;
+            obj.Chave = Guid.NewGuid().ToString();
+
+            new UsuarioDAO().InserirProfessor(obj);
 
             return RedirectToAction("IndexProfessor", "Cadastro");
         }
@@ -39,7 +42,8 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult SalvarEstudante(Usuario obj)
         {
-            new UsuarioDAO().Inserir(obj);
+            obj.PerfilUsuario = Perfil.Estudante;
+            new UsuarioDAO().InserirEstudante(obj);
 
             return RedirectToAction("IndexEstudante", "Cadastro");
         }

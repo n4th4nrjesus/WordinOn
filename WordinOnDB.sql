@@ -31,7 +31,7 @@ create table Usuario
 	sobrenome varchar (200) not null,
 	senha varchar (200) not null,
 	email varchar (250) not null,
-	chave int,
+	chave varchar (100),
 	perfil_usuario int not null
 );
 
