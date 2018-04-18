@@ -19,9 +19,15 @@ namespace WordinOn.WebUI.Controllers
             return View(lst);
         }
 
-        public ActionResult TelaAvaliacaoRedacao()
+        public ActionResult AvaliacaoRedacao()
         {
             return View();
+        }
+
+        public ActionResult EnviarAvaliacao(Avaliacao obj)
+        {
+            new AvaliacaoDAO().Inserir(obj);
+            return RedirectToAction("TelaInicial", "Professor");
         }
 
         public ActionResult ListaSalas()
@@ -50,6 +56,12 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult CriacaoTema()
         {
             return View();
+        }
+
+        public ActionResult SalvarTema(Tema obj)
+        {
+            new TemaDAO().Inserir(obj);
+            return RedirectToAction("ListaTemas", "Professor");
         }
 
         public ActionResult Perfil()
