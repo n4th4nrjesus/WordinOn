@@ -15,7 +15,8 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();
-            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Salas = new SalaDAO().ProcurarProfessores();
+            ViewBag.Salas = new SalaDAO().ProcurarEstudantes();
             return View(lst);
         }
 
@@ -43,6 +44,14 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult CriarSala()
         {
+            ViewBag.Professores = new SalaDAO().ProcurarProfessores();
+            ViewBag.Estudantes = new SalaDAO().ProcurarEstudantes();
+            return View();
+        }
+
+        public ActionResult InserirSala(Sala obj)
+        {
+            new SalaDAO().Inserir(obj);
             return View();
         }
 
