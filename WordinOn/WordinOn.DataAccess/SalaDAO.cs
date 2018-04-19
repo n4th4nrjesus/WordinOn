@@ -109,6 +109,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region metodos pra carregar view bags
         public List<Sala> BuscarPorEstudante(int codEstudante)
         {
             var lst = new List<Sala>();
@@ -117,7 +118,7 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select * from Sala where cod in  (select codSala from salaXestudante where codEstudante = @codEstudante)";
+                string strSQL = @"select * from Sala where cod in (select codSala from salaXestudante where codEstudante = @codEstudante)";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -146,10 +147,7 @@ namespace WordinOn.DataAccess
             return lst;
         }
 
-
-
-
-        public List<Sala> BuscarPorProfessor(int codEstudante)
+        public List<Sala> ProcurarEstudantes()
         {
             var lst = new List<Sala>();
 
@@ -157,13 +155,12 @@ namespace WordinOn.DataAccess
                                                             Data Source=localhost;
                                                             Integrated Security=SSPI;"))
             {
-                string strSQL = @"select * from Sala where cod in  (select codSala from salaXestudante where codEstudante = @codEstudante)";
+                string strSQL = @"select cod, nome from Usuario where perfil_usuario = 1";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
@@ -185,6 +182,44 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+
+        public List<Sala> ProcurarProfessores()
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select cod, nome from Usuario where perfil_usuario = 2";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
+
+        #endregion
 
     }
 }
