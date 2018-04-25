@@ -15,14 +15,16 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();
-            ViewBag.Salas = new SalaDAO().ProcurarProfessores();
-            ViewBag.Salas = new SalaDAO().ProcurarEstudantes();
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
             return View(lst);
         }
 
-        public ActionResult AvaliacaoRedacao()
+        public ActionResult AvaliacaoRedacao(int cod)
         {
-            return View();
+            var obj = new RedacaoDAO().BuscarPorCod(cod);
+            var aval = new Avaliacao();
+            aval.Redacao = obj;
+            return View(aval);
         }
 
         public ActionResult EnviarAvaliacao(Avaliacao obj)
@@ -39,20 +41,22 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult RedacoesSala()
         {
-            return View();
+            var lst = new RedacaoDAO().BuscarTodos();
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            return View(lst);
         }
 
         public ActionResult CriarSala()
         {
-            ViewBag.Professores = new SalaDAO().ProcurarProfessores();
-            ViewBag.Estudantes = new SalaDAO().ProcurarEstudantes();
+            ViewBag.Professores = new UsuarioDAO().ProcurarProfessores();
+            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes();
             return View();
         }
 
         public ActionResult InserirSala(Sala obj)
         {
             new SalaDAO().Inserir(obj);
-            return View();
+            return RedirectToAction("CriarSala", "Professor", new { @cod = obj.Cod });
         }
 
         public ActionResult ListaTemas()
@@ -62,7 +66,7 @@ namespace WordinOn.WebUI.Controllers
             return View(lst);
         }
 
-        public ActionResult CriacaoTema()
+        public ActionResult CriarTema()
         {
             return View();
         }
@@ -84,57 +88,58 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("Perfil", "Professor");
         }
 
-        //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE
+
+        //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE PORÉM NÃO UTILIZADOS
         #region Métodos não automáticos
-        public ActionResult Redacao()
-        {
-            ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
-            return View();
-        }
-
-        //VERIFICAR ESTE MÉTODO
-        public ActionResult AvaliarRedacao(Redacao redacao, Avaliacao avaliacao)
-        {
-            new RedacaoDAO().AcessoRedacaoProfessor(redacao.Cod);
-            new AvaliacaoDAO().Inserir(avaliacao);
-            return View();
-        }
-
-        public ActionResult ProcurarRedacao(string texto)
-        {
-            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
-            return View();
-        }
-
-        public ActionResult ProcurarSala(string texto)
-        {
-            ViewBag.Sala = new SalaDAO().Procurar(texto);
-            return View();
-        }
-
-        public ActionResult ProcurarTema(string texto)
-        {
-            ViewBag.Tema = new RedacaoDAO().Procurar(texto);
-            return View();
-        }
-
-        public ActionResult SalvarSala(Sala obj)
-        {
-            new SalaDAO().Inserir(obj);
-            return RedirectToAction("ListaSala", "Professor");
-        }
-
-        public ActionResult CriarTema(Tema obj)
-        {
-            new TemaDAO().Inserir(obj);
-            return RedirectToAction("ListaTema", "Professor");
-        }
-
-        //public ActionResult PerfilProfessor(Usuario obj)
+        //public ActionResult Redacao()
         //{
-        //    //new UsuarioDAO().Alterar(obj);
-        //    //return RedirectToAction("TelaInicial", "Professor");
+        //    ViewBag.Redacao = new RedacaoDAO().BuscarTodos();
+        //    return View();
         //}
+
+        ////VERIFICAR ESTE MÉTODO
+        //public ActionResult AvaliarRedacao(Redacao redacao, Avaliacao avaliacao)
+        //{
+        //    new RedacaoDAO().AcessoRedacaoProfessor(redacao.Cod);
+        //    new AvaliacaoDAO().Inserir(avaliacao);
+        //    return View();
+        //}
+
+        //public ActionResult ProcurarRedacao(string texto)
+        //{
+        //    ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
+        //    return View();
+        //}
+
+        //public ActionResult ProcurarSala(string texto)
+        //{
+        //    ViewBag.Sala = new SalaDAO().Procurar(texto);
+        //    return View();
+        //}
+
+        //public ActionResult ProcurarTema(string texto)
+        //{
+        //    ViewBag.Tema = new RedacaoDAO().Procurar(texto);
+        //    return View();
+        //}
+
+        //public ActionResult SalvarSala(Sala obj)
+        //{
+        //    new SalaDAO().Inserir(obj);
+        //    return RedirectToAction("ListaSala", "Professor");
+        //}
+
+        //public ActionResult SalvarTema(Tema obj)
+        //{
+        //    new TemaDAO().Inserir(obj);
+        //    return RedirectToAction("ListaTema", "Professor");
+        //}
+
+        ////public ActionResult PerfilProfessor(Usuario obj)
+        ////{
+        ////    //new UsuarioDAO().Alterar(obj);
+        ////    //return RedirectToAction("TelaInicial", "Professor");
+        ////}
         #endregion
     }
 }

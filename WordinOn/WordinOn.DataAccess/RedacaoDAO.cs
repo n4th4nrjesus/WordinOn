@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
@@ -49,6 +46,7 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
+                                    r.cod,
                                     u.nome as Nome_Pessoa, 
                                     t.nome as Tema_Proposto, 
                                     r.data as Data
@@ -72,6 +70,7 @@ namespace WordinOn.DataAccess
                     {
                         var redacao = new Redacao()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Estudante = new Usuario()
                             {
                                 Nome = row["Nome_Pessoa"].ToString()
@@ -125,6 +124,7 @@ namespace WordinOn.DataAccess
                     {
                         var redacao = new Redacao()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Estudante = new Usuario()
                             {
                                 Nome = row["Nome_Pessoa"].ToString()
@@ -309,6 +309,61 @@ namespace WordinOn.DataAccess
                 }
             }
             return lst;
+        }
+        #endregion
+
+        #region Buscar Por Cod
+        public Redacao BuscarPorCod(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = @"select 
+                                    r.cod,
+                                    r.texto,
+                                    u.nome as Nome_Pessoa, 
+                                    t.nome as Tema_Proposto, 
+                                    r.data as Data
+                                    from Redacao r 
+                                    inner join Usuario u on u.cod = r.codEstudante
+	                                inner join Tema t on t.cod = r.codTema
+                                where r.cod = @cod;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    var row = dt.Rows[0];
+                    var redacao = new Redacao()
+                    {
+                        Cod = Convert.ToInt32(row["cod"]),
+                        Estudante = new Usuario()
+                        {
+                            Nome = row["Nome_Pessoa"].ToString()
+                        },
+                        Tema = new Tema()
+                        {
+                            Nome = row["Tema_Proposto"].ToString()
+                        },
+                        Texto = row["texto"].ToString(),
+                        Data = Convert.ToDateTime(row["data"])
+                    };
+
+                    return redacao;
+                }
+            }
         }
         #endregion
 
