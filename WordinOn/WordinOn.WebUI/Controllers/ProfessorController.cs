@@ -11,7 +11,6 @@ namespace WordinOn.WebUI.Controllers
     [Authorize]
     public class ProfessorController : Controller
     {
-        // GET: Professor
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();

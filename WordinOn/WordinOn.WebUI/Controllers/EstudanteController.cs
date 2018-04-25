@@ -5,18 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using WordinOn.DataAccess;
 using WordinOn.Models;
+using WordinOn.WebUI.ViewModels;
 
 namespace WordinOn.WebUI.Controllers
 {
     [Authorize]
     public class EstudanteController : Controller
     {
-        // GET: Estudante
         public ActionResult TelaInicial()
         {
-            var lst = new RedacaoDAO().BuscarTodos();
+            ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
             ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
-            return View(lst);
+            return View();
         }
 
         public ActionResult CriarRedacao()
@@ -74,10 +74,11 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult ProcurarRedacao(string texto)
+        public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
-            ViewBag.Redacao = new RedacaoDAO().Procurar(texto);
-            return View();
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            return View("TelaInicial", filtro);
         }
 
         public ActionResult ProcurarSala(string texto)
@@ -88,7 +89,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ProcurarTema(string texto)
         {
-            ViewBag.Tema = new RedacaoDAO().Procurar(texto);
+            //ViewBag.Tema = new RedacaoDAO().Procurar(texto);
             return View();
         }
 
@@ -115,6 +116,5 @@ namespace WordinOn.WebUI.Controllers
             new SalaXEstudanteDAO().TirarDaSala(obj);
             return View();
         }
-
     }
 }
