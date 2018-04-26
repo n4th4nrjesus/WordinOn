@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WordinOn.DataAccess;
 using WordinOn.Models;
+using WordinOn.WebUI.ViewModels;
 
 namespace WordinOn.WebUI.Controllers
 {
@@ -14,7 +12,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult TelaInicial()
         {
             var lst = new RedacaoDAO().BuscarTodos();
-            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View(lst);
         }
 
@@ -87,6 +85,12 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("Perfil", "Professor");
         }
 
+        public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
+        {
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            return View("TelaInicial", filtro);
+        }
 
         //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE PORÉM NÃO UTILIZADOS
         #region Métodos não automáticos
