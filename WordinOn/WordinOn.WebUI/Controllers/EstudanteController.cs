@@ -31,9 +31,10 @@ namespace WordinOn.WebUI.Controllers
             return View(lst);
         }
 
-        public ActionResult AcessoRedacao()
+        public ActionResult AcessoRedacao(int cod)
         {
-            return View();
+            var obj = new RedacaoDAO().BuscarPorCod(cod);
+            return View(obj);
         }
 
         public ActionResult AcessoRedacaoAvaliacao()
@@ -78,6 +79,7 @@ namespace WordinOn.WebUI.Controllers
         {
             ViewBag.Salas = new SalaDAO().BuscarTodos();
             ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View("TelaInicial", filtro);
         }
 

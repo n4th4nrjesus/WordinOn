@@ -4,6 +4,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <form action="@Url.Action("ProcurarRedacao", "Estudante")" class="form-horizontal">
     <div class="row" style="border: 2px solid black">
         <div class="col-md-4" style="border-right: 2px solid black; padding: 20px">
@@ -44,6 +45,7 @@
                         <th>Nome do Estudante</th>
                         <th>Tema</th>
                         <th>Data</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +55,11 @@
                             <td>@item.Estudante.Nome</td>
                             <td>@item.Tema.Nome</td>
                             <td>@item.Data</td>
+                            <td>
+                                <a href="@Url.Action("AcessoRedacao", "Estudante", new { @cod = item.Cod })">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
