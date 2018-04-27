@@ -26,9 +26,9 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult PropriasRedacoes()
         {
-            var lst = new RedacaoDAO().BuscarPropriasRedacoes(((Usuario)User).Cod);
-
-            return View(lst);
+            ViewBag.Redacoes = new RedacaoDAO().BuscarPropriasRedacoes(((Usuario)User).Cod);
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
+            return View();
         }
 
         public ActionResult AcessoRedacao(int cod)
@@ -79,6 +79,14 @@ namespace WordinOn.WebUI.Controllers
         {
             ViewBag.Salas = new SalaDAO().BuscarTodos();
             ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
+            return View("TelaInicial", filtro);
+        }
+
+        public ActionResult ProcurarPropriaRedacao(FiltroRedacaoViewModel filtro)
+        {
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Redacoes = new RedacaoDAO().ProcurarPropriaRedacao(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto, ((Usuario)User).Cod);
             ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View("TelaInicial", filtro);
         }

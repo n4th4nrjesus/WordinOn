@@ -99,6 +99,7 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
+                                    r.cod,
                                     u.nome as Nome_Pessoa, 
                                     t.nome as Tema_Proposto, 
                                     r.data as Data
@@ -110,7 +111,7 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
@@ -144,7 +145,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Acesso Redação
-        public List<Redacao> AcessoRedacao(int obj)
+        public List<Redacao> AcessoRedacao(bool avaliadas)
         {
             var lst = new List<Redacao>();
 
@@ -153,19 +154,23 @@ namespace WordinOn.DataAccess
                                                             Integrated Security=SSPI;"))
             {
                 string strSQL = @"select 
-	                                r.texto,
-	                                r.tempo, 
-	                                t.nome, 
-	                                t.descricao	
+	                                r.texto as Texto_redacao,
+	                                r.tempo as Tempo_redacao, 
+	                                t.nome as Nome_tema, 
+	                                t.descricao as Descricao_tema
 	                                from Redacao r
 	                                inner join Tema t on t.cod = r.codTema
                                     inner join Usuario u on u.cod = r.codEstudante
                                     where r.cod = @cod";
 
+                if (avaliadas)
+                {
+                    strSQL += " and r.cod in (select codRedacao from Avaliacao);";
+                }
+
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
-                    cmd.Parameters.Add("@cod", SqlDbType.VarChar).Value = obj;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
@@ -296,6 +301,77 @@ namespace WordinOn.DataAccess
                         cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = codSala;
                     }
 
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Estudante = new Usuario()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome_estudante"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome_tema"].ToString()
+                            },
+                            Data = Convert.ToDateTime(row["data"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
+        #region Procurar Própria Redação
+        public List<Redacao> ProcurarPropriaRedacao(int? codSala, bool avaliadas, string texto, int codusuario)
+        {
+            var lst = new List<Redacao>();
+
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
+                                                            Data Source=localhost;
+                                                            Integrated Security=SSPI;"))
+            {
+                string strSQL = string.Format(@"select 
+                                                    r.cod,
+                                                    u.nome as nome_estudante,
+                                                    t.nome as nome_tema,
+                                                    r.data 
+                                                from Redacao r
+                                                inner join Usuario u on u.cod = r.codEstudante
+                                                inner join Tema t on t.cod = r.codTema
+                                                where (t.nome like '%{0}%' or u.nome like '%{0}%') and u.cod = @cod", texto);
+
+                if (codSala.HasValue && codSala.Value > 0)
+                {
+                    strSQL += " and r.codSala = @codSala ";
+                }
+
+                if (avaliadas)
+                {
+                    strSQL += " and r.cod in (select codRedacao from Avaliacao);";
+                }
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    if (codSala.HasValue && codSala.Value > 0)
+                    {
+                        cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = codSala;
+                    }
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = codusuario;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
