@@ -11,5 +11,6 @@ namespace WordinOn.WebUI.ViewModels
         public bool RAvaliadas { get; set; }
         public string CampoTexto { get; set; }
         public Sala Sala { get; set; }
+        public Redacao Redacao { get; set; }
     }
 }
