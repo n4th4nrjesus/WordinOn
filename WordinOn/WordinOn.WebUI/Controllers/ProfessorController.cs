@@ -9,11 +9,12 @@ namespace WordinOn.WebUI.Controllers
     [Authorize]
     public class ProfessorController : Controller
     {
+        
         public ActionResult TelaInicial()
         {
-            var lst = new RedacaoDAO().BuscarTodos();
-            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
-            return View(lst);
+            ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
+            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            return View();
         }
 
         public ActionResult AvaliacaoRedacao(int cod)
@@ -23,10 +24,11 @@ namespace WordinOn.WebUI.Controllers
             aval.Redacao = obj;
             return View(aval);
         }
-
         public ActionResult EnviarAvaliacao(Avaliacao obj)
         {
-            new AvaliacaoDAO().Inserir(obj);
+            var codProf = ((Usuario)User).Cod;
+            
+            new AvaliacaoDAO().Inserir(obj, codProf);
             return RedirectToAction("TelaInicial", "Professor");
         }
 
@@ -38,9 +40,9 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult RedacoesSala()
         {
-            var lst = new RedacaoDAO().BuscarTodos();
+            ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
             ViewBag.Salas = new SalaDAO().BuscarTodos();
-            return View(lst);
+            return View();
         }
 
         public ActionResult CriarSala()
@@ -81,6 +83,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult AlterarPerfil(Usuario obj)
         {
+            
             new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
             return RedirectToAction("Perfil", "Professor");
         }

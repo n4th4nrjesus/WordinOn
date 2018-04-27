@@ -1,5 +1,6 @@
 ﻿@using WordinOn.Models
-@model List<Redacao>
+@using WordinOn.WebUI.ViewModels
+@model FiltroRedacaoViewModel
 @{
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
@@ -11,7 +12,7 @@
         <div class="row">
             <div class="col-md-6 text-center">
                 <div class="form-group">
-                    @Html.DropDownList("ddlSala", new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
+                    @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
                 </div>
             </div>
             <div class="col-md-6 text-center">
@@ -22,7 +23,7 @@
 
     <div class="col-md-8" style="padding-top: 30px">
         <div class="col-md-10">
-            @Html.TextBox("txtBusca", string.Empty, new { @class = "form-control", @style = "border-color: black" })
+            @Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
         </div>
         <div class="col-md-2">
             <button type="submit" class="btn btn-default" name="btnVoltar" style="border: none">
@@ -44,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Redacao item in Model ?? new List<Redacao>())
+                    @foreach (Redacao item in ViewBag.Redacoes ?? new List<Redacao>())
                     {
                         <tr>
                             <td>@item.Estudante.Nome</td>

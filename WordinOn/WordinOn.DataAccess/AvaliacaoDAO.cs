@@ -12,7 +12,7 @@ namespace WordinOn.DataAccess
     public class AvaliacaoDAO
     {
         #region Inserir
-        public void Inserir(Avaliacao obj)
+        public void Inserir(Avaliacao obj, int codProf)
         {
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
                                                             Data Source=localhost;
@@ -26,7 +26,7 @@ namespace WordinOn.DataAccess
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
                     cmd.Parameters.Add("@valor", SqlDbType.Int).Value = obj.Valor;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.VarChar).Value = obj.Professor.Cod;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.VarChar).Value = codProf;
                     cmd.Parameters.Add("@codRedacao", SqlDbType.VarChar).Value = obj.Redacao.Cod;
 
                     conn.Open();
