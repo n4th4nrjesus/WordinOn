@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
 
-@*CHAMAR O PROFESSOR PARA: CONTAGEM REGRESSIVA E PEGAR O COD DE UMA REDAÇÃO*@
-@*TERMINAR FUNÇÕES*@
+@*TRAZER AS AVALIAÇÕES INSERIDAS*@
 
 <form action="@Url.Action("EnviarAvaliacao", "Professor")" class="form-horizontal">
     @Html.HiddenFor(m => m.Redacao.Cod)
