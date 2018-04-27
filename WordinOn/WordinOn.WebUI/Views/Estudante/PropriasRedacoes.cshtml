@@ -38,6 +38,7 @@
                         <th>Nome do Estudante</th>
                         <th>Tema</th>
                         <th>Data</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,11 @@
                             <td>@item.Estudante.Nome</td>
                             <td>@item.Tema.Nome</td>
                             <td>@item.Data</td>
+                            <td>
+                                <a href="@Url.Action("AcessoRedacao", "Estudante", new { @cod = item.Cod })">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
