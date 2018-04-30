@@ -1,69 +1,21 @@
 -- COISAS PARA MUDAR NA DOCUMENTAÇÃO --
 
+-- PARA ATUALIZAR
 
+* PROTOTIPOS FISICOS
 
-FEITO
+*MOCKUPS
 
+*D. CLASSE
 
-* Introdução
+*SUMARIO EXECUTIVO
 
-* Elementos Pré-textuais (Capa, Folha de Rosto, Listas [Figuras, Tabelas e
-Siglas], Sumário, Agradecimentos, Resumo)
+-- PARA FAZER
 
-* Referencial Teórico (Embasamento Teórico do Objeto de Pesquisa)
+*DER
 
-* Objetivo Geral
+*UC DESCRITIVOS
 
-* Objetivos Específicos
+*DOCUMENTAÇÃO DE TESTE
 
-* Requisitos (funcionais e não funcionais)
-
-* Regras de Negócio
-
-* Ferramentas;
-
-* Protótipos (todos);
-
-* Telas (todas)
-
-* Instruções de uso (quando aplicável);
-
-* Instruções de instalação (quando aplicável);
-
-* Referências
-
-
-
-
-NÃO FEITOS
-
-
-
-
-* Problematização
-
-* Justificativa;
-
-* Viabilidade Técnica e Econômica
-	* Cronograma
-	* Business Model Canvas
-	* Sumário Executivo (Categoria, Estudo de Mercado e Demanda,investimentos Previstos e Resultados Esperados)
-
-* Desenvolvimento
-
-* Caso de Uso Descritivo
-
-* Diagramas (Casos de uso, classe, sequência, atividade e DER Lógico e
-físico de banco de dados, etc.);
-
-* Implementação
-
-* Arquitetura e Metodologia – (por que usar esta Arquitetura?)
-
-* Plano de teste;
-
-* Casos de teste (três principais funcionalidades);
-
-* Conclusão
-
-* Anexos e apêndices
+-- !!!VALIDAR DOCUMENTAÇÃO!!! --
