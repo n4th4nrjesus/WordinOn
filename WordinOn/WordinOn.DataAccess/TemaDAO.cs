@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
 {
     public class TemaDAO
     {
-
         #region Inserir
         public void Inserir(Tema obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Tema (nome, descricao) values (@nome, @descricao);";
 
@@ -40,9 +35,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Tema>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select nome, descricao from Tema";
 
@@ -77,9 +70,7 @@ namespace WordinOn.DataAccess
         public List<Tema> BuscarAleatoriamente(Tema obj)
         {
             var lst = new List<Tema>();
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select top 1 * from Tema order by newid()";
 
@@ -116,9 +107,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Tema>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select nome, descricao, data from Tema where nome like '%{0}%';", texto); ;
 
@@ -148,6 +137,5 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
-
     }
 }

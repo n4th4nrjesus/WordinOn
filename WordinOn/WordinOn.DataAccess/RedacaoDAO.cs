@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using WordinOn.Models;
@@ -8,13 +9,10 @@ namespace WordinOn.DataAccess
 {
     public class RedacaoDAO
     {
-
         #region Inserir
         public void Inserir(Redacao obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Redacao (texto, tempo, codTema, codAvaliacao, codNota, codEstudante, data)
                                               values (@texto, @tempo, @codTema, @codAvaliacao, @codNota, @codEstudante, @data);";
@@ -41,9 +39,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
                                     r.cod,
@@ -94,9 +90,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
                                     r.cod,
@@ -149,9 +143,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
 	                                r.texto as Texto_redacao,
@@ -207,9 +199,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
 	                                r.texto,
@@ -267,9 +257,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select 
                                                     r.cod,
@@ -338,9 +326,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Redacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select 
                                                     r.cod,
@@ -407,9 +393,7 @@ namespace WordinOn.DataAccess
         #region Buscar Por Cod
         public Redacao BuscarPorCod(int cod)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
                                     r.cod,

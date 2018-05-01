@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
@@ -14,12 +12,10 @@ namespace WordinOn.DataAccess
         #region Inserir
         public void Inserir(Avaliacao obj, int codProf)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Avaliacao (texto, valor, codProfessor, codRedacao)
-                                              values (@texto, @valor, @codProfessor, @codRedacao);";
+                                  values (@texto, @valor, @codProfessor, @codRedacao);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -36,15 +32,13 @@ namespace WordinOn.DataAccess
             }
         }
         #endregion
-        
+
         #region Buscar Todos
         public List<Avaliacao> BuscarTodos()
         {
             var lst = new List<Avaliacao>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
                                     u.nome as Nome_Professor,

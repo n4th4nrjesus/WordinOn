@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
@@ -14,9 +12,7 @@ namespace WordinOn.DataAccess
         #region Inserir
         public void Inserir(SalaXProfessor obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into salaXprofessor (codProfessor, codSala) 
                                     values (@codProfessor, @codSala);";
@@ -38,9 +34,7 @@ namespace WordinOn.DataAccess
         #region Tirar da Sala
         public void TirarDaSala(SalaXProfessor obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"delete from SalaXProfessor where codProfessor = @codProfessor and codSala = @codSala";
 
@@ -63,9 +57,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<SalaXProfessor>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
                                     nome, 
@@ -112,9 +104,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Usuario>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select nome, email from Usuario where nome like '%' + @texto + '%' or email = '%' + @texto + '%';";
 
@@ -146,6 +136,5 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
-
     }
 }

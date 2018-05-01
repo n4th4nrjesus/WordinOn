@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
 {
     public class SalaDAO
     {
-
         #region Inserir
         public void Inserir(Sala obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Sala (nome) values (@nome);
                                   select SCOPE_IDENTITY();";
@@ -40,9 +35,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Sala>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select * from Sala";
 
@@ -78,9 +71,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Sala>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select * from Sala where nome like '%{0}%';", texto); ;
 
@@ -115,9 +106,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Sala>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select * from Sala where cod in (select codSala from salaXestudante where codEstudante = @codEstudante)";
 
@@ -148,6 +137,5 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
-
     }
 }

@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordinOn.Models;
 
 namespace WordinOn.DataAccess
 {
     public class UsuarioDAO
     {
-
         #region Inserir Professor
         public void InserirProfessor(Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Usuario (nome, sobrenome, senha, email, chave, perfil_usuario) 
-                                    values (@nome, @sobrenome, @senha, @email, @chave, @perfil_usuario);";
+                                  values (@nome, @sobrenome, @senha, @email, @chave, @perfil_usuario);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -43,9 +38,7 @@ namespace WordinOn.DataAccess
         #region Inserir Estudante
         public void InserirEstudante(Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Usuario (nome, sobrenome, senha, email, perfil_usuario) 
                                     values (@nome, @sobrenome, @senha, @email, @perfil_usuario);";
@@ -70,9 +63,7 @@ namespace WordinOn.DataAccess
         #region Alterar
         public void Alterar(int cod, Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"update Usuario set nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email where cod = @cod;";
 
@@ -96,9 +87,7 @@ namespace WordinOn.DataAccess
         #region login
         public Usuario Login(Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select top 1 * from Usuario where email = @email and senha = @senha;";
 
@@ -140,9 +129,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Usuario>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select nome from Usuario";
 
@@ -179,9 +166,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Usuario>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 1";
 
@@ -216,9 +201,7 @@ namespace WordinOn.DataAccess
         {
             var lst = new List<Usuario>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=WordinOnDB;
-                                                            Data Source=localhost;
-                                                            Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2";
 
@@ -250,6 +233,5 @@ namespace WordinOn.DataAccess
         }
 
         // TEMOS QUE FAZER UM MÉTODO PARA VALIDAR O PERFIL_USUARIO
-
     }
 }
