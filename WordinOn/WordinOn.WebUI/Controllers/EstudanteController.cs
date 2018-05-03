@@ -34,12 +34,18 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult AcessoRedacao(int cod)
         {
             var obj = new RedacaoDAO().BuscarPorCod(cod);
-            return View(obj);
+            obj.Avaliacoes = new AvaliacaoDAO().BuscarPorRedacao(cod);
+            if (obj.Avaliacoes.Count > 0)
+                return RedirectToAction("AcessoRedacaoAvaliacao", "Estudante", new { @cod = cod });
+            else
+                return View(obj);
         }
 
-        public ActionResult AcessoRedacaoAvaliacao()
+        public ActionResult AcessoRedacaoAvaliacao(int cod)
         {
-            return View();
+            var obj = new RedacaoDAO().BuscarPorCod(cod);
+            obj.Avaliacoes = new AvaliacaoDAO().BuscarPorRedacao(cod);
+            return View(obj);
         }
 
         public ActionResult ListaSalas()

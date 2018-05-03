@@ -114,7 +114,7 @@ values
 insert into Avaliacao (texto, valor, codProfessor, codRedacao)
 values
 ('Muito bom', 750, 3, 1),
-('Muito ruim', 300, 4, 2)
+('Muito bom mesmo', 800, 3, 1)
 
 insert into salaXestudante (codEstudante, codSala)
 values

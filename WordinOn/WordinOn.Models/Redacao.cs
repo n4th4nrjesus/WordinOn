@@ -15,5 +15,11 @@ namespace WordinOn.Models
         public Usuario Estudante { get; set; }
         public DateTime Data { get; set; }
         public bool RAvaliada { get; set; }
+        public List<Avaliacao> Avaliacoes { get; set; }
+
+        public Redacao()
+        {
+            this.Avaliacoes = new List<Avaliacao>();
+        }
     }
 }
