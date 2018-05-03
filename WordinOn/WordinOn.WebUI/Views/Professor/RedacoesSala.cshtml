@@ -8,6 +8,7 @@
 @*TERMINAR FUNÇÕES*@
 
 <form class="form-horizontal" action="@Url.Action("ProcurarRedacao", "Professor")">
+    @Html.HiddenFor(m => m.Sala.Cod)
     <div class="row" style="border: 2px solid black">
         <div class="col-md-12" style="padding-top: 30px">
             <div class="col-md-10">
@@ -21,7 +22,6 @@
         </div>
     </div>
 </form>
-@Html.HiddenFor(Model.Sala.Cod => Model.)
 <div class="row" style="border-bottom: 2px solid black">
     <div class="col-md-12">
         <div class="table-responsive">

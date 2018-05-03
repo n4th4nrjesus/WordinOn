@@ -38,10 +38,10 @@ namespace WordinOn.WebUI.Controllers
             return View(lst);
         }
 
-        public ActionResult RedacoesSala(FiltroRedacaoViewModel filtro)
+        public ActionResult RedacoesSala(int cod)
         {
-            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
-            return View(filtro);
+            ViewBag.Redacoes = new RedacaoDAO().ProcurarPorSala(cod);
+            return View();
         }
 
         public ActionResult CriarSala()
