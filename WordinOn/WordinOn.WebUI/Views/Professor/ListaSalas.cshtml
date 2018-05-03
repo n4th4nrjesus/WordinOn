@@ -5,22 +5,7 @@
 }
 
 <div class="row" style="border: 2px solid black">
-    <div class="col-md-4" style="border-right: 2px solid black; padding: 20px">
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <div class="form-group">
-                    <div class="col-md-6 text-center">
-                        <button type="submit" class="btn btn-default" name="btnAcessar" style="border-color: black">Acessar</button>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <button type="submit" class="btn btn-default" name="btnGerenciar" style="border-color: black">Gerenciar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-8" style="padding-top: 30px">
+    <div class="col-md-12" style="padding-top: 30px">
         <div class="col-md-10">
             @Html.TextBox("txtBusca", string.Empty, new { @class = "form-control", @style = "border-color: black" })
         </div>
@@ -31,7 +16,7 @@
         </div>
     </div>
 </div>
- 
+
 <div class="row" style="border-bottom: 2px solid black">
     <div class="col-md-12">
         <div class="table-responsive">
@@ -40,6 +25,8 @@
                     <tr>
                         <th>Nome</th>
                         <th>Quantidade de Pessoa</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +35,16 @@
                         <tr>
                             <td>@item.Nome</td>
                             <td>@item.Quantidade</td>
+                            <td>
+                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
+                                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
