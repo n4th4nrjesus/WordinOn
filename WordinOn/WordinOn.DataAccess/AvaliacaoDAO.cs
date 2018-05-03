@@ -63,11 +63,13 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
                             {
-                                Nome = row["nome"].ToString()
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Nome_Professor"].ToString()
                             }
                         };
                         lst.Add(avaliacao);
@@ -78,7 +80,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        //FAZER MÉTODO DE FILTRAR POR REDAÇÃO AVALIADA
+        #region Buscar por Redação
         public List<Avaliacao> BuscarPorRedacao(int cod)
         {
             var lst = new List<Avaliacao>();
@@ -110,6 +112,7 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["Comentario"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
@@ -123,5 +126,6 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+        #endregion
     }
 }
