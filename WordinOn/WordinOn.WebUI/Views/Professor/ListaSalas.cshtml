@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
 
+
 <div class="row" style="border: 2px solid black">
     <div class="col-md-12" style="padding-top: 30px">
         <div class="col-md-10">
@@ -16,6 +17,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="row" style="border-bottom: 2px solid black">
     <div class="col-md-12">
@@ -36,12 +38,12 @@
                             <td>@item.Nome</td>
                             <td>@item.Quantidade</td>
                             <td>
-                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
+                                <a href="@Url.Action("RedacoesSala", "Professor", new { @cod = item.Cod })">
                                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 </a>
                             </td>
                             <td>
-                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
+                                <a href="@Url.Action("AlterarSala", "Professor", new { @cod = item.Cod })">
                                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                                 </a>
                             </td>

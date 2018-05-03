@@ -442,5 +442,64 @@ namespace WordinOn.DataAccess
             }
         }
         #endregion
+
+        #region Procurar pelo codigo da sala
+        public List<Redacao> ProcurarPorSala(int? codSala)
+        {
+            var lst = new List<Redacao>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = string.Format(@"select 
+                                                    r.cod,
+                                                    u.nome as nome_estudante,
+                                                    t.nome as nome_tema,
+                                                    r.data 
+                                                from Redacao r
+                                                inner join Usuario u on u.cod = r.codEstudante
+                                                inner join Tema t on t.cod = r.codTema
+                                                where r.codSala = @codSala");
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    if (codSala.HasValue && codSala.Value > 0)
+                    {
+                        cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = codSala;
+                    }
+
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var redacao = new Redacao()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Estudante = new Usuario()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome_estudante"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome_tema"].ToString()
+                            },
+                            Data = Convert.ToDateTime(row["data"])
+                        };
+                        lst.Add(redacao);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
     }
 }
