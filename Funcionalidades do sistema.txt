@@ -1,4 +1,3 @@
-ESTUDANTE
 1 - diferenciar redações avaliadas e redações sem avaliação
 2 - funcionalidades da tela de criar redações
 3 - funcionalidade de acessar e sair da sala
