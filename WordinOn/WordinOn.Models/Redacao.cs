@@ -21,10 +21,6 @@ namespace WordinOn.Models
         public Redacao()
         {
             this.Avaliacoes = new List<Avaliacao>();
-        }
-
-        public Redacao()
-        {
             this.Temas = new List<Tema>();
         }
     }
