@@ -16,10 +16,16 @@ namespace WordinOn.Models
         public DateTime Data { get; set; }
         public bool RAvaliada { get; set; }
         public List<Avaliacao> Avaliacoes { get; set; }
+        public List<Tema> Temas { get; set; }
 
         public Redacao()
         {
             this.Avaliacoes = new List<Avaliacao>();
+        }
+
+        public Redacao()
+        {
+            this.Temas = new List<Tema>();
         }
     }
 }

@@ -110,7 +110,6 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
-                            Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["Comentario"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
