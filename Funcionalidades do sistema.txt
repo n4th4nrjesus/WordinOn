@@ -1,8 +1,7 @@
 1 - diferenciar redações avaliadas e redações sem avaliação
 2 - funcionalidades da tela de criar redações
 3 - funcionalidade de acessar e sair da sala
-7 - tela de criação de sala professor
-8 - alterar perfil do estudante
-9 - CRONOMETRO
-10 - tela de criar redação (pegar todos os parametros para o banco)
-11 - tela e funcionalidades de alterar sala
+4 - tela de criação de sala (professor e estudante)
+5 - CRONOMETRO
+6 - tela de criar redação (pegar todos os parametros para o banco)
+7 - tela e funcionalidades de alterar sala
