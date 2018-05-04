@@ -84,7 +84,7 @@ namespace WordinOn.WebUI.Controllers
         {
             
             new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
-            return RedirectToAction("Perfil", "Professor");
+            return RedirectToAction("TelaInicial", "Professor");
         }
 
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)

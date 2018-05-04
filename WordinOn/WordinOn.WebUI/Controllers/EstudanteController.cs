@@ -65,6 +65,13 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
+        public ActionResult AlterarPerfil(Usuario obj)
+        {
+
+            new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
+            return RedirectToAction("TelaInicial", "Estudante");
+        }
+
         public ActionResult Salas()
         {
             ViewBag.Sala = new SalaDAO().BuscarTodos();
