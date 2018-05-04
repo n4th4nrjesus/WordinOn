@@ -3,6 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <div class="row" style="border-bottom: solid 2px black; padding: 15px">
     <div class="container">
         <div class="row">
@@ -10,7 +12,7 @@
                 @Html.Label("lblTema", "Tema:", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
             </div>
             <div class="col-md-9" style="border-right: solid 2px black">
-                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+                @Html.LabelFor(m => m.Tema.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
             </div>
             <div class="col-md-2">
                 @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
@@ -25,12 +27,12 @@
         <form class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-12">
-                    @Html.DropDownList("ddlSala", new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style= "border-color: black" })
+                    @Html.DropDownListFor(m => m.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
+                    <button type="submit" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
                 </div>
             </div>
             <div class="form-group" style="margin-top: 305px">
@@ -42,7 +44,7 @@
     </div>
 
     <div class="col-md-10">
-        <form class="form-horizontal">
+        <form class="form-horizontal" @Url.Action("EnviarRedacao", "Estudante")>
             <div class="form-group">
                 <div class="col-md-12">
                     @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })

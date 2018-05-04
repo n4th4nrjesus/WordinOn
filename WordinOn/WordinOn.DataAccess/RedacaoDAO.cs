@@ -22,8 +22,8 @@ namespace WordinOn.DataAccess
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
                     cmd.Parameters.Add("@tempo", SqlDbType.VarChar).Value = obj.Tempo;
-                    cmd.Parameters.Add("@codTema", SqlDbType.VarChar).Value = obj.Tema.Cod;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj.Estudante.Cod;
+                    cmd.Parameters.Add("@codTema", SqlDbType.Int).Value = obj.Tema.Cod;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj.Estudante.Cod;
                     cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = obj.Data;
 
                     conn.Open();
