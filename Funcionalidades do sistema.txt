@@ -7,4 +7,3 @@
 7 - tela de criação de sala professor
 8 - alterar perfil do estudante
 9 - CRONOMETRO
-10 - seleção aleatória não repitível de tema

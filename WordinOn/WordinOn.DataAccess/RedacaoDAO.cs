@@ -17,6 +17,7 @@ namespace WordinOn.DataAccess
                 string strSQL = @"insert into Redacao (texto, tempo, codTema, codAvaliacao, codNota, codEstudante, data)
                                               values (@texto, @tempo, @codTema, @codAvaliacao, @codNota, @codEstudante, @data);";
 
+
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
