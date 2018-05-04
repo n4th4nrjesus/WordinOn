@@ -4,10 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="row" style="border-bottom: solid 2px black; padding: 15px">
-    <div class="container">
-        <div class="row">
+<form class="form-horizontal" @Url.Action("EnviarRedacao", "Estudante")>
+    <div class="row" style="border-bottom: solid 2px black; padding: 15px">
+        <div class="container">
             <div class="col-md-1">
                 @Html.Label("lblTema", "Tema:", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
             </div>
@@ -20,11 +19,9 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="row" style="padding: 50px">
-    <div class="col-md-2 text-center">
-        <form class="form-horizontal">
+    <div class="row" style="padding: 50px">
+        <div class="col-md-2 text-center">
             <div class="form-group">
                 <div class="col-md-12">
                     @Html.DropDownListFor(m => m.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
@@ -40,16 +37,14 @@
                     <button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <div class="col-md-10">
-        <form class="form-horizontal" @Url.Action("EnviarRedacao", "Estudante")>
+        <div class="col-md-10">
             <div class="form-group">
                 <div class="col-md-12">
                     @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
