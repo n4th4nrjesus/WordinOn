@@ -115,7 +115,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ProcurarTema(string texto)
         {
-            //ViewBag.Tema = new RedacaoDAO().Procurar(texto);
+            ViewBag.Tema = new TemaDAO().Procurar(texto);
             return View();
         }
 

@@ -49,19 +49,11 @@ namespace WordinOn.WebUI.Controllers
             ViewBag.Professores = new UsuarioDAO().ProcurarProfessores();
             return View();
         }
-
-        #region Sala x Professor
-        public ActionResult InserirProfessor(SalaXProfessor obj, int cod)
-        {
-            new SalaXProfessorDAO().Inserir(obj);
-            return RedirectToAction("CriarSalaEstd", "Professor"); //ViewBag.ProfessoresIn = new SalaXProfessorDAO().CarregarViewBag(cod);
-        }
-        #endregion
-
+        
         public ActionResult InserirSala(Sala obj)
         {
             new SalaDAO().Inserir(obj);
-            return RedirectToAction("ListaSalas", "Professor", new { @cod = obj.Cod });
+            return RedirectToAction("CriarSalaEstd", "Professor", new { @cod = obj.Cod });
         }
 
         public ActionResult ListaTemas()
