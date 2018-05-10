@@ -20,7 +20,7 @@ select * from Sala;
 select * from Redacao;
 select * from Avaliacao;
 select * from salaXestudante;
-select * from salaXprofessor
+select * from salaXprofessor;
 
 ------------------------------------------------------------------------------------------------
 

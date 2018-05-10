@@ -21,9 +21,8 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult CriarRedacao()
         {
-            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View();
-                //RedirectToAction("CriarRedacao", "EstudanteController");
         }
 
         public ActionResult PropriasRedacoes()
