@@ -138,40 +138,40 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Carregar ViewBag
-        public List<Usuario> CarregarViewBag(int cod)
-        {
-            var lst = new List<Usuario>();
+        //public List<Usuario> CarregarViewBag(int cod)
+        //{
+        //    var lst = new List<Usuario>();
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
-            {
-                string strSQL = @"select nome from Usuario where cod = @cod";
+        //    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+        //    {
+        //        string strSQL = @"select nome from Usuario where cod = @cod";
 
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    conn.Open();
-                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+        //        using (SqlCommand cmd = new SqlCommand(strSQL))
+        //        {
+        //            conn.Open();
+        //            cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = strSQL;
 
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
-                    dt.Load(dataReader);
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
 
-                    conn.Close();
+        //            conn.Close();
 
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        var Professor = new Usuario()
-                        {
-                            Cod = Convert.ToInt32(row["cod"]),
-                            Nome = row["nome"].ToString(),
-                        };
-                        lst.Add(Professor);
-                    }
-                }
-            }
-            return lst;
-        }
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var Professor = new Usuario()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod"]),
+        //                    Nome = row["nome"].ToString(),
+        //                };
+        //                lst.Add(Professor);
+        //            }
+        //        }
+        //    }
+        //    return lst;
+        //}
         #endregion
 
     }
