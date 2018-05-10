@@ -54,7 +54,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult InserirProfessor(SalaXProfessor obj, int cod)
         {
             new SalaXProfessorDAO().Inserir(obj);
-            return ViewBag.ProfessoresIn = new SalaXProfessorDAO().CarregarViewBag(cod);
+            return RedirectToAction("CriarSalaEstd", "Professor"); //ViewBag.ProfessoresIn = new SalaXProfessorDAO().CarregarViewBag(cod);
         }
         #endregion
 
