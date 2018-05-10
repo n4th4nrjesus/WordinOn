@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
 
-@*PEDIR AJUDA RPOR PROF PARA A IMPLEMENTAÇÃO DESSA TELA*@
-@*TERMINAR FUNÇÕES*@
-
 <form action="@Url.Action("InserirSala", "Professor")" class="form-horizontal">
     <div class="row" style="border: 2px solid black; padding: 20px">
         <div class="col-md-3 text-left">
@@ -31,10 +28,10 @@
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-10">
                     @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
-                    @Html.DropDownList("ddlProfessores", new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
+                    @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
                 </div>
                 <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
-                    <button type="submit" class="btn btn-default" name="btnAddProfessor" style="border-color: black">Adicionar</button>
+                    <button type="button" class="btn btn-default" name="btnAddProfessor" style="border-color: black" action="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
                 </div>
             </div>
         </div>

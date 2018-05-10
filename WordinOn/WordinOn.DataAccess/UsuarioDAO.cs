@@ -131,7 +131,7 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select nome from Usuario";
+                string strSQL = @"select nome, sobrenome, senha, email from Usuario";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {

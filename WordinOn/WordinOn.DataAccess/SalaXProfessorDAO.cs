@@ -20,8 +20,8 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.VarChar).Value = obj.Professor;
-                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -41,8 +41,8 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.VarChar).Value = obj.Professor;
-                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -136,5 +136,43 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
+
+        #region Carregar ViewBag
+        public List<Usuario> CarregarViewBag(int cod)
+        {
+            var lst = new List<Usuario>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"select nome from Usuario where cod = @cod";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var Professor = new Usuario()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString(),
+                        };
+                        lst.Add(Professor);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
     }
 }

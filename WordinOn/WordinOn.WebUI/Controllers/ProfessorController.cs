@@ -38,23 +38,30 @@ namespace WordinOn.WebUI.Controllers
             return View(lst);
         }
 
-        public ActionResult RedacoesSala(int cod)
+        public ActionResult ListaRedacoesSala(int cod)
         {
             ViewBag.Redacoes = new RedacaoDAO().ProcurarPorSala(cod);
             return View();
         }
 
         public ActionResult CriarSala()
-        {
+        {           
             ViewBag.Professores = new UsuarioDAO().ProcurarProfessores();
-            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes();
             return View();
         }
+
+        #region Sala x Professor
+        public ActionResult InserirProfessor(SalaXProfessor obj, int cod)
+        {
+            new SalaXProfessorDAO().Inserir(obj);
+            return ViewBag.ProfessoresIn = new SalaXProfessorDAO().CarregarViewBag(cod);
+        }
+        #endregion
 
         public ActionResult InserirSala(Sala obj)
         {
             new SalaDAO().Inserir(obj);
-            return RedirectToAction("CriarSala", "Professor", new { @cod = obj.Cod });
+            return RedirectToAction("ListaSalas", "Professor", new { @cod = obj.Cod });
         }
 
         public ActionResult ListaTemas()
@@ -89,9 +96,15 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
-            ViewBag.Salas = new SalaDAO().BuscarTodos();
+            //ViewBag.Salas = new SalaDAO().BuscarTodos();
             ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
             return View("TelaInicial", filtro);
+        }
+
+        public ActionResult CriarSalaEstd()
+        {
+            ViewBag.Professaores = new UsuarioDAO().ProcurarProfessores();
+            return View();
         }
 
         //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE PORÉM NÃO UTILIZADOS
