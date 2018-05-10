@@ -52,11 +52,13 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ListaSalas()
         {
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View();
         }
 
-        public ActionResult ListaRedacoesSala()
+        public ActionResult ListaRedacoesSala(int cod)
         {
+            ViewBag.Redacoes = new RedacaoDAO().ProcurarPorSala(cod);
             return View();
         }
 

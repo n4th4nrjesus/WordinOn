@@ -6,11 +6,8 @@
 <div class="row" style="border: 2px solid black">
     <div class="col-md-4" style="border-right: 2px solid black; padding: 20px">
         <div class="row">
-            <div class="col-md-6 text-center">
+            <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-default" name="btnSairSala" style="border-color: black">Sair da sala</button>
-            </div>
-            <div class="col-md-6 text-center">
-                <button type="submit" class="btn btn-default" name="btnAcessar" style="border-color: black">Acessar</button>
             </div>
         </div>
     </div>
@@ -34,13 +31,19 @@
                 <thead>
                     <tr>
                         <th>Nome da sala</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Sala item in Model ?? new List<Sala>())
+                    @foreach (Sala item in ViewBag.Salas ?? new List<Sala>())
                     {
                         <tr>
                             <td>@item.Nome</td>
+                            <td>
+                                <a href="@Url.Action("ListaRedacoesSala", "Estudante", new { @cod = item.Cod })">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
