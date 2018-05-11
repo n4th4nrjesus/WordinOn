@@ -12,7 +12,7 @@
                     @Html.Label("lblNomeSala", "Nome da sala:", new { @class = "control-label" })
                 </div>
                 <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
+                    @Html.TextBox("", string.Format(Model.Nome), new { @class = "form-control", @placehoder = "", @style = "border-color: black" })
                 </div>
             </div>
         </div>

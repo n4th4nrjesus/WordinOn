@@ -53,7 +53,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult InserirSala(Sala obj)
         {
             new SalaDAO().Inserir(obj);
-            return RedirectToAction("CriarSalaEstd", "Professor", new { @cod = obj.Cod });
+            return RedirectToAction("CriarSalaEstd", "Professor", new { @cod = obj.Cod, @nome = obj.Nome });
         }
 
         public ActionResult ListaTemas()
