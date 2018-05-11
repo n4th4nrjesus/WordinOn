@@ -35,7 +35,7 @@
 
         <div class="row" style="margin-bottom: 20px">
             <div class="col-md-6">
-                @Html.Label("Email", "Email:", new { @class = "control-label" })
+                @Html.Label("lblEmail", "Email:", new { @class = "control-label" })
             </div>
             <div class="col-md-6">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @style = "border-color: black" })
@@ -46,7 +46,7 @@
     <div class="container-fluid">
         <div class="row text-right" style="padding: 20px">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-default" name="btnSalvar" style="border-color: black">Salvar</button>
+                <button type="submit" class="btn btn-primary name="btnSalvar" style="border-color: black">Salvar</button>
                 <button type="button" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
             </div>
         </div>
