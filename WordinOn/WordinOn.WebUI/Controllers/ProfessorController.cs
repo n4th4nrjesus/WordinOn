@@ -24,6 +24,7 @@ namespace WordinOn.WebUI.Controllers
             aval.Redacao = obj;
             return View(aval);
         }
+
         public ActionResult EnviarAvaliacao(Avaliacao obj)
         {
             var codProf = ((Usuario)User).Cod;
