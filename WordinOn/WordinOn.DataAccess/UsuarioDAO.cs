@@ -162,6 +162,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Procurar por Estudante
         public List<Usuario> ProcurarEstudantes()
         {
             var lst = new List<Usuario>();
@@ -196,7 +197,9 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+        #endregion
 
+        #region Procurar por Professor
         public List<Usuario> ProcurarProfessores()
         {
             var lst = new List<Usuario>();
@@ -231,6 +234,7 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+        #endregion
 
         // TEMOS QUE FAZER UM MÉTODO PARA VALIDAR O PERFIL_USUARIO
     }
