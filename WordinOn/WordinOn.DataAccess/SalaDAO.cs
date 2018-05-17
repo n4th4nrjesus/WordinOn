@@ -138,5 +138,38 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        public Sala BuscarPorCod(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"SELECT * FROM SALA WHERE COD = @COD;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@COD", SqlDbType.Int).Value = cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    var row = dt.Rows[0];
+                    var sala = new Sala()
+                    {
+                        Cod = Convert.ToInt32(row["cod"]),
+                        Nome = row["nome"].ToString()
+                    };
+
+                    return sala;
+                }
+            }
+        }
+
     }
 }

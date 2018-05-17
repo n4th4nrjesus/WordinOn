@@ -12,5 +12,14 @@ namespace WordinOn.Models
         public string Nome { get; set; }
         public Usuario Professor { get; set; } // esta propriedade está aqui para que seja possível mostrasr qual professor criou a sala
         public int Quantidade { set; get; }
+
+        public List<SalaXProfessor> Professores { get; set; }
+        public List<SalaXEstudante> Estudantes { get; set; }
+
+        public Sala()
+        {
+            this.Professores = new List<SalaXProfessor>();
+            this.Estudantes = new List<SalaXEstudante>();
+        }
     }
 }

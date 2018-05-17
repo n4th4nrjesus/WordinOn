@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
-
 <form action="@Url.Action("InserirSala", "Professor")" class="form-horizontal">
+    @Html.HiddenFor(m => m.Cod)
     <div class="row" style="border: 2px solid black; padding: 20px">
         <div class="col-md-3 text-left">
             <div class="row">
@@ -22,43 +22,61 @@
         </div>
     </div>
 </form>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row" style="margin-top: 10px">
-                <div class="col-md-10">
-                    @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
-                    @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
+
+@if (Model != null && Model.Cod > 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-10">
+                        @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlProfessor", @class = "form-control", @style = "border-color: black" })
+                    </div>
+                    <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
+                        <button type="button" class="btn btn-default" id="btnAddProfessor" style="border-color: black" data-url="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
+                    </div>
                 </div>
-                <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
-                    <button type="button" class="btn btn-default" name="btnAddProfessor" style="border-color: black" action="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="professores">
+                    @Html.Partial("_Professores")
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nome do Pofessores</th>
-                            <th>Email</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Usuario item in (List<Usuario>)ViewBag.Professores)
-                        {
-                            <tr>
-                                <td>@item.Nome</td>
-                                <td>@item.Email</td>
-                                <td><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnAddProfessor").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $.ajax({
+                    url: $("#btnAddProfessor").data("url"),
+                    data: {
+                        codSala: $("input[type='hidden']").val(),
+                        codProfessor: $("#ddlProfessor option:selected").val()
+                    },
+                    method: "POST",
+                    cache: false,
+                    success: function (result) {
+                        $("#professores").html(result);
+                        var professor = $("#ddlProfessor option:selected").val();
+                        $("#ddlProfessor option").each(function () {
+                            if ($(this).val() == professor) {
+                                $(this).remove();
+                            }
+                        });
+                        $("#ddlProfessor").val("")
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -20,8 +20,8 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor.Cod;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -174,5 +174,50 @@ namespace WordinOn.DataAccess
         //}
         #endregion
 
+        public List<SalaXProfessor> BuscarPorSala(Sala obj)
+        {
+            var lst = new List<SalaXProfessor>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"SELECT 
+                                      NOME, 
+                                      EMAIL 
+                                  FROM SALAXPROFESSOR 
+                                  INNER JOIN USUARIO ON (SALAXPROFESSOR.CODPROFESSOR = USUARIO.COD)
+                                  WHERE CODSALA = @CODSALA;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var salaXprofessor = new SalaXProfessor()
+                        {
+                            Professor = new Usuario()
+                            {
+                                Nome = row["nome"].ToString(),
+                                Email = row["email"].ToString()
+                            },
+                            Sala = new Sala()
+                            {
+                                Nome = row["nome"].ToString()
+                            }
+                        };
+                        lst.Add(salaXprofessor);
+                    }
+                }
+            }
+            return lst;
+        }
     }
 }

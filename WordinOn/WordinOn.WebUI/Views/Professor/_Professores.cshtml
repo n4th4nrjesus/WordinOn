@@ -1,0 +1,26 @@
+﻿@using WordinOn.Models
+@model Sala
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome do Pofessores</th>
+                <th>Email</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (Usuario item in (List<Usuario>)Model.Professores.Select(o => o.Professor).ToList())
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Email</td>
+                        <td><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
