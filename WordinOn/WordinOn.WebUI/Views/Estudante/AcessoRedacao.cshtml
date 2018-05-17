@@ -27,7 +27,7 @@
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="col-md-12">
-                        @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+                        @Html.Label("lblRedacao", string.Format("{0}", Model.Texto), new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
                     </div>
                 </div>
             </form>
