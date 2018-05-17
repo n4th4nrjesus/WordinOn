@@ -27,7 +27,7 @@
 {
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="row" style="margin-top: 10px">
                     <div class="col-md-10">
                         @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
@@ -40,9 +40,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div id="professores">
                     @Html.Partial("_Professores")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-10">
+                    @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlProfessor", @class = "form-control", @style = "border-color: black" })
+                </div>
+                <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
+                    <button type="button" class="btn btn-default" id="btnAddProfessor" style="border-color: black" data-url="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="professores">
+                    @Html.Partial("_Estudantes")
                 </div>
             </div>
         </div>
