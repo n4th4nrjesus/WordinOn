@@ -81,6 +81,7 @@ namespace WordinOn.WebUI.Controllers
             sala.Professores = new SalaXProfessorDAO().BuscarPorSala(sala);
 
             return PartialView("_Professores", sala);
+
         }
 
         [HttpPost]

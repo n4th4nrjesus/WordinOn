@@ -155,7 +155,7 @@ namespace WordinOn.DataAccess
                 {
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Cod;
+                    cmd.Parameters.Add("@CODSALA", SqlDbType.Int).Value = obj.Cod;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
