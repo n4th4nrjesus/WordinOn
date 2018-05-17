@@ -14,6 +14,8 @@ drop table Avaliacao;
 drop table salaXestudante;
 drop table salaXprofessor;
 
+delete from Redacao
+
 select * from Usuario;
 select * from Tema;
 select * from Sala;

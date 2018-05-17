@@ -67,17 +67,17 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Buscar Aleatoriamente
-        public List<Tema> BuscarAleatoriamente(Tema obj)
+        public Tema BuscarAleatoriamente(int codEstudante)
         {
-            var lst = new List<Tema>();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select top 1 * from Tema order by newid()";
+                string strSQL = @"select top 1 * from Tema where cod not in (select codTema from Redacao where codEstudante = @codEstudante) order by newid()";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
                     cmd.Connection = conn;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
@@ -86,19 +86,20 @@ namespace WordinOn.DataAccess
 
                     conn.Close();
 
-                    foreach (DataRow row in dt.Rows)
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    var row = dt.Rows[0];
+                    var tema = new Tema()
                     {
-                        var tema = new Tema()
-                        {
-                            Cod = Convert.ToInt32(row["cod"]),
-                            Nome = row["nome"].ToString(),
-                            Descricao = row["descricao"].ToString()
-                        };
-                        lst.Add(tema);
-                    }
+                        Cod = Convert.ToInt32(row["cod"]),
+                        Nome = row["nome"].ToString(),
+                        Descricao = row["descricao"].ToString()
+                    };
+
+                    return tema;
                 }
             }
-            return lst;
         }
         #endregion
 

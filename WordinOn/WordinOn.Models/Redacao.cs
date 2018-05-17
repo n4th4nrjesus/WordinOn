@@ -12,6 +12,7 @@ namespace WordinOn.Models
         public string Texto { get; set; }
         public int Tempo { get; set; }
         public Tema Tema { get; set; }
+        public Sala Sala { get; set; }
         public Usuario Estudante { get; set; }
         public DateTime Data { get; set; }
         public bool RAvaliada { get; set; }

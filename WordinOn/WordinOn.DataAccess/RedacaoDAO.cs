@@ -10,12 +10,12 @@ namespace WordinOn.DataAccess
     public class RedacaoDAO
     {
         #region Inserir
-        public void Inserir(Redacao obj)
+        public void Inserir(Redacao obj, int codEstudante)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"insert into Redacao (texto, tempo, codTema, codAvaliacao, codNota, codEstudante, data)
-                                              values (@texto, @tempo, @codTema, @codAvaliacao, @codNota, @codEstudante, @data);";
+                string strSQL = @"insert into Redacao (texto, tempo, codTema, codSala, codEstudante)
+                                              values (@texto, @tempo, @codTema, @codSala, @codEstudante);";
 
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -24,8 +24,8 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
                     cmd.Parameters.Add("@tempo", SqlDbType.VarChar).Value = obj.Tempo;
                     cmd.Parameters.Add("@codTema", SqlDbType.Int).Value = obj.Tema.Cod;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj.Estudante.Cod;
-                    cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = obj.Data;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -399,6 +399,7 @@ namespace WordinOn.DataAccess
                 string strSQL = @"select 
                                     r.cod,
                                     r.texto,
+                                    t.descricao as tema_descricao,
                                     u.nome as Nome_Pessoa, 
                                     t.nome as Tema_Proposto, 
                                     r.data as Data
@@ -432,7 +433,8 @@ namespace WordinOn.DataAccess
                         },
                         Tema = new Tema()
                         {
-                            Nome = row["Tema_Proposto"].ToString()
+                            Nome = row["Tema_Proposto"].ToString(),
+                            Descricao = row["tema_descricao"].ToString()
                         },
                         Texto = row["texto"].ToString(),
                         Data = Convert.ToDateTime(row["data"])

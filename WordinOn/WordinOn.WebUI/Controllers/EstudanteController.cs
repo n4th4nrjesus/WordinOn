@@ -22,7 +22,9 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult CriarRedacao()
         {
             ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
-            return View();
+            var obj = new Redacao();
+            obj.Tema = new TemaDAO().BuscarAleatoriamente(((Usuario)User).Cod);
+            return View(obj);
         }
 
         public ActionResult PropriasRedacoes()
@@ -121,7 +123,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult EnviarRedacao(Redacao obj)
         {
-            new RedacaoDAO().Inserir(obj);
+            new RedacaoDAO().Inserir(obj, (((Usuario)User).Cod));
             return RedirectToAction("TelaInicial", "Estudante");
         }
 
