@@ -20,8 +20,8 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj.Estudante;
-                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj.Estudante.Cod;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -130,6 +130,54 @@ namespace WordinOn.DataAccess
                             Email = row["email"].ToString()
                         };
                         lst.Add(usuario);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
+        #region buscar poor sala do estudante
+        public List<SalaXEstudante> BuscarPorSala(Sala obj)
+        {
+            var lst = new List<SalaXEstudante>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"SELECT 
+                                      NOME, 
+                                      EMAIL 
+                                  FROM SALAXESTUDANTE 
+                                  INNER JOIN USUARIO ON (SALAXESTUDANTE.CODESTUDANTE = USUARIO.COD)
+                                  WHERE CODSALA = @CODSALA;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var salaXestudante = new SalaXEstudante()
+                        {
+                            Estudante = new Usuario()
+                            {
+                                Nome = row["nome"].ToString(),
+                                Email = row["email"].ToString()
+                            },
+                            Sala = new Sala()
+                            {
+                                Nome = row["nome"].ToString()
+                            }
+                        };
+                        lst.Add(salaXestudante);
                     }
                 }
             }

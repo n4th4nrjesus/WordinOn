@@ -37,33 +37,34 @@
                         <button type="button" class="btn btn-default" id="btnAddProfessor" style="border-color: black" data-url="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="professores">
+                            @Html.Partial("_Professores")
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col-md-6">
-                <div id="professores">
-                    @Html.Partial("_Professores")
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-10">
+                        @Html.Label("lblEstudantes", "Estudantes:", new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.Estudante.Cod, new SelectList(ViewBag.Estudantes ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlEstudante", @class = "form-control", @style = "border-color: black" })
+                    </div>
+                    <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
+                        <button type="button" class="btn btn-default" id="btnAddEstudante" style="border-color: black" data-url="@Url.Action("InserirEstudante", "Professor")">Adicionar</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="professores">
+                            @Html.Partial("_Estudantes")
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="row" style="margin-top: 10px">
-                <div class="col-md-10">
-                    @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
-                    @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlProfessor", @class = "form-control", @style = "border-color: black" })
-                </div>
-                <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
-                    <button type="button" class="btn btn-default" id="btnAddProfessor" style="border-color: black" data-url="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div id="professores">
-                    @Html.Partial("_Estudantes")
-                </div>
-            </div>
+
         </div>
     </div>
 }
@@ -90,6 +91,32 @@
                             }
                         });
                         $("#ddlProfessor").val("")
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            });
+            $("#btnAddEstudante").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $.ajax({
+                    url: $("#btnAddEstudante").data("url"),
+                    data: {
+                        codSala: $("input[type='hidden']").val(),
+                        codEstudante: $("#ddlEstudante option:selected").val()
+                    },
+                    method: "POST",
+                    cache: false,
+                    success: function (result) {
+                        $("#estudantes").html(result);
+                        var estudante = $("#ddlEstudante option:selected").val();
+                        $("#ddlEstudante option").each(function () {
+                            if ($(this).val() == estudante) {
+                                $(this).remove();
+                            }
+                        });
+                        $("#ddlEstudante").val("")
                     },
                     error: function (result) {
                         alert(result);
