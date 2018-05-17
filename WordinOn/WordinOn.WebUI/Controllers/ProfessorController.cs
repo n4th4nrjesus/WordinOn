@@ -83,6 +83,23 @@ namespace WordinOn.WebUI.Controllers
             return PartialView("_Professores", sala);
         }
 
+        [HttpPost]
+        public ActionResult InserirEstudante(int codSala, int codEstudante)
+        {
+            var obj = new SalaXEstudante()
+            {
+                Sala = new Sala() { Cod = codSala },
+                Estudante = new Usuario() { Cod = codEstudante }
+            };
+
+            new SalaXEstudanteDAO().Inserir(obj);
+
+            var sala = new SalaDAO().BuscarPorCod(codSala);
+            sala.Estudantes = new SalaXEstudanteDAO().BuscarPorSala(sala);
+
+            return PartialView("_Estudantes", sala);
+        }
+
         public ActionResult ListaTemas()
         {
             var lst = new TemaDAO().BuscarTodos();

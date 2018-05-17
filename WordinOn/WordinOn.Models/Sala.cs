@@ -21,5 +21,7 @@ namespace WordinOn.Models
             this.Professores = new List<SalaXProfessor>();
             this.Estudantes = new List<SalaXEstudante>();
         }
+
+        public Usuario Estudante { get; set; } // esta prorpie está aqui para que seja possível inserir estudantes na sala
     }
 }
