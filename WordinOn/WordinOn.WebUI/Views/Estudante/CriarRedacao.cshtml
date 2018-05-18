@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<nav class="breadcrumb">
+    @Html.Label("Estudante > Criar Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+</nav>
+
 @if (Model.Tema == null)
 {
     <div class="alert alert-warning" role="alert"> <strong>Atenção!</strong> Todos os temas de redação já foram preenchidos!</div>
