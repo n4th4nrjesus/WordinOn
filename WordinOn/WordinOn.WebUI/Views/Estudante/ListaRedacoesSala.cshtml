@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<nav class="breadcrumb">
+    @Html.Label("Estudante > Salas > Redações da Sala", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+</nav>
+
 <form class="form-horizontal" action="@Url.Action("ListaRedacoesSala", "Estudante")">
     <div class="row" style="border: 2px solid black">
         @Html.HiddenFor(m => m.Sala.Cod)
