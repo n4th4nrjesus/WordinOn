@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
 
-@*TRAZER AS AVALIAÇÕES INSERIDAS*@
+<nav class="breadcrumb">
+    @Html.Label("Professor > Avaliação de Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+</nav>
 
 <form action="@Url.Action("EnviarAvaliacao", "Professor")" class="form-horizontal">
     @Html.HiddenFor(m => m.Redacao.Cod)
