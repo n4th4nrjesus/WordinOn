@@ -125,11 +125,3 @@ insert into salaXprofessor (codProfessor, codSala)
 values
 (3, 1),
 (4, 2)
-
-select u.nome , t.nome, a.texto, a.valor, data from Redacao r
-inner join Tema t on r.codTema = t.cod
-inner join Usuario u on u.cod = r.codEstudante
-inner join Avaliacao a on a.codRedacao = r.cod
-where u.perfil_usuario = 1
-
-
