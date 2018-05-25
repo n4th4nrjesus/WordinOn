@@ -220,7 +220,6 @@
     <Content Include="Views\Estudante\Perfil.cshtml" />
     <Content Include="Views\Professor\Perfil.cshtml" />
     <Content Include="Views\Shared\_LayoutProfessor.cshtml" />
-    <Content Include="Views\Professor\AlterarSala.cshtml" />
     <Content Include="Views\Professor\_Professores.cshtml" />
     <Content Include="Views\Professor\_Estudantes.cshtml" />
   </ItemGroup>

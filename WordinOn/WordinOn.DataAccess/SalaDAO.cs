@@ -138,6 +138,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region buscar por codigo
         public Sala BuscarPorCod(int cod)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
@@ -170,6 +171,7 @@ namespace WordinOn.DataAccess
                 }
             }
         }
+        #endregion
 
     }
 }

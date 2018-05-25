@@ -42,6 +42,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult ListaRedacoesSala(int cod)
         {
             ViewBag.Redacoes = new RedacaoDAO().ProcurarPorSala(cod);
+            //ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
             return View();
         }
 
@@ -126,7 +127,6 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult AlterarPerfil(Usuario obj)
         {
-
             new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
             return RedirectToAction("TelaInicial", "Professor");
         }
@@ -134,7 +134,12 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
             ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
-            return View("TelaInicial", filtro);
+            return View("ListaRedacoesSala", filtro);
+        }
+
+        public void DeletarSala(int cod, int sala)
+        {
+            new SalaXProfessorDAO().DeletarProf(cod, sala);
         }
 
         //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE PORÉM NÃO UTILIZADOS

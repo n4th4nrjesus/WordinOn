@@ -17,7 +17,11 @@
                     <tr>
                         <td>@item.Nome</td>
                         <td>@item.Email</td>
-                        <td><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094ff"></span></td>
+                        <td>
+                            <a href="@Url.Action("DeletarSala", "Professor", new { @cod = item.Cod })" id="btnDeletar">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094ff"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             }

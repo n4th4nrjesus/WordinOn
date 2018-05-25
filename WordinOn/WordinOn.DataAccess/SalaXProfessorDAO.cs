@@ -219,5 +219,26 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+
+        #region DeletarProf
+        public void DeletarProf(int codPro, int codSala)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"delete from salaXprofessor where codProfessor = @cod and codSala = @codSala;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codPro ", SqlDbType.Int).Value = codPro;
+                    cmd.Parameters.Add("@codSala ", SqlDbType.Int).Value = codSala;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+        #endregion DeletarProf
     }
 }

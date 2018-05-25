@@ -44,7 +44,7 @@
                             <td>@item.Tema.Nome</td>
                             <td>@item.Data</td>
                             <td>
-                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
+                                <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod, @sala = item.Sala.Cod })">
                                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 </a>
                             </td>
