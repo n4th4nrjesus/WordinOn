@@ -1,5 +1,6 @@
 ﻿@using WordinOn.Models
-@model List<Sala>
+@using WordinOn.WebUI.ViewModels
+@model FiltroSalaViewModel
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,7 +13,7 @@
 	<div class="row" style="border: 2px solid black">
 		<div class="col-md-12" style="padding-top: 30px">
 			<div class="col-md-10">
-				@Html.TextBox("txtBusca", string.Empty, new { @class = "form-control", @style = "border-color: black" })
+				@Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
 			</div>
 			<div class="col-md-2">
 				<button type="submit" class="btn btn-default" name="btnBuscar" style="border: none">
