@@ -110,7 +110,7 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = string.Format(@"select nome, descricao, data from Tema where nome like '%{0}%';", texto); ;
+                string strSQL = string.Format(@"select nome, descricao from Tema where nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {

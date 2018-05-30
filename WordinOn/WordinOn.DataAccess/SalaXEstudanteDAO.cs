@@ -63,7 +63,8 @@ namespace WordinOn.DataAccess
                                     nome, 
                                     email 
                                     from salaXestudante 
-                                    inner join Usuario on salaXestudante.codEstudante = Usuario.cod";
+                                    inner join Usuario on salaXestudante.codEstudante = Usuario.cod
+                                    ";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -83,13 +84,14 @@ namespace WordinOn.DataAccess
                         {
                             Estudante = new Usuario()
                             {
+                                Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome"].ToString(),
                                 Email = row["email"].ToString()
-                            },
-                            Sala = new Sala()
-                            {
-                                Nome = row["nome"].ToString()
-                            }
+                            }//,
+                            //Sala = new Sala()
+                            //{
+                            //    Nome = row["nome"].ToString()
+                            //}
                         };
                         lst.Add(salaXestudante);
                     }
@@ -169,8 +171,8 @@ namespace WordinOn.DataAccess
                         {
                             Estudante = new Usuario()
                             {
-                                Nome = row["nome"].ToString(),
-                                Email = row["email"].ToString()
+                                Nome = row["NOME"].ToString(),
+                                Email = row["EMAIL"].ToString()
                             },
                             Sala = new Sala()
                             {

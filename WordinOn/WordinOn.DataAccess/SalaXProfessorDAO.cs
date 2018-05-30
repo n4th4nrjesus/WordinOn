@@ -174,6 +174,7 @@ namespace WordinOn.DataAccess
         //}
         #endregion
 
+        #region BuscarPorSala
         public List<SalaXProfessor> BuscarPorSala(Sala obj)
         {
             var lst = new List<SalaXProfessor>();
@@ -191,7 +192,7 @@ namespace WordinOn.DataAccess
                 {
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Cod;
+                    cmd.Parameters.Add("@CODSALA", SqlDbType.Int).Value = obj.Cod;
                     cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
@@ -219,26 +220,6 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
-
-        #region DeletarProf
-        public void DeletarProf(int codPro, int codSala)
-        {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
-            {
-                string strSQL = @"delete from salaXprofessor where codProfessor = @cod and codSala = @codSala;";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    cmd.Connection = conn;
-                    cmd.Parameters.Add("@codPro ", SqlDbType.Int).Value = codPro;
-                    cmd.Parameters.Add("@codSala ", SqlDbType.Int).Value = codSala;
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-        }
-        #endregion DeletarProf
+        #endregion
     }
 }

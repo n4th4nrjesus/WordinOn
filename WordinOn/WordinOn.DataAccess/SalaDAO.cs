@@ -91,6 +91,7 @@ namespace WordinOn.DataAccess
                     {
                         var sala = new Sala()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString()
                         };
                         lst.Add(sala);
