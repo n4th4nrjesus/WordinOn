@@ -67,19 +67,20 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar
-        public List<Sala> Procurar(string texto)
+        public List<Sala> Procurar(string texto, int codEstudante)
         {
             var lst = new List<Sala>();
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = string.Format(@"select * from Sala where nome like '%{0}%';", texto); ;
+                string strSQL = string.Format(@"select * from Sala where nome like '%{0}%' and cod in (select codSala from salaXestudante where codEstudante = @codEstudante);", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+					cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
+					cmd.CommandText = strSQL;
 
                     var dataReader = cmd.ExecuteReader();
                     var dt = new DataTable();

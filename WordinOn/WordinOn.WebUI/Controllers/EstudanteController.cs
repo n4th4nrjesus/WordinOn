@@ -74,7 +74,6 @@ namespace WordinOn.WebUI.Controllers
 
 		public ActionResult AlterarPerfil(Usuario obj)
 		{
-
 			new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
 			return RedirectToAction("TelaInicial", "Estudante");
 		}
@@ -106,8 +105,7 @@ namespace WordinOn.WebUI.Controllers
 
 		public ActionResult ProcurarSala(FiltroSalaViewModel filtro)
 		{
-			ViewBag.Salas = new SalaDAO().Procurar(filtro.CampoTexto);
-			ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
+			ViewBag.Salas = new SalaDAO().Procurar(filtro.CampoTexto, ((Usuario)User).Cod);
 			return View("ListaSalas", filtro);
 		}
 
@@ -120,7 +118,6 @@ namespace WordinOn.WebUI.Controllers
 
 		public ActionResult ProcurarPropriaRedacao(FiltroRedacaoViewModel filtro)
 		{
-			ViewBag.Salas = new SalaDAO().BuscarTodos();
 			ViewBag.Redacoes = new RedacaoDAO().ProcurarPropriaRedacao(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto, ((Usuario)User).Cod);
 			ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
 			return View("PropriasRedacoes", filtro);
