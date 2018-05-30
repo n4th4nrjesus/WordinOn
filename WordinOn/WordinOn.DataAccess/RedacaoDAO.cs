@@ -44,10 +44,11 @@ namespace WordinOn.DataAccess
             {
                 string strSQL = @"select 
                                     r.*,
-                                    u.*, 
-                                    t.nome as Tema_Proposto 
+                                    u.nome as nome_estudante, 
+                                    t.nome as Tema_Proposto
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
+                                    inner join Sala s on s.cod = r.codSala
 	                                inner join Tema t on t.cod = r.codTema;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -73,19 +74,13 @@ namespace WordinOn.DataAccess
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome"].ToString()
+                                Nome = row["nome_estudante"].ToString()
                             },
                             Tema = new Tema()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["Tema Proposto"].ToString(),
-                                Descricao = row["descricao"].ToString()
-                            },
-                            Sala = new Sala()
-                            {
-                                Cod = Convert.ToInt32(row["codSala"]),
-                                Nome = row["Nome_Sala"].ToString()
-                            }
+                                Nome = row["Tema_Proposto"].ToString(),
+                            }                            
                         };
                         lst.Add(redacao);
                     }
