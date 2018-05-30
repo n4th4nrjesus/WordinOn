@@ -419,7 +419,7 @@ namespace WordinOn.DataAccess
                                         r.*,
                                         u.nome as Nome_Pessoa,
                                         t.descricao as Tema_Descricao, 
-                                        t.nome as Tema_Proposto, 
+                                        t.nome as Tema_Proposto 
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
 	                                inner join Tema t on t.cod = r.codTema
