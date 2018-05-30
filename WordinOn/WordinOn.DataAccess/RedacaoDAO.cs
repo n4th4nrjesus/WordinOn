@@ -45,7 +45,7 @@ namespace WordinOn.DataAccess
                 string strSQL = @"select 
                                     r.*,
                                     u.nome as Nome_Pessoa, 
-                                    t.nome as Tema_Proposto, 
+                                    t.nome as Tema_Proposto 
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
 	                                inner join Tema t on t.cod = r.codTema;";
@@ -203,7 +203,7 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codSala"]),
                                 Nome = row["Nome_Sala"].ToString()
-                            },
+                            }
                         };
                         lst.Add(redacao);
                     }
@@ -249,6 +249,7 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
+                            Tempo = Convert.ToInt32(row["Tempo"]),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
@@ -260,7 +261,11 @@ namespace WordinOn.DataAccess
                                 Nome = row["Tema Proposto"].ToString(),
                                 Descricao = row["descricao"].ToString()
                             },
-                            Tempo = Convert.ToInt32(row["Tempo"])
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["Nome_Sala"].ToString()
+                            }
                         };
                         lst.Add(redacao);
                     }
@@ -320,25 +325,26 @@ namespace WordinOn.DataAccess
                          var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Estudante = new Usuario()
-                            {
-                                Cod = Convert.ToInt32(row["codEstudante"]),
-                                Nome = row["nome_estudante"].ToString()
-                            },
-                            Tema = new Tema()
-                            {
-                                Cod = Convert.ToInt32(row["codTema"]),
-                                Nome = row["nome_tema"].ToString()
-                            },
-                            Sala = new Sala()
-                            {
-                                Cod = Convert.ToInt32(row["codSala"]),
-                                Nome = row["nome_sala"].ToString()
-                            },
-                            Data = Convert.ToDateTime(row["data"]),
+                             Data = Convert.ToDateTime(row["data"]),
                             Tempo = Convert.ToInt32(row["tempo"]),
-                            Texto = row["texto"].ToString()
-                        };
+                            Texto = row["texto"].ToString(),
+                             Estudante = new Usuario()
+                             {
+                                 Cod = Convert.ToInt32(row["cod"]),
+                                 Nome = row["nome"].ToString()
+                             },
+                             Tema = new Tema()
+                             {
+                                 Cod = Convert.ToInt32(row["cod"]),
+                                 Nome = row["Tema Proposto"].ToString(),
+                                 Descricao = row["descricao"].ToString()
+                             },
+                             Sala = new Sala()
+                             {
+                                 Cod = Convert.ToInt32(row["codSala"]),
+                                 Nome = row["Nome_Sala"].ToString()
+                             }
+                         };
                         lst.Add(redacao);
                     }
                 }
