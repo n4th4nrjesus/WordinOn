@@ -196,18 +196,8 @@ namespace WordinOn.DataAccess
                             Tema = new Tema()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome"].ToString(),
-                                Descricao = row["descricao"].ToString()
-                            },
-                            Estudante = new Usuario()
-                            {
-                                Cod = Convert.ToInt32(row["codEstudante"]),
-                                Nome = row["Nome_Pessoa"].ToString()
-                            },
-                            Sala = new Sala()
-                            {
-                                Cod = Convert.ToInt32(row["codSala"]),
-                                Nome = row["Nome_Sala"].ToString()
+                                Nome = row["Nome_tema"].ToString(),
+                                Descricao = row["Descricao_tema"].ToString()
                             }
                         };
                         lst.Add(redacao);
