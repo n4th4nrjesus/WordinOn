@@ -476,10 +476,13 @@ namespace WordinOn.DataAccess
                 string strSQL = string.Format(@"select 
                                                     r.*,
                                                     u.nome as nome_estudante,
-                                                    t.nome as nome_tema
+                                                    t.nome as nome_tema,
+                                                    s.cod as codSala,
+                                                    s.nome as nome_sala
                                                 from Redacao r
                                                 inner join Usuario u on u.cod = r.codEstudante
                                                 inner join Tema t on t.cod = r.codTema
+                                                inner join Sala s on s.cod = r.codSala
                                                 where r.codSala = @codSala");
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -516,7 +519,13 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome_tema"].ToString(),
+                            },
+                            Sala = new Sala ()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["nome_sala"].ToString()
                             }
+
                         };
                         lst.Add(redacao);
                     }
