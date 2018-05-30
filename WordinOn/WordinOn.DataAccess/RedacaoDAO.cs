@@ -261,13 +261,14 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select 
-                                                    r.cod,
+                                                    r.*,
                                                     u.nome as nome_estudante,
                                                     t.nome as nome_tema,
-                                                    r.data 
+                                                    s.nome as nome_sala
                                                 from Redacao r
                                                 inner join Usuario u on u.cod = r.codEstudante
                                                 inner join Tema t on t.cod = r.codTema
+                                                inner join Sala s on s.cod = r.codSala
                                                 where (t.nome like '%{0}%' or u.nome like '%{0}%')", texto);
 
                 if (codSala.HasValue && codSala.Value > 0)
@@ -299,20 +300,27 @@ namespace WordinOn.DataAccess
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        var redacao = new Redacao()
+                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Estudante = new Usuario()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
+                                Cod = Convert.ToInt32(row["codEstudante"]),
                                 Nome = row["nome_estudante"].ToString()
                             },
                             Tema = new Tema()
                             {
-                                Cod = Convert.ToInt32(row["cod"]),
+                                Cod = Convert.ToInt32(row["codTema"]),
                                 Nome = row["nome_tema"].ToString()
                             },
-                            Data = Convert.ToDateTime(row["data"])
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["nome_sala"].ToString()
+                            },
+                            Data = Convert.ToDateTime(row["data"]),
+                            Tempo = Convert.ToInt32(row["tempo"]),
+                            Texto = row["texto"].ToString()
                         };
                         lst.Add(redacao);
                     }

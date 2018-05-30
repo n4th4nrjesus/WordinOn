@@ -41,9 +41,8 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
-                                    u.nome as Nome_Professor,
-                                    a.texto as Comentario,
-                                    a.valor as Valor
+                                    a.*,
+                                    u.nome as Nome_Professor
                                     from Avaliacao a
                                     inner join Usuario u on u.cod = a.codProfessor";
 
@@ -63,11 +62,17 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
                             {
+                                Cod = Convert.ToInt32(row["codProfessor"]),
                                 Nome = row["Nome_Professor"].ToString()
+                            },
+                            Redacao = new Redacao()
+                            {
+                                Cod = Convert.ToInt32(row["codRedacao"])
                             }
                         };
                         lst.Add(avaliacao);
@@ -87,8 +92,7 @@ namespace WordinOn.DataAccess
             {
                 string strSQL = @"select 
                                     u.nome as Nome_Professor,
-                                    a.texto as Comentario,
-                                    a.valor as Valor
+                                    a.*
                                     from Avaliacao a
                                     inner join Usuario u on u.cod = a.codProfessor
                                     where codRedacao = @codRedacao;";
@@ -110,12 +114,17 @@ namespace WordinOn.DataAccess
                     {
                         var avaliacao = new Avaliacao()
                         {
-                            Texto = row["Comentario"].ToString(),
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Texto = row["texto"].ToString(),
                             Valor = Convert.ToInt32(row["valor"]),
                             Professor = new Usuario()
                             {
+                                Cod = Convert.ToInt32(row["codProfessor"]),
                                 Nome = row["Nome_Professor"].ToString()
-                            }
+                            },
+                            Redacao = new Redacao()
+                            {
+                                Cod = Convert.ToInt32(row["codRedacao"])
                         };
                         lst.Add(avaliacao);
                     }

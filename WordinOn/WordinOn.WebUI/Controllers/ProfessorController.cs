@@ -42,11 +42,14 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult ListaRedacoesSala(int cod)
         {
             ViewBag.Redacoes = new RedacaoDAO().ProcurarPorSala(cod);
-            //ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
-            return View();
+            var filtro = new FiltroRedacaoViewModel()
+            {
+                Sala = new Sala() { Cod = cod }
+            };
+            return View(filtro);
         }
 
-        public ActionResult CriarSala(int? @cod)
+        public ActionResult CriarSala(int? cod)
         {
             ViewBag.Professores = new UsuarioDAO().ProcurarProfessores();
             ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes();
@@ -134,6 +137,7 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
             ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View("ListaRedacoesSala", filtro);
         }
 
