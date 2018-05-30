@@ -44,7 +44,7 @@ namespace WordinOn.DataAccess
             {
                 string strSQL = @"select 
                                     r.*,
-                                    u.nome as Nome_Pessoa, 
+                                    u.*, 
                                     t.nome as Tema_Proposto 
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
@@ -103,7 +103,7 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
-                                    r.*
+                                    r.*,
                                     u.nome as Nome_Pessoa, 
                                     t.nome as Tema_Proposto 
                                     from Redacao r
