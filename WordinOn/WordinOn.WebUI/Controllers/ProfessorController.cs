@@ -141,11 +141,6 @@ namespace WordinOn.WebUI.Controllers
             return View("ListaRedacoesSala", filtro);
         }
 
-        public void DeletarSala(int cod, int sala)
-        {
-            new SalaXProfessorDAO().DeletarProf(cod, sala);
-        }
-
         //A PARTIR DAQUI COMEÇAM OS MÉTODOS NÃO AUTOMÁTICOS, OU SEJA, QUE FORAM CIRADOS MANUALMENTE PORÉM NÃO UTILIZADOS
         #region Métodos não automáticos
         //public ActionResult Redacao()
