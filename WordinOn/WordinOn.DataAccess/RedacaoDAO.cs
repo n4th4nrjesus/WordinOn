@@ -67,15 +67,25 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
+                            Data = Convert.ToDateTime(row["data"]),
+                            Tempo = Convert.ToInt32(row["tempo"]),
+                            Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
-                                Nome = row["Nome_Pessoa"].ToString()
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome"].ToString()
                             },
                             Tema = new Tema()
                             {
-                                Nome = row["Tema_Proposto"].ToString()
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Tema Proposto"].ToString(),
+                                Descricao = row["descricao"].ToString()
                             },
-                            Data = Convert.ToDateTime(row["data"])
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["Nome_Sala"].ToString()
+                            }
                         };
                         lst.Add(redacao);
                     }
@@ -325,25 +335,25 @@ namespace WordinOn.DataAccess
                          var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                             Data = Convert.ToDateTime(row["data"]),
+                            Data = Convert.ToDateTime(row["data"]),
                             Tempo = Convert.ToInt32(row["tempo"]),
                             Texto = row["texto"].ToString(),
-                             Estudante = new Usuario()
-                             {
-                                 Cod = Convert.ToInt32(row["cod"]),
-                                 Nome = row["nome"].ToString()
-                             },
-                             Tema = new Tema()
-                             {
-                                 Cod = Convert.ToInt32(row["cod"]),
-                                 Nome = row["Tema Proposto"].ToString(),
-                                 Descricao = row["descricao"].ToString()
-                             },
-                             Sala = new Sala()
-                             {
-                                 Cod = Convert.ToInt32(row["codSala"]),
-                                 Nome = row["Nome_Sala"].ToString()
-                             }
+                            Estudante = new Usuario()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["nome"].ToString()
+                            },
+                            Tema = new Tema()
+                            {
+                                Cod = Convert.ToInt32(row["cod"]),
+                                Nome = row["Tema Proposto"].ToString(),
+                                Descricao = row["descricao"].ToString()
+                            },
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["Nome_Sala"].ToString()
+                            }
                          };
                         lst.Add(redacao);
                     }
@@ -361,10 +371,9 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select 
-                                                    r.cod,
+                                                    r.*,
                                                     u.nome as nome_estudante,
-                                                    t.nome as nome_tema,
-                                                    r.data 
+                                                    t.nome as nome_tema
                                                 from Redacao r
                                                 inner join Usuario u on u.cod = r.codEstudante
                                                 inner join Tema t on t.cod = r.codTema
@@ -402,17 +411,25 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
+                            Data = Convert.ToDateTime(row["data"]),
+                            Tempo = Convert.ToInt32(row["tempo"]),
+                            Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome_estudante"].ToString()
+                                Nome = row["nome"].ToString()
                             },
                             Tema = new Tema()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome_tema"].ToString()
+                                Nome = row["Tema Proposto"].ToString(),
+                                Descricao = row["descricao"].ToString()
                             },
-                            Data = Convert.ToDateTime(row["data"])
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["Nome_Sala"].ToString()
+                            }
                         };
                         lst.Add(redacao);
                     }
@@ -428,12 +445,10 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
-                                    r.cod,
-                                    r.texto,
+                                    r.*,
                                     t.descricao as tema_descricao,
                                     u.nome as Nome_Pessoa, 
                                     t.nome as Tema_Proposto, 
-                                    r.data as Data
                                     from Redacao r 
                                     inner join Usuario u on u.cod = r.codEstudante
 	                                inner join Tema t on t.cod = r.codTema
@@ -458,17 +473,25 @@ namespace WordinOn.DataAccess
                     var redacao = new Redacao()
                     {
                         Cod = Convert.ToInt32(row["cod"]),
+                        Data = Convert.ToDateTime(row["data"]),
+                        Tempo = Convert.ToInt32(row["tempo"]),
+                        Texto = row["texto"].ToString(),
                         Estudante = new Usuario()
                         {
-                            Nome = row["Nome_Pessoa"].ToString()
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
                         },
                         Tema = new Tema()
                         {
-                            Nome = row["Tema_Proposto"].ToString(),
-                            Descricao = row["tema_descricao"].ToString()
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["Tema Proposto"].ToString(),
+                            Descricao = row["descricao"].ToString()
                         },
-                        Texto = row["texto"].ToString(),
-                        Data = Convert.ToDateTime(row["data"])
+                        Sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["codSala"]),
+                            Nome = row["Nome_Sala"].ToString()
+                        }
                     };
 
                     return redacao;
@@ -485,10 +508,9 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = string.Format(@"select 
-                                                    r.cod,
+                                                    r.*,
                                                     u.nome as nome_estudante,
                                                     t.nome as nome_tema,
-                                                    r.data 
                                                 from Redacao r
                                                 inner join Usuario u on u.cod = r.codEstudante
                                                 inner join Tema t on t.cod = r.codTema
@@ -516,17 +538,25 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
+                            Data = Convert.ToDateTime(row["data"]),
+                            Tempo = Convert.ToInt32(row["tempo"]),
+                            Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome_estudante"].ToString()
+                                Nome = row["nome"].ToString()
                             },
                             Tema = new Tema()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
-                                Nome = row["nome_tema"].ToString()
+                                Nome = row["Tema Proposto"].ToString(),
+                                Descricao = row["descricao"].ToString()
                             },
-                            Data = Convert.ToDateTime(row["data"])
+                            Sala = new Sala()
+                            {
+                                Cod = Convert.ToInt32(row["codSala"]),
+                                Nome = row["Nome_Sala"].ToString()
+                            }
                         };
                         lst.Add(redacao);
                     }
