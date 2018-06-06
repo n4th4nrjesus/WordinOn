@@ -35,7 +35,7 @@ else
             <div class="col-md-2 text-center">
                 <div class="form-group">
                     <div class="col-md-12">
-                        @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @class = "form-control", @style = "border-color: black" })
+                        @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
                     </div>
                 </div>
                 <div class="form-group">
