@@ -139,5 +139,25 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
+
+        #region Deletar
+        public void Deletar(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"delete from Tema where cod = @cod";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
     }
 }
