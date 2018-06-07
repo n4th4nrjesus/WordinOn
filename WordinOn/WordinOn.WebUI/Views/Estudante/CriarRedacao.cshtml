@@ -1,66 +1,132 @@
 ﻿@using WordinOn.Models
 @model Redacao
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <nav class="breadcrumb">
-    @Html.Label("Estudante > Criar Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+	@Html.Label("Estudante > Criar Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
 </nav>
 
 @if (Model.Tema == null)
 {
-    <div class="alert alert-warning" role="alert"> <strong>Atenção!</strong> Todos os temas de redação já foram preenchidos!</div>
+	<div class="alert alert-warning" role="alert"> <strong>Atenção!</strong> Todos os temas de redação já foram preenchidos!</div>
 }
 else
 {
-    <form class="form-horizontal" action="@Url.Action("EnviarRedacao", "Estudante")">
-        <div class="row" style="border-bottom: solid 2px black; padding: 15px">
-            <div class="container">
-                <div class="col-md-3">
-                    @Html.HiddenFor(m => m.Tema.Cod)
-                    @Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-                </div>
-                <div class="col-md-7" style="border-right: solid 2px black">
-                    @Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
-                </div>
-                <div class="col-md-2">
-                    @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-                    @Html.Label("lblTime", "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
-                </div>
-            </div>
-        </div>
+	<form class="form-horizontal" action="@Url.Action("EnviarRedacao", "Estudante")">
+		<div class="row" style="border-bottom: solid 2px black; padding: 15px">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
 
-        <div class="row" style="padding: 50px">
-            <div class="col-md-2 text-center">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
-                    </div>
-                </div>
-                <div class="form-group" style="margin-top: 305px">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
-                    </div>
-                </div>
-            </div>
+					</div>
 
-            <div class="col-md-10">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+					<div class="col-md-6">
+
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+				<div class="col-md-3">
+					@Html.HiddenFor(m => m.Tema.Cod)
+					@Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+				</div>
+				<div class="col-md-7" style="border-right: solid 2px black">
+					@Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+				</div>
+				<div class="col-md-2">
+					@Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+					@Html.Label("lblTime", "00:00:00", new { @id = "lblTime", @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="padding: 50px">
+			<div class="col-md-2 text-center">
+				<div class="form-group">
+					<div class="col-md-12">
+						@Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
+					</div>
+				</div>
+				<div class="form-group" style="margin-top: 305px">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-10">
+				<div class="form-group">
+					<div class="col-md-12">
+						@Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 }
 
 @section Scripts {
-	
-	}
+	<script type="text/javascript">
+		var tempo = new Number();
+		// Tempo em segundos = 1h e 30 min
+		tempo = 5400;
+
+		function startCountdown() {
+			// Se o tempo não for zerado
+			if ((tempo - 1) >= 0) {
+
+				// Pega a parte inteira dos minutos
+				var min = parseInt(tempo / 60);
+				// Calcula os segundos restantes
+				var seg = tempo % 60;
+
+				// Formata o número menor que dez, ex: 08, 07, ...
+				if (min < 10) {
+					min = "0" + min;
+					min = min.substr(0, 2);
+				}
+				if (seg <= 9) {
+					seg = "0" + seg;
+				}
+
+				// Cria a variável para formatar no estilo hora/cronômetro
+				horaImprimivel = '00:' + min + ':' + seg;
+				//JQuery pra setar o valor
+				$("#lblTime").html(horaImprimivel);
+
+				// Define que a função será executada novamente em 1000ms = 1 segundo
+				setTimeout('startCountdown()', 1000);
+
+				// diminui o tempo
+				tempo--;
+
+				// Quando o contador chegar a zero faz esta ação
+			} else {
+				var aux = confirm("Que pena, o seu tempo para escrever a redação acabou...");
+				if (aux) {
+					//enviar redação e mandar pra tela inicial
+				} else {
+					//discarta a redação e manda pra tela inicial
+				}
+			}
+		}
+
+		// Chama a função ao carregar a tela
+		startCountdown();
+
+	</script>
+}
