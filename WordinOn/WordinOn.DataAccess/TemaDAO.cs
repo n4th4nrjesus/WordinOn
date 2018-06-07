@@ -110,7 +110,7 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = string.Format(@"select nome, descricao from Tema where nome like '%{0}%';", texto); ;
+                string strSQL = string.Format(@"select cod, nome, descricao from Tema where nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -129,7 +129,8 @@ namespace WordinOn.DataAccess
                         var tema = new Tema()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Nome = row["nome"].ToString()
+                            Nome = row["nome"].ToString(),
+                            Descricao = row["descricao"].ToString()
                         };
                         lst.Add(tema);
                     }

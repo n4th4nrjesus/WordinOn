@@ -137,6 +137,43 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Buscar Sala
+        public List<Sala> ProcurarPorProf(int codProf)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = string.Format(@"select * from Sala where cod in (select codSala from salaXprofessor where salaXprofessor.codProfessor = @cod);", codProf); ;
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = codProf;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
         #region Carregar ViewBag
         //public List<Usuario> CarregarViewBag(int cod)
         //{
@@ -215,6 +252,48 @@ namespace WordinOn.DataAccess
                             }
                         };
                         lst.Add(salaXprofessor);
+                    }
+                }
+            }
+            return lst;
+        }
+        #endregion
+
+        #region buscar por texto
+        public List<Sala> BuscarTexto(string texto, int cod)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"select * from Sala where 1=1 ";
+                if (!string.IsNullOrWhiteSpace(texto))
+                {
+                    strSQL += string.Format(@"and nome like '%{0}%' ", texto);
+                }
+                strSQL += @"and cod in (select codSala from salaXprofessor where salaXprofessor.codProfessor = @cod);";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
                     }
                 }
             }

@@ -31,7 +31,7 @@
         <div class="row" style="padding: 50px">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    @Html.TextAreaFor(m => m.Redacao.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+                    @Html.LabelFor(m => m.Redacao.Texto, Model.Redacao.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
                 </div>
             </div>
         </div>
@@ -57,4 +57,31 @@
             </div>
         </div>
     </div>
+
 </form>
+@foreach (var avaliacao in Model.Redacao.Avaliacoes)
+{
+    <div class="row" style="border: 2px solid black; padding: 20px">
+        <div class="col-md-2" style="margin-top: 20px">
+            <div class="row">
+                <div class="col-md-6">
+                    <img alt="Brand" class="img-responsive" style="width: 30px; height: 30px" src="https://upload.wikimedia.org/wikipedia/commons/7/73/Bibeksheel-logo-final.png" />
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("lblProfessor", "Professor: " + avaliacao.Professor.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10" style="border-left: 2px solid black">
+            <div class="col-md-9 text-center" style="border-right: solid 2px black">
+                @Html.Label("lblAvaliacao", "Avaliacao: " + avaliacao.Texto, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+            </div>
+            <div class="col-md-1 text-right">
+                @Html.Label("lblNota", "Nota:", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+            </div>
+            <div class="col-md-2 text-right">
+                @Html.Label("txtNota", string.Format("{0}", avaliacao.Valor), new { @class = "form-control", @style = "border-color: black; width: 60px" })
+            </div>
+        </div>
+    </div>
+}

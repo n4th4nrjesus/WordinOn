@@ -10,5 +10,6 @@ namespace WordinOn.WebUI.ViewModels
 	{
 		public string CampoTexto { get; set; }
 		public Sala Sala { get; set; }
-	}
+        public Sala Salas { get; set; }
+    }
 }
