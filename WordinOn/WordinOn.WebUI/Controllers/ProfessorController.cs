@@ -125,6 +125,15 @@ namespace WordinOn.WebUI.Controllers
             return View("ListaTemas");
         }
 
+        public ActionResult DeletarTema(FiltroRedacaoViewModel obj)
+        {
+            new TemaDAO().Deletar(obj.Redacao.Tema.Cod);
+
+            ViewBag.ListaTema = new TemaDAO().BuscarTodos();
+
+            return View("ListaTemas");
+        }
+
         public ActionResult CriarTema()
         {
             return View();
