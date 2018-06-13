@@ -115,7 +115,7 @@ namespace WordinOn.WebUI.Controllers
         {
             ViewBag.ListaTema = new TemaDAO().BuscarTodos();
 
-            return View("ListaTemas");
+            return View();
         }
 
         public ActionResult ProcurarTema(FiltroRedacaoViewModel obj)

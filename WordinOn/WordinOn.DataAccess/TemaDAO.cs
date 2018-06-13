@@ -37,7 +37,7 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select nome, descricao from Tema";
+                string strSQL = @"select * from Tema";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
