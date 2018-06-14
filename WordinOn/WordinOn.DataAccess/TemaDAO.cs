@@ -55,8 +55,10 @@ namespace WordinOn.DataAccess
                     {
                         var tema = new Tema()
                         {
+                            Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
-                            Descricao = row["descricao"].ToString()
+                            Descricao = row["descricao"].ToString(),
+                            Removido = Convert.ToBoolean(row["removido"])
                         };
                         lst.Add(tema);
                     }
@@ -94,7 +96,8 @@ namespace WordinOn.DataAccess
                     {
                         Cod = Convert.ToInt32(row["cod"]),
                         Nome = row["nome"].ToString(),
-                        Descricao = row["descricao"].ToString()
+                        Descricao = row["descricao"].ToString(),
+                        Removido = Convert.ToBoolean(row["removido"])
                     };
 
                     return tema;
@@ -130,7 +133,8 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Nome = row["nome"].ToString(),
-                            Descricao = row["descricao"].ToString()
+                            Descricao = row["descricao"].ToString(),
+                            Removido = Convert.ToBoolean(row["removido"])
                         };
                         lst.Add(tema);
                     }
@@ -146,6 +150,26 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"delete from Tema where cod = @cod";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region removido
+        public void Removido(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"update Tema set removido = 1 where cod = @cod";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {

@@ -39,7 +39,8 @@ create table Tema
 (
 	cod int primary key identity (1,1),
 	nome varchar (200) not null,
-	descricao varchar (max) not null
+	descricao varchar (max) not null,
+	removido bit default 0 
 );
 
 create table Sala
