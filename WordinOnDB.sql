@@ -65,7 +65,8 @@ create table Avaliacao
 	texto varchar (max) not null,
 	valor int not null,
 	codProfessor int foreign key references Usuario(cod) not null,
-	codRedacao int foreign key references Redacao(cod) not null
+	codRedacao int foreign key references Redacao(cod) not null,
+	data datetime not null default getdate() 
 );
 
 ------------------------------------------------------------------------------------------------

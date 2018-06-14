@@ -20,15 +20,13 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult AvaliacaoRedacao(int cod)
         {
             var obj = new RedacaoDAO().BuscarPorCod(cod);
-            var aval = new Avaliacao();
-            aval.Redacao = obj;
-            return View(aval);
+            obj.Avaliacoes = new AvaliacaoDAO().BuscarPorRedacao(cod);
+            return View(obj);
         }
 
         public ActionResult EnviarAvaliacao(Avaliacao obj)
         {
             var codProf = ((Usuario)User).Cod;
-
             new AvaliacaoDAO().Inserir(obj, codProf);
             return RedirectToAction("TelaInicial", "Professor");
         }
@@ -125,9 +123,9 @@ namespace WordinOn.WebUI.Controllers
             return View("ListaTemas");
         }
 
-        public ActionResult DeletarTema(FiltroRedacaoViewModel obj)
+        public ActionResult DeletarTema(int cod)
         {
-            new TemaDAO().Deletar(obj.Redacao.Tema.Cod);
+            new TemaDAO().Deletar(cod);
 
             ViewBag.ListaTema = new TemaDAO().BuscarTodos();
 
