@@ -6,21 +6,21 @@ go
 
 ------------------------------------------------------------------------------------------------
 
---drop table Usuario;
---drop table Tema;
---drop table Sala;
---drop table Redacao;
---drop table Avaliacao;
---drop table salaXestudante;
---drop table salaXprofessor;
+drop table Usuario;
+drop table Tema;
+drop table Sala;
+drop table Redacao;
+drop table Avaliacao;
+drop table salaXestudante;
+drop table salaXprofessor;
 
---select * from Usuario;
---select * from Tema;
---select * from Sala;
---select * from Redacao;
---select * from Avaliacao;
---select * from salaXestudante;
---select * from salaXprofessor
+select * from Usuario;
+select * from Tema;
+select * from Sala;
+select * from Redacao;
+select * from Avaliacao;
+select * from salaXestudante;
+select * from salaXprofessor;
 
 ------------------------------------------------------------------------------------------------
 
@@ -65,7 +65,8 @@ create table Avaliacao
 	texto varchar (max) not null,
 	valor int not null,
 	codProfessor int foreign key references Usuario(cod) not null,
-	codRedacao int foreign key references Redacao(cod) not null
+	codRedacao int foreign key references Redacao(cod) not null,
+	data datetime not null default getdate() 
 );
 
 ------------------------------------------------------------------------------------------------
@@ -114,7 +115,7 @@ values
 insert into Avaliacao (texto, valor, codProfessor, codRedacao)
 values
 ('Muito bom', 750, 3, 1),
-('Muito ruim', 300, 4, 2)
+('Muito bom mesmo', 800, 3, 1)
 
 insert into salaXestudante (codEstudante, codSala)
 values
@@ -125,9 +126,3 @@ insert into salaXprofessor (codProfessor, codSala)
 values
 (3, 1),
 (4, 2)
-
-select u.nome , t.nome, a.texto, a.valor, data from Redacao r
-inner join Tema t on r.codTema = t.cod
-inner join Usuario u on u.cod = r.codEstudante
-inner join Avaliacao a on a.codRedacao = r.cod
-where u.perfil_usuario = 1
