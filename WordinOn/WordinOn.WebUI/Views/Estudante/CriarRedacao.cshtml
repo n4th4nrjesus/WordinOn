@@ -15,45 +15,41 @@
 else
 {
 	<form class="form-horizontal" action="@Url.Action("EnviarRedacao", "Estudante")">
-		<div class="row" style="border-bottom: solid 2px black; padding: 15px">
-			<div class="container-fluid">
-				<div class="row" style="padding: 20px">
-					<div class="col-md-3">
-						<div class="row">
-							<div class="col-md-12 text-center">
-								@Html.HiddenFor(m => m.Tema.Cod)
-								@Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								@Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
-							</div>
+		<div class="container-fluid">
+			<div class="row" style="border-bottom: solid 2px black; padding: 15px">
+				<div class="col-md-3">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							@Html.HiddenFor(m => m.Tema.Cod)
+							@Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-12">
+							@Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+						</div>
+					</div>
+				</div>
 
-					<div class="col-md-9" style="border-left: 2px solid black">
-						<div class="row text-center">
-							<div class="col-md-6">
-								@Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
-							</div>
-							<div class="col-md-6">
-								@Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-								@Html.Label("lblTime", new { @id = "lblTime", @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
-							</div>
+				<div class="col-md-9" style="border-left: 2px solid black">
+					<div class="row text-center">
+						<div class="col-md-6">
+							@Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
 						</div>
-						<div class="row" style="margin-top: 20px">
-							<div class="col-md-12">
-								@Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
-							</div>
+						<div class="col-md-6">
+							@Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+							@Html.Label("lblTime", new { @id = "lblTime", @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
 						</div>
-						<div class="row text-center" style="padding: 50px">
-							<div class="col-md-6">
-								<button type="submit" class="btn btn-primary" style="border-color: black" id="btnEnviar">Enviar</button>
-							</div>
-							<div class="col-md-6">
-								<button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
-							</div>
+					</div>
+					<div class="row" style="margin-top: 20px">
+						<div class="col-md-12">
+							@Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+						</div>
+					</div>
+					<div class="row text-right" style="padding: 50px">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary" style="border-color: black; padding: 10px" id="btnEnviar">Enviar</button>
+							<button type="button" class="btn btn-default" style="border-color: black" id="btnCancelar">Cancelar</button>
 						</div>
 					</div>
 				</div>
