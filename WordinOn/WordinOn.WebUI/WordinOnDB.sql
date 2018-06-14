@@ -6,21 +6,21 @@ go
 
 ------------------------------------------------------------------------------------------------
 
-drop table Usuario;
-drop table Tema;
-drop table Sala;
-drop table Redacao;
-drop table Avaliacao;
-drop table salaXestudante;
-drop table salaXprofessor;
+--drop table Usuario;
+--drop table Tema;
+--drop table Sala;
+--drop table Redacao;
+--drop table Avaliacao;
+--drop table salaXestudante;
+--drop table salaXprofessor;
 
-select * from Usuario;
-select * from Tema;
-select * from Sala;
-select * from Redacao;
-select * from Avaliacao;
-select * from salaXestudante;
-select * from salaXprofessor
+--select * from Usuario;
+--select * from Tema;
+--select * from Sala;
+--select * from Redacao;
+--select * from Avaliacao;
+--select * from salaXestudante;
+--select * from salaXprofessor
 
 ------------------------------------------------------------------------------------------------
 
@@ -131,5 +131,3 @@ inner join Tema t on r.codTema = t.cod
 inner join Usuario u on u.cod = r.codEstudante
 inner join Avaliacao a on a.codRedacao = r.cod
 where u.perfil_usuario = 1
-
-

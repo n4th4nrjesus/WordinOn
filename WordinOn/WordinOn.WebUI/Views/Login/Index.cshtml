@@ -1,68 +1,78 @@
-﻿@{
+﻿@using WordinOn.Models
+@model Usuario
+@{
     Layout = null;
 }
-@using WordinOn.Models
-@model Usuario
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wordin'On</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container" style="padding-top: 50px;">
         <div class="row">
-            <div class="col-md-8" style="border: 2px solid black; padding: 20px; height: 850px; background-color: lightgray">
-                <div class="row" style="text-align: center">
-                    <div class="col-md-12">
-                        @Html.Label("Bem vindo ao WORDIN'ON", new { @class = "control-label", @style = "font-size: x-large; font-weight: bold" })
+            <div class="col-md-8" style="border: 2px solid black; background-color: lightgray;">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        @Html.Label("Bem vindo ao WORDIN'ON", new { @class = "control-label", @style = "font-size: large; font-weight: bold;" })
                     </div>
                 </div>
-                <br />
-                <div class="row" style="text-align: justify">
-                    <div class="col-md-12">
-                        <p style="font-size: large; font-weight: normal; margin-top: 235px">
+                <div class="row">
+                    <div class="col-md-12" style="text-align: justify;">
+                        <p style="font-size: large; font-weight: normal;">
                             Este é o site Wordin'On. Ele foi desenvolvido com o intuito de ajudar os estudantes a treinarem para o desenvolvimento de redações do estilo ENEM, já que muitos concordam
                             que essa parte do Exame é a mais temida. O Wordin'On permitirá, aos estudantes, criarem redações dissertativas argumentativas (O estilo exigido pelo ENEM) sobre temas que serão
                             selecionados aleatoriamente. As redações terão um determinado tempo para serem realizadas e, logo após sua conclusão, serão dispinibilizadas para correção e avaliação por professores.
                         </p>
                         <br />
-                        <p style="font-size: large; font-weight: normal">
+                        <p style="font-size: large; font-weight: normal;">
                             No site, também há o sistema de salas de redações. Essas serão criadas por professores, sendo que os mesmos poderão inserir usuários (professores ou estudantes) dentro dela. Os estudantes,
-                             quando forem publicar uma redação, poderão fazê-lo em salas que pertencem ou simplesmente para todos.
+                            quando forem publicar uma redação, poderão fazê-lo em salas que pertencem ou simplesmente para todos.
                         </p>
                         <br />
-                        <p style="font-size: large; font-weight: normal">
+                        <p style="font-size: large; font-weight: normal;">
                             Para utilizar do sistema Wordin'On, realize o cadastro ou login (caso já seja cadastrado no site) como professor ou estudante.
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" style="padding: 50px">
-                <nav class="breadcrumb" style="background-color: lightgray; border: 2px solid black">
-                    @Html.Label("Login de Usuário", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
-                </nav>
+            <div class="col-md-4">
                 <form action="@Url.Action("Entrar", "Login")" class="form-horizontal">
                     <div class="form-group">
-                        @Html.Label("lblEmail", "Email:", new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <div class="col-md-12 text-center" style="padding: 0px 5px 10px 5px;">
+                            <div style="background-color: lightgray; border: 2px solid black; width: 100%; padding-bottom: 5px;">
+                                @Html.Label("Login de Usuário", new { @class = "control-label", @style = "font-weight: normal; font-size: larger;" })
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        @Html.Label("lblSenha", "Senha:", new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @type = "password" })
+                        <div class="col-md-12">
+                            @Html.Label("lblEmail", "E-mail:", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
                     </div>
-                    <div class="form-group text-right" style="margin-top: 550px">
-                        <div class="col-md-4 text-left">
-                            <button type="submit" class="btn btn-primary" name="btnEntrar" style="width: 150px; border-color: black">Entrar</button>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.Label("lblSenha", "Senha:", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @type = "password" })
                         </div>
-                        <div class="col-md-4 text-right">
-                            <a class="btn btn-default" style="border-color: black" href="@Url.Action("CadastroProfessor", "Login")">Cadastrar Professor</a>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <button type="submit" class="btn btn-primary btn-block" name="btnEntrar" style="border-color: black;">Entrar</button>
                         </div>
-                        <div class="col-md-4 text-right">
-                            <a class="btn btn-default" style="border-color: black" href="@Url.Action("CadastroEstudante", "Login")">Cadastrar Estudante</a>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 text-right">
+                            <a class="btn btn-default" style="border-color: black;" href="@Url.Action("CadastroProfessor", "Login")">Cadastrar Professor</a>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            <a class="btn btn-default" style="border-color: black;" href="@Url.Action("CadastroEstudante", "Login")">Cadastrar Estudante</a>
                         </div>
                     </div>
                 </form>
