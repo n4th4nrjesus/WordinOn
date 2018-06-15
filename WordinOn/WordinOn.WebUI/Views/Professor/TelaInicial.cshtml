@@ -7,30 +7,33 @@
 }
 
 <nav class="breadcrumb" style="background-color: lightgray; border: 2px solid black">
-    @Html.Label("Professor > Tela Inicial", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+    @Html.Label("Professor > Redações", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
 </nav>
 
-<form class="form-horizontal" action="@Url.Action("ProcurarRedacao", "Professor")">
+<form class="form-horizontal" action="@Url.Action("ProcurarRedacaoSala", "Professor")">
     <div class="row" style="border: 2px solid black">
-        <div class="col-md-2" style="border-right: 2px solid black; padding: 20px">
+        <div class="col-md-4" style="border-right: 2px solid black; padding: 20px">
             <div class="row">
                 <div class="col-md-6 text-center">
                     <div class="form-group">
-                        @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as Salas", new { @class = "form-control", @style = "border-color: black" })
+                        @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
                     </div>
                 </div>
-                <div class="col-md-6 text-center">
-                    <button type="submit" class="btn btn-default" name="btnAcessar" style="border-color: black">Acessar</button>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.CheckBoxFor(m => m.RAvaliadas, new { @id = "chkRedacaoAvaliada" })
+                    @Html.Label("Redações Avaliadas", new { @class = "control-label", @style = "font-weight: normal" })
                 </div>
             </div>
         </div>
 
-        <div class="col-md-10" style="padding-top: 30px">
+        <div class="col-md-8" style="padding-top: 30px">
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-default" name="btnVoltar" style="border: none">
+                <button type="submit" class="btn btn-default" name="btnBuscar" style="border: none">
                     <img alt="Brand" class="img-responsive" style="width: 30px; height: 30px" src="https://icon-icons.com/icons2/904/PNG/512/loupe_icon-icons.com_69633.png" />
                 </button>
             </div>
