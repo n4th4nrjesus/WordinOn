@@ -111,23 +111,36 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ListaTemas()
         {
-            ViewBag.ListaTema = new TemaDAO().BuscarTodos();
+            ViewBag.ListaTemaH = new TemaDAO().BuscarHabilitados();
+            ViewBag.ListaTemaD = new TemaDAO().BuscarDesabilitados();
 
             return View();
         }
 
         public ActionResult ProcurarTema(FiltroRedacaoViewModel obj)
         {
-            ViewBag.ListaTema = new TemaDAO().Procurar(obj.CampoTexto);
+            ViewBag.ListaTemaH = new TemaDAO().Procurar(obj.CampoTexto);
+            ViewBag.ListaTemaD = new TemaDAO().Procurar(obj.CampoTexto);
 
             return View("ListaTemas");
         }
 
-        public ActionResult DeletarTema(int cod)
+        public ActionResult DesabilitarTema(int cod)
         {
-            new TemaDAO().Deletar(cod);
+            new TemaDAO().Desabilitado(cod);
 
-            ViewBag.ListaTema = new TemaDAO().BuscarTodos();
+            ViewBag.ListaTemaH = new TemaDAO().BuscarHabilitados();
+            ViewBag.ListaTemaD = new TemaDAO().BuscarDesabilitados();
+
+            return View("ListaTemas");
+        }
+
+        public ActionResult HabilitarTema(int cod)
+        {
+            new TemaDAO().Habilitado(cod);
+
+            ViewBag.ListaTemaH = new TemaDAO().BuscarHabilitados();
+            ViewBag.ListaTemaD = new TemaDAO().BuscarDesabilitados();
 
             return View("ListaTemas");
         }

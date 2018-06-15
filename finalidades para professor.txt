@@ -1,3 +1,2 @@
-carregar avaliações
 excluir usuarios da sala
-excluir tema
+bug do tema

@@ -37,24 +37,25 @@
     </div>
 
     <div class="row" style="border-bottom: 2px solid black">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            @Html.Label("Temas Habilitados", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Tema item in ViewBag.ListaTema)
+                        @foreach (Tema item in ViewBag.ListaTemaH)
                         {
                             <tr>
                                 <td>@item.Nome</td>
                                 <td>@item.Descricao</td>
                                 <td>
-                                    <a href="@Url.Action("DeletarTema", "Professor", new { @cod = item.Cod })">
+                                    <a href="@Url.Action("DesabilitarTema", "Professor", new { @cod = item.Cod })">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094ff"></span>
                                     </a>
                                 </td>
@@ -64,5 +65,33 @@
                     </table>
                 </div>
             </div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            @Html.Label("Temas Desabilitados", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Tema item in ViewBag.ListaTemaD)
+                        {
+                            <tr>
+                                <td>@item.Nome</td>
+                                <td>@item.Descricao</td>
+                                <td>
+                                    <a href="@Url.Action("HabilitarTema", "Professor", new { @cod = item.Cod })">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
         </div>
     </form>

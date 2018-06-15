@@ -73,7 +73,7 @@ namespace WordinOn.DataAccess
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select top 1 * from Tema where cod not in (select codTema from Redacao where codEstudante = @codEstudante) order by newid()";
+                string strSQL = @"select top 1 * from Tema where removido = 0 and cod not in (select codTema from Redacao where codEstudante = @codEstudante) order by newid()";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -113,7 +113,7 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = string.Format(@"select cod, nome, descricao from Tema where nome like '%{0}%';", texto); ;
+                string strSQL = string.Format(@"select cod, nome, descricao from Tema where removido = 0 and nome like '%{0}%';", texto); ;
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -165,7 +165,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region removido
-        public void Removido(int cod)
+        public void Desabilitado(int cod)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
@@ -181,6 +181,96 @@ namespace WordinOn.DataAccess
                     conn.Close();
                 }
             }
+        }
+
+        public List<Tema> BuscarHabilitados()
+        {
+            var lst = new List<Tema>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"select * from Tema where removido = 0";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var tema = new Tema()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString(),
+                            Descricao = row["descricao"].ToString(),
+                            Removido = Convert.ToBoolean(row["removido"])
+                        };
+                        lst.Add(tema);
+                    }
+                }
+            }
+            return lst;
+        }
+
+        public void Habilitado(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"update Tema set removido = 0 where cod = @cod";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<Tema> BuscarDesabilitados()
+        {
+            var lst = new List<Tema>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"select * from Tema where removido = 1";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var tema = new Tema()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString(),
+                            Descricao = row["descricao"].ToString(),
+                            Removido = Convert.ToBoolean(row["removido"])
+                        };
+                        lst.Add(tema);
+                    }
+                }
+            }
+            return lst;
         }
         #endregion
     }
