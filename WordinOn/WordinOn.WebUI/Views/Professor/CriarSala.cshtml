@@ -36,7 +36,7 @@
                 <div class="row" style="margin-top: 10px">
                     <div class="col-md-10">
                         @Html.Label("lblProfessores", "Professores:", new { @class = "control-label" })
-                        @Html.DropDownListFor(m => m.Professor.Cod, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlProfessor", @class = "form-control", @style = "border-color: black" })
+                        @Html.DropDownListFor(m => m.Professores, new SelectList(ViewBag.Professores ?? new List<Usuario>(), "Cod", "Nome"), "-- [SELECIONE] --", new { @id = "ddlProfessor", @class = "form-control", @style = "border-color: black" })
                     </div>
                     <div class="col-md-2" style="margin-top: 15px; padding: 10px; ">
                         <button type="button" class="btn btn-default" id="btnAddProfessor" style="border-color: black" data-url="@Url.Action("InserirProfessor", "Professor")">Adicionar</button>

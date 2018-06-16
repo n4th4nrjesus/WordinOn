@@ -53,15 +53,20 @@ namespace WordinOn.WebUI.Controllers
             return View(filtro);
         }
 
-        public ActionResult CriarSala(int? cod)
+        public ActionResult CriarSala(int ? cod)
         {
-            ViewBag.Professores = new UsuarioDAO().ProcurarProfessores();
-            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes();
+            ViewBag.Professores = new UsuarioDAO().ProcurarProfessores(cod);
+            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes(cod);
 
             if (cod.HasValue)
             {
                 var obj = new SalaDAO().BuscarPorCod(cod.Value);
                 obj.Professores = new SalaXProfessorDAO().BuscarPorSala(obj);
+                obj.Estudantes = new SalaXEstudanteDAO().BuscarPorSala(obj);
+
+                ViewBag.Professores = new UsuarioDAO().ProcurarProfessores(cod);
+                ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes(cod);
+
                 return View(obj);
             }
 

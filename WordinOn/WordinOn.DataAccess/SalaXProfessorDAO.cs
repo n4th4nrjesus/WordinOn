@@ -52,7 +52,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        #region Buscar Todos
+        #region Carregar ViewBags
         public List<SalaXProfessor> BuscarTodos()
         {
             var lst = new List<SalaXProfessor>();
@@ -60,10 +60,11 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
-                                    nome, 
-                                    email 
-                                    from SalaXProfessor 
-                                    inner join Usuario on SalaXProfessor.codProfessor = Usuario.cod";
+                                    u.cod, 
+                                    u.nome, 
+                                    u.email 
+                                    from SalaXProfessor s 
+                                    inner join Usuario u on s.codProfessor = u.cod";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -172,43 +173,6 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
-        #endregion
-
-        #region Carregar ViewBag
-        //public List<Usuario> CarregarViewBag(int cod)
-        //{
-        //    var lst = new List<Usuario>();
-
-        //    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
-        //    {
-        //        string strSQL = @"select nome from Usuario where cod = @cod";
-
-        //        using (SqlCommand cmd = new SqlCommand(strSQL))
-        //        {
-        //            conn.Open();
-        //            cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
-        //            cmd.Connection = conn;
-        //            cmd.CommandText = strSQL;
-
-        //            var dataReader = cmd.ExecuteReader();
-        //            var dt = new DataTable();
-        //            dt.Load(dataReader);
-
-        //            conn.Close();
-
-        //            foreach (DataRow row in dt.Rows)
-        //            {
-        //                var Professor = new Usuario()
-        //                {
-        //                    Cod = Convert.ToInt32(row["cod"]),
-        //                    Nome = row["nome"].ToString(),
-        //                };
-        //                lst.Add(Professor);
-        //            }
-        //        }
-        //    }
-        //    return lst;
-        //}
         #endregion
 
         #region BuscarPorSala

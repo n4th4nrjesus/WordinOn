@@ -163,17 +163,18 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar por Estudante
-        public List<Usuario> ProcurarEstudantes()
+        public List<Usuario> ProcurarEstudantes(int ? cod)
         {
             var lst = new List<Usuario>();
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 1";
+                string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 1 and cod not in (select codEstudante from salaXestudante where codSala = @cod)";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
@@ -200,17 +201,18 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar por Professor
-        public List<Usuario> ProcurarProfessores()
+        public List<Usuario> ProcurarProfessores(int? cod)
         {
             var lst = new List<Usuario>();
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2";
+                string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2 and cod not in (select codProfessor from salaXprofessor where codSala = @cod)";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
                     cmd.Connection = conn;
                     cmd.CommandText = strSQL;
 
