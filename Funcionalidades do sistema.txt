@@ -1,9 +1,0 @@
-1 - diferenciar redações avaliadas e redações sem avaliação
-2 - funcionalidades da tela de criar redações
-3 - funcionalidade de acessar e sair da sala
-4 - tela de criação de sala (professor e estudante)
-5 - CRONOMETRO
-6 - tela de criar redação (pegar todos os parametros para o banco)
-7 - tela e funcionalidades de alterar sala
-8 - viewbag de salas de rofessor e aluno que mostre apenas as salas em q o usuario esta inserido
-9 - um professor não pode avaliar uma redação mais de uma vez
