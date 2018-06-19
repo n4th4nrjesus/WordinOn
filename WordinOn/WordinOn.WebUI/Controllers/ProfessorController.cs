@@ -55,9 +55,6 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult CriarSala(int ? cod)
         {
-            ViewBag.Professores = new UsuarioDAO().ProcurarProfessores(cod);
-            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes(cod);
-
             if (cod.HasValue)
             {
                 var obj = new SalaDAO().BuscarPorCod(cod.Value);
@@ -69,14 +66,27 @@ namespace WordinOn.WebUI.Controllers
 
                 return View(obj);
             }
+            else
+            {
+                ViewBag.Professores = new UsuarioDAO().BuscarTodos();
+                ViewBag.Estudantes = new UsuarioDAO().BuscarTodos();
+            }
 
             return View();
         }
 
         public ActionResult InserirSala(Sala obj)
         {
-            new SalaDAO().Inserir(obj);
-            return RedirectToAction("CriarSala", "Professor", new { @cod = obj.Cod });
+            if(obj.Cod > 0)
+            {
+                new SalaDAO().Alterar(obj);
+                return View("ListaSalas");
+            }
+            else
+            {
+                new SalaDAO().Inserir(obj);
+            }
+            return View();
         }
 
         [HttpPost]

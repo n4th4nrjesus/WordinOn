@@ -208,7 +208,7 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2 and cod not in (select codProfessor from salaXprofessor where codSala = @cod)";
-
+                
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();

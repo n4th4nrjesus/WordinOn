@@ -30,6 +30,27 @@ namespace WordinOn.DataAccess
         }
         #endregion Inserir
 
+        #region alterar
+        public void Alterar(Sala obj)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"update Sala set nome = @nome where cod = @cod;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@cod", SqlDbType.Int).Value = obj.Cod;
+                    cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
+
+                    conn.Open();
+                    obj.Cod = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
         #region Buscar Todos
         public List<Sala> BuscarTodos()
         {
