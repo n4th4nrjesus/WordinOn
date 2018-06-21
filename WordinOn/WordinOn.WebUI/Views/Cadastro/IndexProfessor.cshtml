@@ -47,6 +47,17 @@
                     @Html.Label("Cadastro de Professor", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
                 </nav>
                 <form action="@Url.Action("SalvarProfessor", "Cadastro")" class="form-horizontal">
+
+                    @if (Model.Email == string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" role="alert"> 
+                                <strong>Alerta!</strong> @ViewBag.ErroMsg</div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="form-group">
                         @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })

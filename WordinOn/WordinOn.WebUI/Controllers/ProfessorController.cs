@@ -9,7 +9,6 @@ namespace WordinOn.WebUI.Controllers
     [Authorize]
     public class ProfessorController : Controller
     {
-
         public ActionResult TelaInicial()
         {
             ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
@@ -53,7 +52,7 @@ namespace WordinOn.WebUI.Controllers
             return View(filtro);
         }
 
-        public ActionResult CriarSala(int ? cod)
+        public ActionResult CriarSala(int? cod)
         {
             if (cod.HasValue)
             {
@@ -77,7 +76,7 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult InserirSala(Sala obj)
         {
-            if(obj.Cod > 0)
+            if (obj.Cod > 0)
             {
                 new SalaDAO().Alterar(obj);
                 return View("ListaSalas");
@@ -200,6 +199,5 @@ namespace WordinOn.WebUI.Controllers
         {
             new SalaXProfessorDAO().TirarDaSala(obj);
         }
-
     }
 }
