@@ -21,7 +21,7 @@ namespace WordinOn.WebUI.Controllers
             obj.PerfilUsuario = Perfil.Professor;
             obj.Chave = Guid.NewGuid().ToString();
 
-            if (!ValidarEmail(obj.Email))
+            if (!Validacoes.ValidarEmail(obj.Email))
             {
                 ViewBag.ErroMsg = "E-mail inválido!";
                 return View("IndexProfessor");
@@ -49,7 +49,7 @@ namespace WordinOn.WebUI.Controllers
         {
             obj.PerfilUsuario = Perfil.Estudante;
 
-            if (!ValidarEmail(obj.Email))
+            if (!Validacoes.ValidarEmail(obj.Email))
             {
                 ViewBag.ErroMsg = "E-mail inválido!";
                 return View("IndexEstudante");
@@ -60,26 +60,5 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("IndexEstudante", "Cadastro");
         }
         #endregion
-
-        private bool ValidarEmail(string email)
-        {
-            if (String.IsNullOrEmpty(email))
-                return false;
-            if (!email.Contains("@") || !email.Contains("."))
-                return false;
-            string[] strCamposEmail = email.Split(new String[] { "@" }, StringSplitOptions.RemoveEmptyEntries);
-            if (strCamposEmail.Length != 2)
-                return false;
-            if (strCamposEmail[0].Length < 3)
-                return false;
-            if (!strCamposEmail[1].Contains("."))
-                return false;
-            strCamposEmail = strCamposEmail[1].Split(new String[] { "." }, StringSplitOptions.RemoveEmptyEntries);
-            if (strCamposEmail.Length < 2)
-                return false;
-            if (strCamposEmail[0].Length < 1)
-                return false;
-            return true;
-        }
     }
 }

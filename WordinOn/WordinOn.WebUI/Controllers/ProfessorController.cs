@@ -177,7 +177,16 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult AlterarPerfil(Usuario obj)
         {
-            new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
+            var isValid = Validacoes.ValidarEmail(obj.Email);
+
+            if (!isValid)
+            {
+                ViewBag.ErroMsg = "Email Inválido";
+                return View("Perfil");
+            }
+
+            new UsuarioDAO().Alterar(((Usuario)User).Cod, obj);
+
             return RedirectToAction("TelaInicial", "Professor");
         }
 
