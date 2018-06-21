@@ -237,7 +237,5 @@ namespace WordinOn.DataAccess
             return lst;
         }
         #endregion
-
-        // TEMOS QUE FAZER UM MÉTODO PARA VALIDAR O PERFIL_USUARIO
     }
 }
