@@ -1,2 +1,4 @@
 excluir usuarios da sala
 bug do tema
+validação de email e outros ngc
+excluir usuários
