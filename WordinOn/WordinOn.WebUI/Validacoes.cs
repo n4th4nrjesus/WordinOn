@@ -27,5 +27,12 @@ namespace WordinOn.WebUI
                 return false;
             return true;
         }
+
+        public static bool ValidarCampos(string campo)
+        {
+            if (String.IsNullOrEmpty(campo))
+                return false;
+            return true;
+        }
     }
 }

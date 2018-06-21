@@ -21,6 +21,12 @@ namespace WordinOn.WebUI.Controllers
             obj.PerfilUsuario = Perfil.Professor;
             obj.Chave = Guid.NewGuid().ToString();
 
+            if (!Validacoes.ValidarCampos(obj.Nome) || !Validacoes.ValidarCampos(obj.Sobrenome) || !Validacoes.ValidarCampos(obj.Senha))
+            {
+                ViewBag.ErroMsg = "Campos vazios não são permitidos!";
+                return View("IndexProfessor");
+            }
+
             if (!Validacoes.ValidarEmail(obj.Email))
             {
                 ViewBag.ErroMsg = "E-mail inválido!";
@@ -49,11 +55,18 @@ namespace WordinOn.WebUI.Controllers
         {
             obj.PerfilUsuario = Perfil.Estudante;
 
+            if (!Validacoes.ValidarCampos(obj.Nome) || !Validacoes.ValidarCampos(obj.Sobrenome) || !Validacoes.ValidarCampos(obj.Senha))
+            {
+                ViewBag.ErroMsg = "Campos vazios não são permitidos!";
+                return View("IndexEstudante");
+            }
+
             if (!Validacoes.ValidarEmail(obj.Email))
             {
                 ViewBag.ErroMsg = "E-mail inválido!";
                 return View("IndexEstudante");
             }
+
 
             new UsuarioDAO().InserirEstudante(obj);
 
