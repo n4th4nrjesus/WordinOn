@@ -124,6 +124,29 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        #region Validar Email
+        public bool ValidarEmail(string email)
+        {
+            if (String.IsNullOrEmpty(email))
+                return false;
+            if (!email.Contains("@") || !email.Contains("."))
+                return false;
+            string[] strCamposEmail = email.Split(new String[] { "@" }, StringSplitOptions.RemoveEmptyEntries);
+            if (strCamposEmail.Length != 2)
+                return false;
+            if (strCamposEmail[0].Length < 3)
+                return false;
+            if (!strCamposEmail[1].Contains("."))
+                return false;
+            strCamposEmail = strCamposEmail[1].Split(new String[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            if (strCamposEmail.Length < 2)
+                return false;
+            if (strCamposEmail[0].Length < 1)
+                return false;
+            return true;
+        }
+        #endregion
+
         #region Buscar Todos
         public List<Usuario> BuscarTodos()
         {
@@ -163,7 +186,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Procurar por Estudante
-        public List<Usuario> ProcurarEstudantes(int ? cod)
+        public List<Usuario> ProcurarEstudantes(int? cod)
         {
             var lst = new List<Usuario>();
 
@@ -208,7 +231,7 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2 and cod not in (select codProfessor from salaXprofessor where codSala = @cod)";
-                
+
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     conn.Open();
