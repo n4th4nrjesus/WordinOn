@@ -127,5 +127,3 @@ insert into salaXprofessor (codProfessor, codSala)
 values
 (3, 1),
 (4, 2)
-
-select top 1 * from Tema where removido = 0 order by newid()
