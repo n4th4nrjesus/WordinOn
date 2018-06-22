@@ -8,8 +8,18 @@
     @Html.Label("Estudante > Perfil", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
 </nav>
 
-<form action="@Url.Action("AlterarPerfil", "Estudante")" class="form-horizontal">
+<form action="@Url.Action("AlterarPerfil", "Estudante")" class="form-horizontal" autocomplete="off">
     <div class="container">
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Alerta!</strong> @ViewBag.ErroMsg
+                    </div>
+                </div>
+            </div>
+        }
 
         <div class="row" style="margin-bottom: 20px; margin-top: 20px">
             <div class="col-md-6">

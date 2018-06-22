@@ -25,7 +25,14 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult EnviarAvaliacao(Avaliacao obj)
         {
+            if (!Validacoes.ValidarAvaliacao(obj))
+            {
+                ViewBag.ErroMsg = "Avaliação inválida";
+                return View(obj.Redacao.Cod);
+            }
+
             var codProf = ((Usuario)User).Cod;
+
             new AvaliacaoDAO().Inserir(obj, codProf);
             return RedirectToAction("TelaInicial", "Professor");
         }
@@ -178,6 +185,12 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult AlterarPerfil(Usuario obj)
         {
             var isValid = Validacoes.ValidarEmail(obj.Email);
+
+            if (Validacoes.ValidarCampos(obj.Nome) || Validacoes.ValidarCampos(obj.Sobrenome) || Validacoes.ValidarCampos(obj.Senha) || Validacoes.ValidarCampos(obj.Email))
+            {
+                ViewBag.ErroMsg = "Campos vazios não são permitidos!";
+                return View("Perfil");
+            }
 
             if (!isValid)
             {

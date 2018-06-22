@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WordinOn.Models;
 
 namespace WordinOn.WebUI
 {
@@ -34,5 +35,18 @@ namespace WordinOn.WebUI
                 return false;
             return true;
         }
+
+        public static bool ValidarAvaliacao(Avaliacao obj)
+        {
+            if (String.IsNullOrWhiteSpace(obj.Texto))
+                return false;
+            var nota = Convert.ToString(obj.Valor);
+            if (nota.Where(c => char.IsLetter(c)).Count() > 0)
+                return false;
+            if (obj.Valor > 1000)
+                return false;
+            return true;
+        }
+
     }
 }
