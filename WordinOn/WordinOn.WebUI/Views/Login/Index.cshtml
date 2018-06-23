@@ -43,6 +43,7 @@
             </div>
             <div class="col-md-4">
                 <form action="@Url.Action("Entrar", "Login")" class="form-horizontal">
+
                     <div class="form-group">
                         <div class="col-md-12 text-center" style="padding: 0px 5px 10px 5px;">
                             <div style="background-color: lightgray; border: 2px solid black; width: 100%; padding-bottom: 5px;">
@@ -50,6 +51,18 @@
                             </div>
                         </div>
                     </div>
+
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Alerta!</strong> @ViewBag.ErroMsg
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="form-group">
                         <div class="col-md-12">
                             @Html.Label("lblEmail", "E-mail:", new { @class = "control-label" })

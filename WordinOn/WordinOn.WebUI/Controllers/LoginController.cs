@@ -28,6 +28,12 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult Entrar(Usuario obj)
         {
+            if (!Validacoes.ValidarCampos(obj.Email) || !Validacoes.ValidarCampos(obj.Senha))
+            {
+                ViewBag.ErroMsg = "Campos vazios não são permitidos!";
+                return View("Index");
+            }
+
             var usuarioLogado = new UsuarioDAO().Login(obj);
 
             if (usuarioLogado == null)

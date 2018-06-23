@@ -26,14 +26,14 @@
                 <div class="row" style="text-align: justify">
                     <div class="col-md-12">
                         <p style="font-size: large; font-weight: normal; margin-top: 235px">
-							Este é o site Wordin'On. Ele foi desenvolvido com o intuito de ajudar os estudantes a treinarem para o desenvolvimento de redações do estilo ENEM, já que muitos concordam
-							que essa parte do Exame é a mais temida. O Wordin'On permitirá, aos estudantes, criarem redações dissertativas argumentativas (O estilo exigido pelo ENEM) sobre temas que serão
-							selecionados aleatoriamente. As redações terão um determinado tempo para serem realizadas e, logo após sua conclusão, serão dispinibilizadas para correção e avaliação por professores.
+                            Este é o site Wordin'On. Ele foi desenvolvido com o intuito de ajudar os estudantes a treinarem para o desenvolvimento de redações do estilo ENEM, já que muitos concordam
+                            que essa parte do Exame é a mais temida. O Wordin'On permitirá, aos estudantes, criarem redações dissertativas argumentativas (O estilo exigido pelo ENEM) sobre temas que serão
+                            selecionados aleatoriamente. As redações terão um determinado tempo para serem realizadas e, logo após sua conclusão, serão dispinibilizadas para correção e avaliação por professores.
                         </p>
                         <br />
                         <p style="font-size: large; font-weight: normal">
-							No site, também há o sistema de salas de redações. Essas serão criadas por professores, sendo que os mesmos poderão inserir usuários (professores ou estudantes) dentro dela. Os estudantes,
-							 quando forem publicar uma redação, poderão fazê-lo em salas que pertencem ou simplesmente para todos.
+                            No site, também há o sistema de salas de redações. Essas serão criadas por professores, sendo que os mesmos poderão inserir usuários (professores ou estudantes) dentro dela. Os estudantes,
+                            quando forem publicar uma redação, poderão fazê-lo em salas que pertencem ou simplesmente para todos.
                         </p>
                         <br />
                         <p style="font-size: large; font-weight: normal">
@@ -46,7 +46,20 @@
                 <nav class="breadcrumb" style="background-color: lightgray; border: 2px solid black">
                     @Html.Label("Cadastro de Estudante", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
                 </nav>
+
                 <form action="@Url.Action("SalvarEstudante", "Cadastro")" class="form-horizontal">
+
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Alerta!</strong> @ViewBag.ErroMsg
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="form-group">
                         @Html.Label("lblNome", "Nome:", new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })

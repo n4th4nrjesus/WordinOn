@@ -9,7 +9,6 @@ namespace WordinOn.WebUI.Controllers
     [Authorize]
     public class ProfessorController : Controller
     {
-
         public ActionResult TelaInicial()
         {
             ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
@@ -26,7 +25,14 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult EnviarAvaliacao(Avaliacao obj)
         {
+            if (!Validacoes.ValidarAvaliacao(obj))
+            {
+                ViewBag.ErroMsg = "Avaliação inválida";
+                return View(obj.Redacao.Cod);
+            }
+
             var codProf = ((Usuario)User).Cod;
+
             new AvaliacaoDAO().Inserir(obj, codProf);
             return RedirectToAction("TelaInicial", "Professor");
         }
@@ -53,11 +59,8 @@ namespace WordinOn.WebUI.Controllers
             return View(filtro);
         }
 
-        public ActionResult CriarSala(int ? cod)
+        public ActionResult CriarSala(int? cod)
         {
-            ViewBag.Professores = new UsuarioDAO().ProcurarProfessores(cod);
-            ViewBag.Estudantes = new UsuarioDAO().ProcurarEstudantes(cod);
-
             if (cod.HasValue)
             {
                 var obj = new SalaDAO().BuscarPorCod(cod.Value);
@@ -69,14 +72,27 @@ namespace WordinOn.WebUI.Controllers
 
                 return View(obj);
             }
+            else
+            {
+                ViewBag.Professores = new UsuarioDAO().BuscarTodos();
+                ViewBag.Estudantes = new UsuarioDAO().BuscarTodos();
+            }
 
             return View();
         }
 
         public ActionResult InserirSala(Sala obj)
         {
-            new SalaDAO().Inserir(obj);
-            return RedirectToAction("CriarSala", "Professor", new { @cod = obj.Cod });
+            if (obj.Cod > 0)
+            {
+                new SalaDAO().Alterar(obj);
+                return View("ListaSalas");
+            }
+            else
+            {
+                new SalaDAO().Inserir(obj);
+            }
+            return View();
         }
 
         [HttpPost]
@@ -168,7 +184,22 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult AlterarPerfil(Usuario obj)
         {
-            new UsuarioDAO().Alterar((((Usuario)User).Cod), obj);
+            var isValid = Validacoes.ValidarEmail(obj.Email);
+
+            if (Validacoes.ValidarCampos(obj.Nome) || Validacoes.ValidarCampos(obj.Sobrenome) || Validacoes.ValidarCampos(obj.Senha) || Validacoes.ValidarCampos(obj.Email))
+            {
+                ViewBag.ErroMsg = "Campos vazios não são permitidos!";
+                return View("Perfil");
+            }
+
+            if (!isValid)
+            {
+                ViewBag.ErroMsg = "Email Inválido";
+                return View("Perfil");
+            }
+
+            new UsuarioDAO().Alterar(((Usuario)User).Cod, obj);
+
             return RedirectToAction("TelaInicial", "Professor");
         }
 
@@ -190,6 +221,5 @@ namespace WordinOn.WebUI.Controllers
         {
             new SalaXProfessorDAO().TirarDaSala(obj);
         }
-
     }
 }
