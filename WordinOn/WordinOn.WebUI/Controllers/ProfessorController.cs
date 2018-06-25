@@ -186,7 +186,7 @@ namespace WordinOn.WebUI.Controllers
         {
             var isValid = Validacoes.ValidarEmail(obj.Email);
 
-            if (Validacoes.ValidarCampos(obj.Nome) || Validacoes.ValidarCampos(obj.Sobrenome) || Validacoes.ValidarCampos(obj.Senha) || Validacoes.ValidarCampos(obj.Email))
+            if (!Validacoes.ValidarCampos(obj.Nome) || !Validacoes.ValidarCampos(obj.Sobrenome) || !Validacoes.ValidarCampos(obj.Senha) || !Validacoes.ValidarCampos(obj.Email))
             {
                 ViewBag.ErroMsg = "Campos vazios não são permitidos!";
                 return View("Perfil");
