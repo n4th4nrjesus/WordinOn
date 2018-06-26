@@ -15,13 +15,21 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into salaXprofessor (codProfessor, codSala) 
-                                    values (@codProfessor, @codSala);";
+                                  values (@codProfessor, @codSala);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor.Cod;
                     cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -41,8 +49,16 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor.Cod;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

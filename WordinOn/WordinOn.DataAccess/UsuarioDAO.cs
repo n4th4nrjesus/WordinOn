@@ -27,6 +27,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@chave", SqlDbType.VarChar).Value = obj.Chave;
                     cmd.Parameters.Add("@perfil_usuario", SqlDbType.Int).Value = Convert.ToInt32(obj.PerfilUsuario);
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -41,7 +49,7 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Usuario (nome, sobrenome, senha, email, perfil_usuario) 
-                                    values (@nome, @sobrenome, @senha, @email, @perfil_usuario);";
+                                  values (@nome, @sobrenome, @senha, @email, @perfil_usuario);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -51,6 +59,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
                     cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
                     cmd.Parameters.Add("@perfil_usuario", SqlDbType.Int).Value = Convert.ToInt32(obj.PerfilUsuario);
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -75,6 +91,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@sobrenome", SqlDbType.VarChar).Value = obj.Sobrenome;
                     cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
                     cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

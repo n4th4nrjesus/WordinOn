@@ -22,6 +22,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = obj.Descricao;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -156,6 +164,14 @@ namespace WordinOn.DataAccess
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -175,6 +191,14 @@ namespace WordinOn.DataAccess
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -229,6 +253,14 @@ namespace WordinOn.DataAccess
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@cod", SqlDbType.Int).Value = cod;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

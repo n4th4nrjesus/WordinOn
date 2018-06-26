@@ -23,6 +23,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj.Estudante.Cod;
                     cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -41,8 +49,16 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj.Estudante;
-                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj.Estudante.Cod;
+                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala.Cod;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

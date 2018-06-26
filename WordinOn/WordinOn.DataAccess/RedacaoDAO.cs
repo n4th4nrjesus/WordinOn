@@ -15,7 +15,7 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"insert into Redacao (texto, tempo, codTema, codSala, codEstudante)
-                                              values (@texto, @tempo, @codTema, @codSala, @codEstudante);";
+                                  values (@texto, @tempo, @codTema, @codSala, @codEstudante);";
 
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -26,6 +26,14 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@codTema", SqlDbType.Int).Value = obj.Tema.Cod;
                     cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
                     cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
+
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -310,7 +318,7 @@ namespace WordinOn.DataAccess
 
                     foreach (DataRow row in dt.Rows)
                     {
-                         var redacao = new Redacao()
+                        var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Data = Convert.ToDateTime(row["data"]),
@@ -331,7 +339,7 @@ namespace WordinOn.DataAccess
                                 Cod = Convert.ToInt32(row["codSala"]),
                                 Nome = row["nome_sala"].ToString()
                             }
-                         };
+                        };
                         lst.Add(redacao);
                     }
                 }
@@ -520,7 +528,7 @@ namespace WordinOn.DataAccess
                                 Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome_tema"].ToString(),
                             },
-                            Sala = new Sala ()
+                            Sala = new Sala()
                             {
                                 Cod = Convert.ToInt32(row["codSala"]),
                                 Nome = row["nome_sala"].ToString()
