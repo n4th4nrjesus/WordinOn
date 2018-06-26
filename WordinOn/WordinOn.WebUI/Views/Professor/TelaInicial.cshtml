@@ -50,6 +50,7 @@
                         <th>Nome do Estudante</th>
                         <th>Tema</th>
                         <th>Data</th>
+                        <th>Sala</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -60,6 +61,7 @@
                             <td>@item.Estudante.Nome</td>
                             <td>@item.Tema.Nome</td>
                             <td>@item.Data</td>
+                            <td>@item.Sala.Nome</td>
                             <td>
                                 <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">
                                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
