@@ -36,7 +36,7 @@ else
                 <div class="col-md-9" style="border-left: 2px solid black">
                     <div class="row text-center">
                         <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "Todas as salas", new { @class = "form-control", @style = "border-color: black" })
+                            @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE UMA SALA] --", new { @class = "form-control", @style = "border-color: black" })
                         </div>
                         <div class="col-md-2 text-right">
                             @Html.Label("lblTempo", "Tempo: ", new { @class = "control-label", @style = "font-size: medium" })
