@@ -113,7 +113,11 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
-            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
+            if (filtro.Sala.Cod != 0 || filtro.RAvaliadas != false || filtro.CampoTexto != null)
+            {
+                ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            }
             ViewBag.Salas = new SalaDAO().BuscarPorEstudante(((Usuario)User).Cod);
             return View("TelaInicial", filtro);
         }

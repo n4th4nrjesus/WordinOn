@@ -203,18 +203,15 @@ namespace WordinOn.WebUI.Controllers
             return RedirectToAction("TelaInicial", "Professor");
         }
 
-        public ActionResult ProcurarRedacaoSala(FiltroRedacaoViewModel filtro)
-        {
-            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
-            ViewBag.Salas = new SalaDAO().BuscarPorProfessor(((Usuario)User).Cod);
-            return View("TelaInicial", filtro);
-        }
-
         public ActionResult ProcurarRedacao(FiltroRedacaoViewModel filtro)
         {
-            ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            ViewBag.Redacoes = new RedacaoDAO().BuscarTodos();
+            if (filtro.Sala.Cod != 0 || filtro.RAvaliadas == true || filtro.CampoTexto != null)
+            {
+                ViewBag.Redacoes = new RedacaoDAO().Procurar(filtro.Sala != null ? filtro.Sala.Cod : new Nullable<int>(), filtro.RAvaliadas, filtro.CampoTexto);
+            }
             ViewBag.Salas = new SalaDAO().BuscarPorProfessor(((Usuario)User).Cod);
-            return View("ListaRedacoesSala", filtro);
+            return View("TelaInicial", filtro);
         }
 
         public void DeletarSala(SalaXProfessor obj)
