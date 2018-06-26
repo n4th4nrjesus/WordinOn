@@ -159,6 +159,41 @@ namespace WordinOn.DataAccess
             }
             return lst;
         }
+
+        public List<Sala> BuscarPorProfessor(int codProfessor)
+        {
+            var lst = new List<Sala>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"select * from Sala where cod in (select codSala from salaXprofessor where codProfessor = @codProfessor)";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = codProfessor;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+
+                    conn.Close();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var sala = new Sala()
+                        {
+                            Cod = Convert.ToInt32(row["cod"]),
+                            Nome = row["nome"].ToString()
+                        };
+                        lst.Add(sala);
+                    }
+                }
+            }
+            return lst;
+        }
         #endregion
 
         #region buscar por codigo
