@@ -36,7 +36,7 @@ else
                 <div class="col-md-9" style="border-left: 2px solid black">
                     <div class="row text-center">
                         <div class="col-md-10">
-                            @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [SELECIONE UMA SALA] --", new { @class = "form-control", @style = "border-color: black" })
+                            @Html.DropDownListFor(m => m.Sala.Cod, new SelectList(ViewBag.Salas ?? new List<Sala>(), "Cod", "Nome"), "-- [TODAS AS SALAS] --", new { @class = "form-control", @style = "border-color: black" })
                         </div>
                         <div class="col-md-2 text-right">
                             @Html.Label("lblTempo", "Tempo: ", new { @class = "control-label", @style = "font-size: medium" })
@@ -45,7 +45,7 @@ else
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-md-12">
-                            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @rows = 20, @style = "resize: none; border-radius: 10px; border-color: black; background-color: lightgray", @disabled = "disabled" })
+                            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @rows = 20, @style = "resize: none; border-radius: 10px; border-color: black; background-color: lightgray" })
                         </div>
                     </div>
                     <div class="row">
@@ -62,87 +62,67 @@ else
 
 @section Scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("select#Sala_Cod").change(function () {
-                if ($("select#Sala_Cod").val() != undefined && $("select#Sala_Cod").val() != "") {
-                    $("select#Sala_Cod").removeAttr("style");
-                    $("select#Sala_Cod").css("border-color", "black").css("color", "black");
-                    $("textarea#Texto").removeAttr("disabled");
-                    startCountdown();
-                } else {
-                    $("select#Sala_Cod").removeAttr("style");
-                    $("select#Sala_Cod").css("border-color", "red").css("color", "red");
-                    $("textarea#Texto").attr("disabled", "disabled");
-                }
-            });
-        });
-
         // Tempo em segundos = 1h e 30 min
         var tempo = new Number();
         //tempo = 5400;
-        tempo = 120;
+        tempo = 75;
 
         function startCountdown() {
-            if ($("select#Sala_Cod").val() != undefined && $("select#Sala_Cod").val() != "") {
-                // Se o tempo não for zerado
-                if ((tempo - 1) >= 0) {
-                    var hora = 0;
+            // Se o tempo não for zerado
+            if ((tempo - 1) >= 0) {
+                var hora = 0;
 
-                    if (parseInt(tempo / 60) >= 60) {
-                        hora = parseInt((tempo / 60) / 60);
-                    }
-
-                    // Pega a parte inteira dos minutos
-                    var min = parseInt(tempo / 60);
-                    if (min >= 60) {
-                        min = min - 60;
-                    }
-
-                    // Calcula os segundos restantes
-                    var seg = tempo % 60;
-
-                    // Formata o número menor que dez, ex: 08, 07, ...
-                    if (hora < 10) {
-                        hora = "0" + hora;
-                        hora = hora.substr(0, 2);
-                    }
-
-                    if (min < 10) {
-                        min = "0" + min;
-                        min = min.substr(0, 2);
-                    }
-
-                    if (seg <= 9) {
-                        seg = "0" + seg;
-                    }
-
-                    // Cria a variável para formatar no estilo hora/cronômetro
-                    horaImprimivel = hora + ':' + min + ':' + seg;
-
-                    //JQuery pra setar o valor
-                    $("#lblTime").html(horaImprimivel);
-
-                    // Define que a função será executada novamente em 1000ms = 1 segundo
-                    setTimeout('startCountdown()', 1000);
-
-                    // diminui o tempo
-                    tempo--;
-                } else {
-                    $("#lblTime").html("00:00:00");
-                    var enviarMesmo = confirm("Que pena, o seu tempo para escrever a redação acabou ... Deseja enviar a redação incompleta?");
-                    if (enviarMesmo) {
-                        //enviar redação e mandar pra tela inicial
-                        if ($("textarea#Texto").val() != undefined && $.trim($("textarea#Texto").val()) != "") {
-                            $("#btnEnviar").click();
-                        }
-                    } else {
-                        //discarta a redação e manda pra tela inicial
-                        document.location.href = '@Url.Action("PropriasRedacoes", "Estudante")';
-                    }
+                if (parseInt(tempo / 60) >= 60) {
+                    hora = parseInt((tempo / 60) / 60);
                 }
+
+                // Pega a parte inteira dos minutos
+                var min = parseInt(tempo / 60);
+                if (min >= 60) {
+                    min = min - 60;
+                }
+
+                // Calcula os segundos restantes
+                var seg = tempo % 60;
+
+                // Formata o número menor que dez, ex: 08, 07, ...
+                if (hora < 10) {
+                    hora = "0" + hora;
+                    hora = hora.substr(0, 2);
+                }
+
+                if (min < 10) {
+                    min = "0" + min;
+                    min = min.substr(0, 2);
+                }
+
+                if (seg <= 9) {
+                    seg = "0" + seg;
+                }
+
+                // Cria a variável para formatar no estilo hora/cronômetro
+                horaImprimivel = hora + ':' + min + ':' + seg;
+
+                //JQuery pra setar o valor
+                $("#lblTime").html(horaImprimivel);
+
+                // Define que a função será executada novamente em 1000ms = 1 segundo
+                setTimeout('startCountdown()', 1000);
+
+                // diminui o tempo
+                tempo--;
             } else {
-                $("select#Sala_Cod").removeAttr("style");
-                $("select#Sala_Cod").css("border-color", "red").css("color", "red");
+                $("#lblTime").html("00:00:00");
+                var enviarMesmo = confirm("Que pena, o seu tempo para escrever a redação acabou ... Deseja enviar a redação incompleta?");
+                if (enviarMesmo) {
+                    //enviar redação e mandar pra tela inicial
+                    if ($("textarea#Texto").val() != undefined && $.trim($("textarea#Texto").val()) != "") {
+                        $("#btnEnviar").click();
+                    }
+                } else {
+                    //discarta a redação e manda pra tela inicial
+                    document.location.href = '@Url.Action("PropriasRedacoes", "Estudante")';
+                }
             }
         }
 

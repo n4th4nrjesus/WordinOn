@@ -24,7 +24,7 @@ namespace WordinOn.DataAccess
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
                     cmd.Parameters.Add("@tempo", SqlDbType.VarChar).Value = obj.Tempo;
                     cmd.Parameters.Add("@codTema", SqlDbType.Int).Value = obj.Tema.Cod;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala != null && obj.Sala.Cod > 0 ? obj.Sala.Cod : new Nullable<int>();
                     cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
 
                     foreach (SqlParameter parameter in cmd.Parameters)
