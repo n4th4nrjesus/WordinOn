@@ -31,9 +31,8 @@ namespace WordinOn.WebUI.Controllers
                 return View(obj.Redacao.Cod);
             }
 
-            var codProf = ((Usuario)User).Cod;
-
-            new AvaliacaoDAO().Inserir(obj, codProf);
+            obj.Professor = new Usuario() { Cod = ((Usuario)User).Cod };
+            new AvaliacaoDAO().Inserir(obj);
             return RedirectToAction("TelaInicial", "Professor");
         }
 
@@ -59,6 +58,20 @@ namespace WordinOn.WebUI.Controllers
             return View(filtro);
         }
 
+        [HttpPost]
+        public JsonResult InserirSala(Sala obj)
+        {
+            if (obj != null && obj.Cod > 0)
+                new SalaDAO().Alterar(obj);
+            else
+                new SalaDAO().Inserir(obj);
+
+            return Json(new
+            {
+                responseUrl = Url.Action("CriarSala", "Professor", new { cod = obj.Cod })
+            });
+        }
+
         public ActionResult CriarSala(int? cod)
         {
             if (cod.HasValue)
@@ -79,23 +92,6 @@ namespace WordinOn.WebUI.Controllers
             }
 
             return View();
-        }
-
-        public ActionResult InserirSala(Sala obj)
-        {
-            if (obj.Cod > 0)
-            {
-                new SalaDAO().Alterar(obj);
-                return View("ListaSalas");
-            }
-            else
-            {
-                new SalaDAO().Inserir(obj);
-            }
-
-            CriarSala(obj.Cod);
-
-            return View("CriarSala");
         }
 
         [HttpPost]
@@ -217,9 +213,26 @@ namespace WordinOn.WebUI.Controllers
             return View("TelaInicial", filtro);
         }
 
-        public void DeletarSala(SalaXProfessor obj)
+        [HttpPost]
+        public JsonResult ExcluirSalaXProf(int professor, int sala)
         {
-            new SalaXProfessorDAO().TirarDaSala(obj);
+            new SalaXProfessorDAO().TirarDaSala(professor, sala);
+
+            return Json(new
+            {
+                responseUrl = Url.Action("CriarSala", "Professor", new { cod = sala })
+            });
+        }
+
+        [HttpPost]
+        public JsonResult ExcluirSalaXEst(int estudante, int sala)
+        {
+            new SalaXEstudanteDAO().TirarDaSala(estudante, sala);
+
+            return Json(new
+            {
+                responseUrl = Url.Action("CriarSala", "Professor", new { cod = sala })
+            });
         }
     }
 }

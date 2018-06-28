@@ -18,8 +18,8 @@
                         <td>@item.Nome</td>
                         <td>@item.Email</td>
                         <td>
-                            <a href="@Url.Action("DeletarSala", "Professor", new { @codP = item.Cod, @codS = Model.Cod })" id="btnDeletar">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094ff"></span>
+                            <a class="lnkExcProf" href="@Url.Action("ExcluirSalaXProf", "Professor", new { @professor = item.Cod, @sala = Model.Cod })" onclick="if (!confirm('Deseja excluir este professor?')) return false;">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094FF;"></span>
                             </a>
                         </td>
                     </tr>

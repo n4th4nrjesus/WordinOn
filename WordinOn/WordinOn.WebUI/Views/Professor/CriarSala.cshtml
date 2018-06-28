@@ -8,28 +8,34 @@
     @Html.Label("Professor > Criar Sala", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
 </nav>
 
-<form action="@Url.Action("InserirSala", "Professor")" class="form-horizontal">
-    @Html.HiddenFor(m => m.Cod)
-    <div class="row" style="border: 2px solid black; padding: 20px">
-        <div class="col-md-3 text-left">
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.Label("lblNomeSala", "Nome da sala:", new { @class = "control-label" })
-                </div>
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
+<div class="container-fluid">
+    <div class="row" style="border: 2px solid black;">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="salaForm" action="@Url.Action("InserirSala", "Professor")" class="form-horizontal">
+                            @Html.Hidden("Cod", Model != null ? Model.Cod : 0)
+                            <div class="row" style="padding: 20px 0px 20px 0px;">
+                                <div class="col-md-6">
+                                    @Html.Label("lblNomeSala", "Nome da sala:", new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @style = "border-color: black" })
+                                </div>
+                                <div class="col-md-6">
+                                    <br />
+                                    <button id="btnCriar" type="button" class="btn btn-default" style="border-color: black; margin-top: 7px;">Salvar Dados</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9 text-right">
-            <button type="submit" class="btn btn-default" name="btnCriar" style="width: 100px; border-color: black">Criar</button>
-            <button type="submit" class="btn btn-default" name="btnCancelar" style="width: 100px; border-color: black">Salvar</button>
-        </div>
     </div>
-</form>
+</div>
 
 @if (Model != null && Model.Cod > 0)
-{
+            {
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -76,6 +82,26 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            $(document).ready(function () {
+                $("#btnCriar").click(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $.ajax({
+                        url: $("#salaForm").attr("action"),
+                        data: $("#salaForm").serialize(),
+                        method: "POST",
+                        cache: false,
+                        dataType: "json",
+                        success: function (result) {
+                            document.location.href = result.responseUrl;
+                        },
+                        error: function (result) {
+                            alert(result);
+                        }
+                    });
+                });
+            });
+
             $("#btnAddProfessor").click(function (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -102,6 +128,7 @@
                     }
                 });
             });
+
             $("#btnAddEstudante").click(function (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -126,6 +153,46 @@
                     error: function (result) {
                         alert(result);
                     }
+                });
+            });
+
+            $("a.lnkExcProf").each(function () {
+                var url = $(this).attr("href");
+                $(this).on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $.ajax({
+                        url: url,
+                        method: "POST",
+                        cache: false,
+                        dataType: "json",
+                        success: function (result) {
+                            document.location.href = result.responseUrl;
+                        },
+                        error: function (result) {
+                            alert(result);
+                        }
+                    });
+                });
+            });
+
+            $("a.lnkExcEst").each(function () {
+                var url = $(this).attr("href");
+                $(this).on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $.ajax({
+                        url: url,
+                        method: "POST",
+                        cache: false,
+                        dataType: "json",
+                        success: function (result) {
+                            document.location.href = result.responseUrl;
+                        },
+                        error: function (result) {
+                            alert(result);
+                        }
+                    });
                 });
             });
         });

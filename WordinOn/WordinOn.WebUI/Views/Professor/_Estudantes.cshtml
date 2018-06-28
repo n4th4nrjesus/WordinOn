@@ -17,7 +17,11 @@
                     <tr>
                         <td>@item.Nome</td>
                         <td>@item.Email</td>
-                        <td><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094ff"></span></td>
+                        <td>
+                            <a class="lnkExcEst" href="@Url.Action("ExcluirSalaXEst", "Professor", new { @estudante = item.Cod, @sala = Model.Cod })" onclick="if (!confirm('Deseja excluir este estudante?')) return false;">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #0094FF;"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             }

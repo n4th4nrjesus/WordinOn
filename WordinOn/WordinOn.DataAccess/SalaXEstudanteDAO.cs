@@ -40,7 +40,7 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Tirar da Sala
-        public void TirarDaSala(SalaXEstudante obj)
+        public void TirarDaSala(int estudante, int sala)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
@@ -49,8 +49,8 @@ namespace WordinOn.DataAccess
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.VarChar).Value = obj.Estudante.Cod;
-                    cmd.Parameters.Add("@codSala", SqlDbType.VarChar).Value = obj.Sala.Cod;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = estudante;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = sala;
 
                     foreach (SqlParameter parameter in cmd.Parameters)
                     {
@@ -155,7 +155,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        #region buscar poor sala do estudante
+        #region Buscar por Sala do Estudante
         public List<SalaXEstudante> BuscarPorSala(Sala obj)
         {
             var lst = new List<SalaXEstudante>();
@@ -163,10 +163,13 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"SELECT 
-                                      NOME, 
-                                      EMAIL 
+                                      SALAXESTUDANTE.*,
+                                      USUARIO.NOME, 
+                                      USUARIO.EMAIL ,
+                                      SALA.NOME as NOME_SALA
                                   FROM SALAXESTUDANTE 
                                   INNER JOIN USUARIO ON (SALAXESTUDANTE.CODESTUDANTE = USUARIO.COD)
+                                  INNER JOIN SALA ON (SALAXESTUDANTE.CODSALA = SALA.COD)
                                   WHERE CODSALA = @CODSALA;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -187,12 +190,14 @@ namespace WordinOn.DataAccess
                         {
                             Estudante = new Usuario()
                             {
+                                Cod = Convert.ToInt32(row["CODESTUDANTE"]),
                                 Nome = row["NOME"].ToString(),
                                 Email = row["EMAIL"].ToString()
                             },
                             Sala = new Sala()
                             {
-                                Nome = row["nome"].ToString()
+                                Cod = Convert.ToInt32(row["CODSALA"]),
+                                Nome = row["NOME_SALA"].ToString()
                             }
                         };
                         lst.Add(salaXestudante);

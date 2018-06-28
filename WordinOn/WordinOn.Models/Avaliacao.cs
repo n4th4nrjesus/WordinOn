@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WordinOn.Models
 {
@@ -10,7 +9,7 @@ namespace WordinOn.Models
     {
         public int Cod { get; set; }
         public string Texto { get; set; }
-        public int Valor{ get; set; }
+        public decimal Valor { get; set; }
         public Usuario Professor { get; set; }
         public Redacao Redacao { get; set; }
     }

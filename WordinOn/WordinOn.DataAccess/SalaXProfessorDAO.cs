@@ -40,17 +40,17 @@ namespace WordinOn.DataAccess
         #endregion
 
         #region Tirar da Sala
-        public void TirarDaSala(SalaXProfessor obj)
+        public void TirarDaSala(int professor, int sala)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"delete from SalaXProfessor where codProfessor = @codProfessor and codSala = @codSala";
+                string strSQL = @"delete from SalaXProfessor where codProfessor = @codProfessor and codSala = @codSala;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor.Cod;
-                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala.Cod;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = professor;
+                    cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = sala;
 
                     foreach (SqlParameter parameter in cmd.Parameters)
                     {
@@ -199,10 +199,13 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"SELECT 
-                                      NOME, 
-                                      EMAIL 
+                                      SALAXPROFESSOR.*,
+                                      USUARIO.NOME, 
+                                      USUARIO.EMAIL ,
+                                      SALA.NOME as NOME_SALA
                                   FROM SALAXPROFESSOR 
                                   INNER JOIN USUARIO ON (SALAXPROFESSOR.CODPROFESSOR = USUARIO.COD)
+                                  INNER JOIN SALA ON (SALAXPROFESSOR.CODSALA = SALA.COD)
                                   WHERE CODSALA = @CODSALA;";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -223,14 +226,17 @@ namespace WordinOn.DataAccess
                         {
                             Professor = new Usuario()
                             {
-                                Nome = row["nome"].ToString(),
-                                Email = row["email"].ToString()
+                                Cod = Convert.ToInt32(row["CODPROFESSOR"]),
+                                Nome = row["NOME"].ToString(),
+                                Email = row["EMAIL"].ToString()
                             },
                             Sala = new Sala()
                             {
-                                Nome = row["nome"].ToString()
+                                Cod = Convert.ToInt32(row["CODSALA"]),
+                                Nome = row["NOME_SALA"].ToString()
                             }
                         };
+
                         lst.Add(salaXprofessor);
                     }
                 }

@@ -3,93 +3,97 @@
 @{
     Layout = "~/Views/Shared/_LayoutProfessor.cshtml";
 }
-
 <nav class="breadcrumb" style="background-color: lightgray; border: 2px solid black">
-    @Html.Label("Professor > Avaliação de Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger" })
+    @Html.Label("Professor > Avaliação de Redação", new { @class = "control-label", @style = "font-weight: normal; font-size: larger;" })
 </nav>
-<div class="row" style="border-bottom: solid 2px black; padding: 15px">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1">
-                @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-            </div>
-            <div class="col-md-9" style="border-right: solid 2px black">
-                @Html.LabelFor(m => m.Tema.Nome, Model.Tema.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
-            </div>
-            <div class="col-md-2">
-                @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-                @Html.LabelFor(m => m.Duracao, Model.Duracao.ToString(), new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
+
+<div class="container-fluid" style="border-bottom: 2px solid black;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container" style="padding-bottom: 15px;">
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.Label("lblTema", "Tema", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                        @Html.LabelFor(m => m.Tema.Nome, Model.Tema.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("lblTempo", "Tempo", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                        @Html.LabelFor(m => m.Duracao, Model.Duracao.ToString(), new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row" style="padding: 50px">
+    <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.Texto, Model.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
-            </div>
+            <br />
+            @Html.LabelFor(m => m.Texto, Model.Texto, new { @class = "form-control", @style = "resize: none; height: 425px; border-radius: 10px; border-color: black; background-color: lightgray" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <form action="@Url.Action("EnviarAvaliacao", "Professor")" class="form-horizontal">
+                @Html.Hidden("Redacao.Cod", Model.Cod)
+                @if (!string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
+                {
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Alerta!</strong> @ViewBag.ErroMsg
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-md-10 text-center">
+                        @Html.TextArea("Texto", string.Empty, new { @class = "form-control", @style = "border-color: black;", @rows = "5", @id = "txtTexto" })
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group text-center">
+                            <div class="col-md-12 text-center">
+                                @Html.TextBox("Valor", (int)decimal.Zero, new { @class = "form-control", @style = "border-color: black; text-align: center", @placeholder = "Nota" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 text-center">
+                                <button type="submit" class="btn btn-default btn-block" name="btnEnviar" style="border-color: black" onclick="if (document.getElementById('txtTexto').value == '') { alert('Informe o campo texto da avaliação!'); return false };">Enviar</button>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <button type="button" class="btn btn-default btn-block" name="btnCancelar" style="border-color: black">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<form action="@Url.Action("EnviarAvaliacao", "Professor")" class="form-horizontal">
-    @Html.Hidden("Redacao.Cod", Model.Cod)
-    @if (!string.IsNullOrWhiteSpace(ViewBag.ErroMsg))
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger" role="alert">
-                    <strong>Alerta!</strong> @ViewBag.ErroMsg
-                </div>
-            </div>
-        </div>
-    }
-    <div class="form-group" style="margin: 15px">
-        <div class="col-md-10 text-center">
-            @Html.TextArea("Texto", string.Empty, new { @class = "form-control", @style = "border-color: black;", @rows = "5" })
-        </div>
-        <div class="col-md-2">
-            <div class="form-group text-center" style="padding-bottom: 10px">
-                <div class="col-md-12 text-center">
-                    @Html.TextBox("Valor", (int)decimal.Zero, "Nota", new { @class = "form-control", @style = "border-color: black; width: 60px; text-align: center" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-6 text-center">
-                    <button type="submit" class="btn btn-default" name="btnEnviar" style="border-color: black">Enviar</button>
-                </div>
-                <div class="col-md-6 text-center">
-                    <button type="button" class="btn btn-default" name="btnCancelar" style="border-color: black">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
 @foreach (var avaliacao in Model.Avaliacoes)
 {
-    <div class="row" style="border: 2px solid black; padding: 20px">
-        <div class="col-md-2" style="margin-top: 20px">
+    <div class="row" style="border: 2px solid black; padding: 20px;">
+        <div class="col-md-3" style="margin-top: 20px;">
             <div class="row">
-                <div class="col-md-6">
-                    <img alt="Brand" class="img-responsive" style="width: 30px; height: 30px" src="https://upload.wikimedia.org/wikipedia/commons/7/73/Bibeksheel-logo-final.png" />
+                <div class="col-md-3">
+                    <img class="img-responsive" style="width: 30px; height: 30px"
+                         src="https://upload.wikimedia.org/wikipedia/commons/7/73/Bibeksheel-logo-final.png" />
                 </div>
-                <div class="col-md-6">
-                    @Html.Label("lblProfessor", "Professor: " + avaliacao.Professor.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                <div class="col-md-9">
+                    @Html.Label("lblProfessor", "Professor: " + avaliacao.Professor.Nome, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium;" })
                 </div>
             </div>
         </div>
-        <div class="col-md-10" style="border-left: 2px solid black">
-            <div class="col-md-9 text-center" style="border-right: solid 2px black">
-                @Html.Label("lblAvaliacao", "Avaliacao: " + avaliacao.Texto, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+        <div class="col-md-9" style="border-left: 2px solid black">
+            <div class="col-md-10 text-center" style="border-right: solid 2px black">
+                @Html.Label("lblAvaliacao", "Avaliacao: " + avaliacao.Texto, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium;" })
             </div>
-            <div class="col-md-1 text-right">
-                @Html.Label("lblNota", "Nota:", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-            </div>
-            <div class="col-md-2 text-right">
-                @Html.Label("txtNota", string.Format("{0}", avaliacao.Valor), new { @class = "form-control", @style = "border-color: black; width: 60px" })
+            <div class="col-md-2 text-center">
+                @Html.Label("lblNota", "Nota:", new { @class = "", @style = "margin-top: 15px; font-size: medium" })
+                @Html.Label("txtNota", string.Format("{0}", avaliacao.Valor), new { @class = "", @style = "margin-top: 15px; font-size: medium;" })
             </div>
         </div>
     </div>

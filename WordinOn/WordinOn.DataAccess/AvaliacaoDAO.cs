@@ -10,19 +10,19 @@ namespace WordinOn.DataAccess
     public class AvaliacaoDAO
     {
         #region Inserir
-        public void Inserir(Avaliacao obj, int codProf)
+        public void Inserir(Avaliacao obj)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"insert into Avaliacao (texto, valor, codProfessor, codRedacao)
-                                  values (@texto, @valor, @codProfessor, @codRedacao);";
+                string strSQL = @"INSERT INTO Avaliacao (texto, valor, codProfessor, codRedacao)
+                                  VALUES (@texto, @valor, @codProfessor, @codRedacao);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
                     cmd.Parameters.Add("@valor", SqlDbType.Int).Value = obj.Valor;
-                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = codProf;
+                    cmd.Parameters.Add("@codProfessor", SqlDbType.Int).Value = obj.Professor.Cod;
                     cmd.Parameters.Add("@codRedacao", SqlDbType.Int).Value = obj.Redacao.Cod;
 
                     foreach (SqlParameter parameter in cmd.Parameters)

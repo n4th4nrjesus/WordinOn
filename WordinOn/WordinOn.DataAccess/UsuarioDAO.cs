@@ -148,6 +148,41 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
+        public Usuario BuscarPorCod(int cod)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                string strSQL = @"SELECT * FROM USUARIO WHERE COD = @COD;";
+
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@COD", SqlDbType.Int).Value = cod;
+                    cmd.CommandText = strSQL;
+
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    var row = dt.Rows[0];
+                    var usuario = new Usuario()
+                    {
+                        Nome = row["nome"].ToString(),
+                        Sobrenome = row["sobrenome"].ToString(),
+                        Senha = row["senha"].ToString(),
+                        Email = row["email"].ToString()
+                    };
+
+                    return usuario;
+                }
+            }
+        }
+
         #region Buscar Todos
         public List<Usuario> BuscarTodos()
         {
@@ -231,7 +266,8 @@ namespace WordinOn.DataAccess
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"select cod, nome, email from Usuario where perfil_usuario = 2 and cod not in (select codProfessor from salaXprofessor where codSala = @cod)";
+                string strSQL = @"select cod, nome, email from Usuario 
+                                  where perfil_usuario = 2 and cod not in (select codProfessor from salaXprofessor where codSala = @cod)";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
@@ -243,7 +279,6 @@ namespace WordinOn.DataAccess
                     var dataReader = cmd.ExecuteReader();
                     var dt = new DataTable();
                     dt.Load(dataReader);
-
                     conn.Close();
 
                     foreach (DataRow row in dt.Rows)

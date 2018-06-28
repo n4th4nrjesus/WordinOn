@@ -47,6 +47,5 @@ namespace WordinOn.WebUI
                 return false;
             return true;
         }
-
     }
 }

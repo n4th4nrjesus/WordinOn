@@ -69,7 +69,8 @@ namespace WordinOn.WebUI.Controllers
 
         public ActionResult Perfil()
         {
-            return View();
+            var usuario = new UsuarioDAO().BuscarPorCod(((Usuario)User).Cod);
+            return View(usuario);
         }
 
         public ActionResult AlterarPerfil(Usuario obj)
@@ -179,12 +180,6 @@ namespace WordinOn.WebUI.Controllers
         public ActionResult Avaliacao()
         {
             ViewBag.Sala = new AvaliacaoDAO().BuscarTodos();
-            return View();
-        }
-
-        public ActionResult SairSala(SalaXEstudante obj)
-        {
-            new SalaXEstudanteDAO().TirarDaSala(obj);
             return View();
         }
     }
