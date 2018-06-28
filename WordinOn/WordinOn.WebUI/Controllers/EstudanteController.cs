@@ -152,14 +152,16 @@ namespace WordinOn.WebUI.Controllers
         [HttpPost]
         public JsonResult EnviarRedacao(Redacao obj)
         {
+            //timezone para o azure
+            TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
             //duração padrão de uma redação
-            //var duracaoTempo = new TimeSpan(01, 30, 00);
-            var duracaoTempo = new TimeSpan(00, 05, 00);
+            var duracaoTempo = new TimeSpan(01, 30, 00);
 
             //tempo que o estudando levou para fazer a redação
             obj.Duracao = duracaoTempo - obj.Duracao;
 
-            obj.DataFim = DateTime.Now;
+            obj.DataFim = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local, zone);
             obj.DataInicio = obj.DataFim.Subtract(obj.Duracao);
             obj.Estudante = new Usuario() { Cod = ((Usuario)User).Cod };
 
