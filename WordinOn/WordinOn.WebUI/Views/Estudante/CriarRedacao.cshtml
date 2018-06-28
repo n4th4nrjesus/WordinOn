@@ -24,7 +24,7 @@ else
                     <div class="row">
                         <div class="col-md-12 text-center">
                             @Html.HiddenFor(m => m.Tema.Cod)
-                            @Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
+                            @Html.Label("lblTema", Model.Tema.Nome + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-align: center !important;" })
                         </div>
                     </div>
                     <div class="row">
@@ -65,8 +65,7 @@ else
     <script type="text/javascript">
         // Tempo em segundos = 1h e 30 min
         var tempo = new Number();
-        //tempo = 5400;
-        tempo = 300;
+        tempo = 5400;
 
         function startCountdown() {
             // Se o tempo não for zerado
