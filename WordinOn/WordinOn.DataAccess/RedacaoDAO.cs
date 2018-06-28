@@ -10,22 +10,24 @@ namespace WordinOn.DataAccess
     public class RedacaoDAO
     {
         #region Inserir
-        public void Inserir(Redacao obj, int codEstudante)
+        public void Inserir(Redacao obj)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
-                string strSQL = @"insert into Redacao (texto, tempo, codTema, codSala, codEstudante)
-                                  values (@texto, @tempo, @codTema, @codSala, @codEstudante);";
+                string strSQL = @"INSERT INTO Redacao (texto, codTema, codSala, codEstudante, dataInicio, dataFim, duracao)
+                                  VALUES (@texto, @codTema, @codSala, @codEstudante, @dataInicio, @dataFim, @duracao);";
 
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@texto", SqlDbType.VarChar).Value = obj.Texto;
-                    cmd.Parameters.Add("@tempo", SqlDbType.VarChar).Value = obj.Tempo;
                     cmd.Parameters.Add("@codTema", SqlDbType.Int).Value = obj.Tema.Cod;
                     cmd.Parameters.Add("@codSala", SqlDbType.Int).Value = obj.Sala != null && obj.Sala.Cod > 0 ? obj.Sala.Cod : new Nullable<int>();
-                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = codEstudante;
+                    cmd.Parameters.Add("@codEstudante", SqlDbType.Int).Value = obj.Estudante.Cod;
+                    cmd.Parameters.Add("@dataInicio", SqlDbType.DateTime).Value = obj.DataInicio;
+                    cmd.Parameters.Add("@dataFim", SqlDbType.DateTime).Value = obj.DataFim;
+                    cmd.Parameters.Add("@duracao", SqlDbType.BigInt).Value = obj.Duracao.Ticks;
 
                     foreach (SqlParameter parameter in cmd.Parameters)
                     {
@@ -77,8 +79,6 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Data = Convert.ToDateTime(row["data"]),
-                            Tempo = Convert.ToInt32(row["tempo"]),
                             Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
@@ -94,8 +94,12 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["nome"].ToString()
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
+
                         lst.Add(redacao);
                     }
                 }
@@ -139,8 +143,6 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
-                            Tempo = Convert.ToInt32(row["tempo"]),
-                            Data = Convert.ToDateTime(row["data"]),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["codEstudante"]),
@@ -150,7 +152,10 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codTema"]),
                                 Nome = row["Tema_Proposto"].ToString()
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
                         lst.Add(redacao);
                     }
@@ -199,8 +204,6 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
-                            Tempo = Convert.ToInt32(row["Tempo"]),
-                            Data = Convert.ToDateTime(row["data"]),
                             Tema = new Tema()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
@@ -211,7 +214,10 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codEstudante"]),
                                 Nome = row["nome"].ToString()
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
                         lst.Add(redacao);
                     }
@@ -229,10 +235,10 @@ namespace WordinOn.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 string strSQL = @"select 
-	                                r.*, 
-	                                t.nome,
-	                                t.descricao,
-                                    u.nome as [nome do estudante]
+	                                    r.*, 
+	                                    t.nome,
+	                                    t.descricao,
+                                        u.nome as [nome do estudante]
 	                                from Redacao r
 	                                inner join Tema t on t.cod = r.codTema
                                     inner join Usuario u on u.cod = r.codEstudante
@@ -257,7 +263,6 @@ namespace WordinOn.DataAccess
                         {
                             Cod = Convert.ToInt32(row["cod"]),
                             Texto = row["texto"].ToString(),
-                            Tempo = Convert.ToInt32(row["Tempo"]),
                             Estudante = new Usuario()
                             {
                                 Cod = Convert.ToInt32(row["cod"]),
@@ -268,7 +273,10 @@ namespace WordinOn.DataAccess
                                 Cod = Convert.ToInt32(row["cod"]),
                                 Nome = row["Tema Proposto"].ToString(),
                                 Descricao = row["descricao"].ToString()
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
                         lst.Add(redacao);
                     }
@@ -328,8 +336,6 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Data = Convert.ToDateTime(row["data"]),
-                            Tempo = Convert.ToInt32(row["tempo"]),
                             Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
@@ -345,7 +351,10 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codSala"]),
                                 Nome = row["nome_sala"].ToString()
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
                         lst.Add(redacao);
                     }
@@ -403,8 +412,6 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Data = Convert.ToDateTime(row["data"]),
-                            Tempo = Convert.ToInt32(row["tempo"]),
                             Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
@@ -415,8 +422,12 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codTema"]),
                                 Nome = row["nome_tema"].ToString(),
-                            }
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
+
                         lst.Add(redacao);
                     }
                 }
@@ -459,8 +470,6 @@ namespace WordinOn.DataAccess
                     var redacao = new Redacao()
                     {
                         Cod = Convert.ToInt32(row["cod"]),
-                        Data = Convert.ToDateTime(row["data"]),
-                        Tempo = Convert.ToInt32(row["tempo"]),
                         Texto = row["texto"].ToString(),
                         Estudante = new Usuario()
                         {
@@ -472,7 +481,10 @@ namespace WordinOn.DataAccess
                             Cod = Convert.ToInt32(row["codTema"]),
                             Nome = row["Tema_Proposto"].ToString(),
                             Descricao = row["Tema_Descricao"].ToString()
-                        }
+                        },
+                        DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                        DataFim = Convert.ToDateTime(row["dataFim"]),
+                        Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                     };
 
                     return redacao;
@@ -481,7 +493,7 @@ namespace WordinOn.DataAccess
         }
         #endregion
 
-        #region Procurar pelo codigo da sala
+        #region Procurar pelo Código da Sala
         public List<Redacao> ProcurarPorSala(int? codSala)
         {
             var lst = new List<Redacao>();
@@ -522,8 +534,6 @@ namespace WordinOn.DataAccess
                         var redacao = new Redacao()
                         {
                             Cod = Convert.ToInt32(row["cod"]),
-                            Data = Convert.ToDateTime(row["data"]),
-                            Tempo = Convert.ToInt32(row["tempo"]),
                             Texto = row["texto"].ToString(),
                             Estudante = new Usuario()
                             {
@@ -539,8 +549,10 @@ namespace WordinOn.DataAccess
                             {
                                 Cod = Convert.ToInt32(row["codSala"]),
                                 Nome = row["nome_sala"].ToString()
-                            }
-
+                            },
+                            DataInicio = Convert.ToDateTime(row["dataInicio"]),
+                            DataFim = Convert.ToDateTime(row["dataFim"]),
+                            Duracao = TimeSpan.FromTicks(Convert.ToInt64(row["duracao"]))
                         };
                         lst.Add(redacao);
                     }

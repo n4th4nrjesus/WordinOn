@@ -10,11 +10,12 @@ namespace WordinOn.Models
     {
         public int Cod { get; set; }
         public string Texto { get; set; }
-        public int Tempo { get; set; }
         public Tema Tema { get; set; }
         public Sala Sala { get; set; }
         public Usuario Estudante { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataFim { get; set; }
+        public TimeSpan Duracao { get; set; }
         public bool RAvaliada { get; set; }
         public List<Avaliacao> Avaliacoes { get; set; }
         public List<Tema> Temas { get; set; }

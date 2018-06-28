@@ -49,7 +49,9 @@
                     <tr>
                         <th>Nome do Estudante</th>
                         <th>Tema</th>
-                        <th>Data</th>
+                        <th>Início</th>
+                        <th>Fim</th>
+                        <th>Duração</th>
                         <th>Sala</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -60,7 +62,9 @@
                         <tr>
                             <td>@item.Estudante.Nome</td>
                             <td>@item.Tema.Nome</td>
-                            <td>@item.Data</td>
+                            <td>@item.DataInicio</td>
+                            <td>@item.DataFim</td>
+                            <td>@item.Duracao</td>
                             <td>@item.Sala.Nome</td>
                             <td>
                                 <a href="@Url.Action("AvaliacaoRedacao", "Professor", new { @cod = item.Cod })">

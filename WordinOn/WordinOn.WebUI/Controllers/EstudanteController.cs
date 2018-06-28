@@ -148,10 +148,26 @@ namespace WordinOn.WebUI.Controllers
             return View();
         }
 
-        public ActionResult EnviarRedacao(Redacao obj)
+        [HttpPost]
+        public JsonResult EnviarRedacao(Redacao obj)
         {
-            new RedacaoDAO().Inserir(obj, (((Usuario)User).Cod));
-            return RedirectToAction("TelaInicial", "Estudante");
+            //duração padrão de uma redação
+            //var duracaoTempo = new TimeSpan(01, 30, 00);
+            var duracaoTempo = new TimeSpan(00, 05, 00);
+
+            //tempo que o estudando levou para fazer a redação
+            obj.Duracao = duracaoTempo - obj.Duracao;
+
+            obj.DataFim = DateTime.Now;
+            obj.DataInicio = obj.DataFim.Subtract(obj.Duracao);
+            obj.Estudante = new Usuario() { Cod = ((Usuario)User).Cod };
+
+            new RedacaoDAO().Inserir(obj);
+
+            return Json(new
+            {
+                responseUrl = Url.Action("TelaInicial", "Estudante")
+            });
         }
 
         public ActionResult Professores()

@@ -16,9 +16,10 @@
 }
 else
 {
-    <form class="form-horizontal" action="@Url.Action("EnviarRedacao", "Estudante")">
+    <form id="redacaoForm" class="form-horizontal" action="@Url.Action("EnviarRedacao", "Estudante")">
         <div class="container-fluid">
-            <div class="row" style="border-bottom: solid 2px black; padding: 15px">
+            <input type="hidden" id="redacaoTempo" name="Duracao" />
+            <div class="row" style="border-bottom: solid 2px black; padding: 15px;">
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12 text-center">
@@ -27,8 +28,8 @@ else
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            @Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
+                        <div class="col-md-12 text-center">
+                            @Html.Label("lblTemaDescricao", Model.Tema.Descricao, new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal; text-align: center !important;" })
                         </div>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ else
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right" style="padding-top: 20px;">
-                            <button type="submit" class="btn btn-primary" style="border-color: black;" id="btnEnviar">Enviar</button>
+                            <button type="button" class="btn btn-primary" style="border-color: black;" id="btnEnviar">Enviar</button>
                             <button type="button" class="btn btn-default" style="border-color: black;" id="btnCancelar">Cancelar</button>
                         </div>
                     </div>
@@ -65,7 +66,7 @@ else
         // Tempo em segundos = 1h e 30 min
         var tempo = new Number();
         //tempo = 5400;
-        tempo = 75;
+        tempo = 300;
 
         function startCountdown() {
             // Se o tempo não for zerado
@@ -105,6 +106,7 @@ else
 
                 //JQuery pra setar o valor
                 $("#lblTime").html(horaImprimivel);
+                $("#redacaoTempo").val(horaImprimivel);
 
                 // Define que a função será executada novamente em 1000ms = 1 segundo
                 setTimeout('startCountdown()', 1000);
@@ -113,6 +115,7 @@ else
                 tempo--;
             } else {
                 $("#lblTime").html("00:00:00");
+                $("#redacaoTempo").val("00:00:00");
                 var enviarMesmo = confirm("Que pena, o seu tempo para escrever a redação acabou ... Deseja enviar a redação incompleta?");
                 if (enviarMesmo) {
                     //enviar redação e mandar pra tela inicial
@@ -128,5 +131,25 @@ else
 
         // Chama a função ao carregar a tela
         startCountdown();
+
+        $(document).ready(function () {
+            $("#btnEnviar").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $.ajax({
+                    url: $("#redacaoForm").attr("action"),
+                    data: $("#redacaoForm").serialize(),
+                    method: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function (result) {
+                        document.location.href = result.responseUrl;
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            });
+        });
     </script>
 }

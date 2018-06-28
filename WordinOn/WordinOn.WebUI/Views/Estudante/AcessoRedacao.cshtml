@@ -1,6 +1,6 @@
 ﻿@using WordinOn.Models
 @model Redacao
-@{ 
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,15 +11,13 @@
 <div class="row" style="border-bottom: solid 2px black; padding: 15px">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-10" style="border-right: solid 2px black">
                 @Html.Label("lblTema", string.Format("{0}", Model.Tema.Nome) + ": ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-            </div>
-            <div class="col-md-7" style="border-right: solid 2px black">
                 @Html.Label("lblTemaDescricao", string.Format("{0}", Model.Tema.Descricao), new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; font-weight: normal" })
             </div>
             <div class="col-md-2">
                 @Html.Label("lblTempo", "Tempo: ", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium" })
-                @Html.Label("lblTime", "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
+                @Html.Label("lblTime", Model != null ? Model.Duracao.ToString() : "00:00:00", new { @class = "control-label", @style = "margin-top: 15px; font-size: medium; text-decoration: underline; font-weight: normal" })
             </div>
         </div>
     </div>
