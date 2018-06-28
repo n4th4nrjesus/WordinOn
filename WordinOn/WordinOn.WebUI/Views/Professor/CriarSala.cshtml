@@ -128,31 +128,6 @@
                     }
                 });
             });
-            $("#btnDeletar").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                $.ajax({
-                    url: $("#btnDeletar").data("url"),
-                    data: {
-                        codSala: $("delete[type='hidden']").val(),
-                        codProfessor: $("#btnDeletar option:selected").val()
-                    },
-                    method: "REMOVEDATA",
-                    cache: false,
-                    success: function (result) {
-                        $("#professor").html(result);
-                        var professor = $("#btnDeletar option:selected").val();
-                        $("#ddlProfessor option").each(function () {
-                            if ($(this).val() == professor) {
-                                $(this).load();
-                            }
-                        });
-                    },
-                    error: function (result) {
-                        alert(result);
-                    }
-                });
-            });
         });
     </script>
 }

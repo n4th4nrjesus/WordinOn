@@ -92,7 +92,10 @@ namespace WordinOn.WebUI.Controllers
             {
                 new SalaDAO().Inserir(obj);
             }
-            return View();
+
+            CriarSala(obj.Cod);
+
+            return View("CriarSala");
         }
 
         [HttpPost]
