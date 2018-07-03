@@ -46,7 +46,7 @@ else
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-md-12">
-                            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @rows = 20, @style = "resize: none; border-radius: 10px; border-color: black; background-color: lightgray" })
+                            @Html.TextAreaFor(m => m.Texto, new { @class = "form-control", @rows = 20, @style = "resize: none; border-radius: 10px; border-color: black; background-color: lightgray", @minlength = "1416", @maxlength = "5310" })
                         </div>
                     </div>
                     <div class="row">
