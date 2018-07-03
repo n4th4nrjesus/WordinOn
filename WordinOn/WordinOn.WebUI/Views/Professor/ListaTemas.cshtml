@@ -11,14 +11,10 @@
 
 <form class="form-horizontal" action="@Url.Action("ProcurarTema", "Professor")">
     <div class="row" style="border: 2px solid black;">
-        <div class="col-md-4" style="border-right: 2px solid black; padding-top: 30px;">
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    <a class="btn btn-default" name="btnCriar" style="border-color: black" href="@Url.Action("CriarTema", "Professor")">Criar Novo Tema</a>
-                </div>
-            </div>
+        <div class="col-md-2 text-center" style="padding-top: 30px">
+            <a class="btn btn-default" name="btnCriar" style="border-color: black" href="@Url.Action("CriarTema", "Professor")">Criar Novo Tema</a>
         </div>
-        <div class="col-md-8" style="padding: 30px;">
+        <div class="col-md-10" style="padding: 30px;">
             <div class="col-md-12">
                 <div class="input-group">
                     @Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
