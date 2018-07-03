@@ -109,22 +109,22 @@ values
 ('Metamorfose'),
 ('Raízes Urbanas');
 
--- insert into Redacao (texto, tempo, codTema, codEstudante, codSala)
--- values
--- ('blablablabla1', 70, 1, 1, 1),
--- ('beruberuberu1', 50, 2, 2, 2);
+insert into Redacao (texto, tempo, codTema, codEstudante, codSala)
+values
+('blablablabla1', 70, 1, 1, 1),
+('beruberuberu1', 50, 2, 2, 2);
 
--- insert into Avaliacao (texto, valor, codProfessor, codRedacao)
--- values
--- ('Muito bom', 750, 3, 1),
--- ('Muito bom mesmo', 800, 3, 1);
+insert into Avaliacao (texto, valor, codProfessor, codRedacao)
+values
+('Muito bom', 750, 3, 1),
+('Muito bom mesmo', 800, 3, 1);
 
--- insert into salaXestudante (codEstudante, codSala)
--- values
--- (1, 1),
--- (2, 2);
+insert into salaXestudante (codEstudante, codSala)
+values
+(1, 1),
+(2, 2);
 
--- insert into salaXprofessor (codProfessor, codSala)
--- values
--- (3, 1),
--- (4, 2);
+insert into salaXprofessor (codProfessor, codSala)
+values
+(3, 1),
+(4, 2);

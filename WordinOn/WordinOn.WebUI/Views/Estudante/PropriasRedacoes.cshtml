@@ -10,26 +10,19 @@
 </nav>
 
 <form action="@Url.Action("ProcurarPropriaRedacao", "Estudante")" class="form-horizontal">
-    <div class="row" style="border: 2px solid black">
-        <div class="col-md-4" style="padding: 20px">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    @Html.CheckBoxFor(m => m.RAvaliadas, new { @id = "chkRedacaoAvaliada" })
-                    @Html.Label("Redações Avaliadas", new { @class = "control-label", @style = "font-weight: normal" })
-                </div>
-            </div>
+    <div class="form-group" style="border: 2px solid black">
+        <div class="col-md-4 text-center" style="padding: 20px">
+            @Html.CheckBoxFor(m => m.RAvaliadas, new { @id = "chkRedacaoAvaliada" })
+            @Html.Label("Redações Avaliadas", new { @class = "control-label", @style = "font-weight: normal" })
         </div>
-
-        <div class="col-md-8" style="border-left: 2px solid black; padding: 30px;">
-            <div class="col-md-12">
-                <div class="input-group">
-                    @Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default" style="border-color: black;">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </button>
-                    </span>
-                </div>
+        <div class="col-md-8 text-center" style="border-left: 2px solid black; padding: 30px;">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.CampoTexto, string.Empty, new { @class = "form-control", @style = "border-color: black" })
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" style="border-color: black;">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </span>
             </div>
         </div>
     </div>
